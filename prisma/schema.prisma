@@ -1,0 +1,73 @@
+// Future DB/CMS model. Mirrors src/content/types.ts. Not wired yet.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  NOINDEX
+  ARCHIVED
+}
+
+model Service {
+  slug            String   @id
+  name            String
+  category        String
+  status          Status   @default(DRAFT)
+  seoTitle        String
+  metaDescription String
+  h1              String
+  answer          String
+  content         Json // intro, signs, process, costFactors, diy, faqs, glance
+  related         String[]
+  emergency       Boolean  @default(false)
+  updated         DateTime
+}
+
+model City {
+  slug          String   @id
+  stateSlug     String
+  name          String
+  county        String
+  region        String
+  status        Status   @default(DRAFT)
+  officeAddress String?
+  zips          String[]
+  content       Json // intro, housingNotes, localIssues, water, permits, faqs, areas
+  updated       DateTime
+}
+
+model Article {
+  slug       String   @id
+  title      String
+  category   String
+  status     Status   @default(DRAFT)
+  content    Json
+  published  DateTime
+  updated    DateTime
+  reviewedBy String?
+}
+
+model Lead {
+  id            String   @id
+  receivedAt    DateTime @default(now())
+  service       String
+  emergency     Boolean
+  zip           String
+  inArea        Boolean
+  timing        String?
+  name          String
+  phone         String
+  email         String?
+  contactMethod String
+  notes         String?
+  attribution   Json
+  ipHash        String
+}

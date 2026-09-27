@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1b2b34;
+  --color-ink-soft: #2c3f4a;
+  --color-teal: #2a7f83;
+  --color-teal-deep: #1d5f63;
+  --color-teal-tint: #e5f2f2;
+  --color-sun: #c2410c;
+  --color-sun-dark: #9a3412;
+  --color-alert: #b42318;
+  --color-alert-tint: #fdecea;
+  --color-sand: #f7f2e8;
+  --color-sand-deep: #efe6d6;
+  --color-line: #e0d5c1;
+  --color-sage: #4d6b4f;
+  --color-muted: #52606a;
+
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-sand text-ink font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-serif text-balance;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-teal);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-base font-semibold whitespace-nowrap transition-colors;
+  }
+  .btn-primary {
+    @apply bg-sun text-white hover:bg-sun-dark;
+  }
+  .btn-secondary {
+    @apply bg-white text-ink ring-1 ring-line hover:bg-sand-deep;
+  }
+  .btn-alert {
+    @apply bg-alert text-white hover:bg-[#8f1c13];
+  }
+  .btn-ghost-light {
+    @apply text-white ring-1 ring-white/50 hover:bg-white/10;
+  }
+  .eyebrow {
+    @apply text-sm font-semibold tracking-wider text-teal uppercase;
+  }
+  .link {
+    @apply font-medium text-teal-deep underline decoration-teal/40 underline-offset-2 hover:decoration-teal-deep;
+  }
+  .card {
+    @apply rounded-2xl bg-white ring-1 ring-line;
+  }
+  .answer-box {
+    @apply rounded-xl border-l-4 border-teal bg-teal-tint p-5 text-lg leading-relaxed;
+  }
+  .prose-cp p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose-cp ul {
+    @apply mb-4 list-disc space-y-1.5 pl-6;
+  }
+  .field {
+    @apply block min-h-12 w-full min-w-0 rounded-md border border-line bg-white px-3 text-base text-ink focus:border-teal;
+  }
+  .field-label {
+    @apply mb-1 block text-sm font-semibold;
+  }
+  .field-error {
+    @apply mt-1 text-sm text-alert;
+  }
+}
+
+/* Defer layout of long below-the-fold sections. The homepage is excluded; do not use :has() here. */
+main:not([data-home]) > section:nth-of-type(n + 4) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
