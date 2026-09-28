@@ -19,3 +19,14 @@ These are stock photos, not photos of our network's jobs. Replace them with real
 | gas-burner-flame.webp | 37520689 | https://www.pexels.com/photo/close-up-of-a-lit-gas-stove-burner-37520689/ |
 | plumber-with-wrench.webp | 8486978 | https://www.pexels.com/photo/handywoman-holding-a-plumbers-wrench-8486978/ |
 | wrench-on-sink.webp | 10961064 | https://www.pexels.com/photo/a-spanner-on-stainless-steel-sink-10961064/ |
+
+## Before/after examples (stock, not our jobs)
+
+Cropped to 1200×900. Two "after" images reuse the photos above: `after-copper-pipe-fittings.webp` and `after-bathroom-faucet-brushed-nickel.webp`.
+
+| File | Pexels ID | Source |
+|---|---|---|
+| before-rusty-pipes.webp | 39686932 | https://www.pexels.com/photo/stack-of-rusty-industrial-metal-pipes-39686932/ |
+| before-crusted-faucet.webp | 31493645 | https://www.pexels.com/photo/rustic-old-faucet-with-dripping-water-in-sink-31493645/ |
+| before-dripping-spigot.webp | 36215888 | https://www.pexels.com/photo/outdoor-water-faucet-dripping-in-urban-setting-36215888/ |
+| after-new-kitchen-faucet.webp | 34295401 | https://www.pexels.com/photo/modern-chrome-kitchen-faucet-with-running-water-34295401/ |

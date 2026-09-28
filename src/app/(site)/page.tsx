@@ -14,6 +14,8 @@ import { FaqList, JsonLd, SectionHeading, Reviews } from "@/components/ui";
 import { Icon } from "@/components/icons";
 import { ZipChecker } from "@/components/ZipChecker";
 import { CtaBand } from "@/components/CtaBand";
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { beforeAfter } from "@/content/beforeAfter";
 import { PhoneLink } from "@/components/PhoneLink";
 
 const title = "Phoenix Metro Plumbing Help: Leaks, Hard Water & Repipes";
@@ -147,6 +149,17 @@ export default function Home() {
                   Learn more
                 </Link>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-16">
+        <div className="container-x">
+          <SectionHeading eyebrow="Before & after" title="What the fix looks like" lead="Drag the slider to compare. These are example stock photos, not jobs from our network." />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {beforeAfter.map((b) => (
+              <BeforeAfterSlider key={b.id} item={b} />
             ))}
           </div>
         </div>
