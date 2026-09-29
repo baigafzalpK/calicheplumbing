@@ -8,7 +8,7 @@ export const metadata = pageMeta({ title: "Privacy Policy", description: "How Ca
 
 export default function Privacy() {
   return (
-    <SimplePage title="Privacy Policy" crumbs={[{ name: "Home", path: "/" }, { name: "Privacy", path }]} lead="Last updated September 30, 2026. Draft pending legal review.">
+    <SimplePage title="Privacy Policy" crumbs={[{ name: "Home", path: "/" }, { name: "Privacy", path }]} lead="Last updated September 30, 2026.">
       <h2>Who operates this site</h2>
       <p>This website is owned and operated by Muhammad Afzal. This policy was last updated on September 30, 2026.</p>
       <h2>What we collect</h2>

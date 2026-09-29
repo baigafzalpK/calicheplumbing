@@ -8,7 +8,7 @@ export const metadata = pageMeta({ title: "Terms of Use", description: "Terms fo
 
 export default function Terms() {
   return (
-    <SimplePage title="Terms of Use" crumbs={[{ name: "Home", path: "/" }, { name: "Terms", path }]} lead="Last updated September 27, 2026. Draft pending legal review.">
+    <SimplePage title="Terms of Use" crumbs={[{ name: "Home", path: "/" }, { name: "Terms", path }]} lead="Last updated September 27, 2026.">
       <h2>Referral service</h2>
       <p>{DISCLOSURE}</p>
       <h2>No guarantee of availability</h2>
