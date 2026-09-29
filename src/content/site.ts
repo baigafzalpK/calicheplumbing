@@ -9,7 +9,7 @@ export const site = {
   name: "Caliche Plumbing",
   shortName: "Caliche",
   domain: "calicheplumbing.com",
-  url: (env("NEXT_PUBLIC_SITE_URL") || "https://calicheplumbing.com").replace(/\/$/, ""),
+  url: (env("NEXT_PUBLIC_SITE_URL") || "https://www.calicheplumbing.com").replace(/\/$/, ""),
   market: "Phoenix metro",
   marketLong: "the Phoenix metro and Maricopa County",
   stateAbbr: "AZ",

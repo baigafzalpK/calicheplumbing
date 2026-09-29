@@ -8,10 +8,8 @@ const config: NextConfig = {
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"], deviceSizes: [390, 640, 828, 1080, 1280, 1600] },
   async redirects() {
-    return [
-      { source: "/:path*", has: [{ type: "host", value: "www.calicheplumbing.com" }], destination: "https://calicheplumbing.com/:path*", permanent: true },
-      ...redirects,
-    ];
+    // www/apex canonical host is handled by Vercel domain settings (a code redirect here caused a loop).
+    return redirects;
   },
   async headers() {
     return [
