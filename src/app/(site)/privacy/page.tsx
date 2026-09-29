@@ -8,7 +8,9 @@ export const metadata = pageMeta({ title: "Privacy Policy", description: "How Ca
 
 export default function Privacy() {
   return (
-    <SimplePage title="Privacy Policy" crumbs={[{ name: "Home", path: "/" }, { name: "Privacy", path }]} lead="Last updated September 27, 2026. Draft pending legal review.">
+    <SimplePage title="Privacy Policy" crumbs={[{ name: "Home", path: "/" }, { name: "Privacy", path }]} lead="Last updated September 30, 2026. Draft pending legal review.">
+      <h2>Who operates this site</h2>
+      <p>This website is owned and operated by Muhammad Afzal. This policy was last updated on September 30, 2026.</p>
       <h2>What we collect</h2>
       <p>When you submit a request, we collect what you enter: the service you need, ZIP code, timing, name, phone, optional email and notes. We also collect how you found us (for example ad campaign parameters and the page you landed on), basic device type, and a one-way hash of your IP address for spam prevention.</p>
       <h2>Calls</h2>
