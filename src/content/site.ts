@@ -2,8 +2,8 @@
 
 const env = (k: string) => (process.env[k] ?? "").trim();
 
-const TEMP_PHONE = "(602) 555-0147"; // fictional 555-01xx range; never emitted in schema
-const TEMP_PHONE_E164 = "+16025550147";
+const TEMP_PHONE = "(773) 514-3066";
+const TEMP_PHONE_E164 = "+17735143066";
 
 export const site = {
   name: "Caliche Plumbing",
