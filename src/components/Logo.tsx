@@ -1,28 +1,45 @@
 import Link from "next/link";
+import Image from "next/image";
 
-// Stratified-ground mark (three caliche strata with a pipe drop) + wordmark.
-export function LogoMark({ className = "h-9 w-9", light = false }: { className?: string; light?: boolean }) {
+export function LogoMark({ className = "h-9 w-9" }: { className?: string; light?: boolean }) {
   return (
-    <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
-      <rect width="40" height="40" rx="9" fill={light ? "#2a7f83" : "#1b2b34"} />
-      <path d="M7 22h26" stroke="#e8c9a0" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M7 27.5h26" stroke="#d6a36a" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M7 33h26" stroke="#c2410c" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M20 6v9" stroke="#7fc8c9" strokeWidth="3" strokeLinecap="round" />
-      <path d="M14 10h12" stroke="#7fc8c9" strokeWidth="3" strokeLinecap="round" />
-      <circle cx="20" cy="18" r="1.6" fill="#7fc8c9" />
-    </svg>
+    <Image
+      src="/brand/icon.png"
+      alt="Calishe Plumbing emblem"
+      width={128}
+      height={128}
+      className={`${className} object-contain`}
+    />
   );
 }
 
-export function Logo({ light = false }: { light?: boolean }) {
+export function Logo({ light = false, className = "" }: { light?: boolean; className?: string }) {
+  if (light) {
+    return (
+      <Link href="/" className={`inline-block shrink-0 ${className}`} aria-label="Calishe Plumbing home">
+        <div className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 shadow-sm transition-opacity hover:opacity-90">
+          <Image
+            src="/brand/logo.png"
+            alt="Calishe Plumbing"
+            width={970}
+            height={345}
+            className="h-9 w-auto object-contain"
+          />
+        </div>
+      </Link>
+    );
+  }
+
   return (
-    <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="Caliche Plumbing home">
-      <LogoMark light={light} />
-      <span className="leading-none">
-        <span className={`block font-serif text-2xl font-semibold ${light ? "text-white" : "text-ink"}`}>Caliche</span>
-        <span className={`block text-[0.65rem] font-bold tracking-[0.28em] ${light ? "text-teal-tint" : "text-teal-deep"}`}>PLUMBING</span>
-      </span>
+    <Link href="/" className={`flex shrink-0 items-center ${className}`} aria-label="Calishe Plumbing home">
+      <Image
+        src="/brand/logo.png"
+        alt="Calishe Plumbing"
+        width={970}
+        height={345}
+        priority
+        className="h-11 sm:h-12 w-auto object-contain"
+      />
     </Link>
   );
 }

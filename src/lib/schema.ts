@@ -52,7 +52,7 @@ export function siteGraph() {
 
   return [
     org,
-    { "@type": "ImageObject", "@id": ids.logo, url: `${U}/brand/logo.png`, width: 600, height: 160, caption: site.name },
+    { "@type": "ImageObject", "@id": ids.logo, url: `${U}/brand/logo.png`, width: 970, height: 345, caption: site.name },
     { "@type": "WebSite", "@id": ids.website, url: `${U}/`, name: site.name, publisher: { "@id": ids.org }, inLanguage: "en-US" },
     ...publishedServices.map((s) => ({ "@type": "Service", "@id": ids.service(s.slug), name: s.name, url: `${U}${routes.service(s.slug)}` })),
     ...states.map((s) => ({ "@type": "State", "@id": ids.state(s.slug), name: s.name })),
