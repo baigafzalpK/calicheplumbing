@@ -49,6 +49,7 @@ export default async function CityServicePage({ params }: P) {
     name: `${s.name} in ${cityLabel(city)}`,
     url: `${site.url}${path}`,
     description: cs.answer,
+    provider: { "@id": ids.org },
     broker: { "@id": ids.org },
     areaServed: { "@id": ids.place(city.slug) },
     isRelatedTo: { "@id": ids.service(s.slug) },

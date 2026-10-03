@@ -36,6 +36,7 @@ export default async function ServicePage({ params }: P) {
     description: s.answer,
     serviceType: s.name,
     category: getCategory(s.category).name,
+    provider: { "@id": ids.org },
     broker: { "@id": ids.org },
     areaServed: { "@id": ids.county },
   };

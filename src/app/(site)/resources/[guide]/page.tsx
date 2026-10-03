@@ -46,6 +46,7 @@ export default async function Guide({ params }: P) {
     "@id": `${site.url}${path}#article`,
     headline: a.title,
     description: a.metaDescription,
+    image: [`${site.url}${guidePhotos[a.category].src}`],
     datePublished: a.published,
     dateModified: a.updated,
     author: { "@id": ids.org },
