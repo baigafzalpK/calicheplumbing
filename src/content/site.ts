@@ -26,7 +26,7 @@ export const site = {
   googleProfileUrl: env("NEXT_PUBLIC_GOOGLE_PROFILE_URL") || null,
   gtmId: env("NEXT_PUBLIC_GTM_ID") || null,
   googleVerification: env("NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION") || null,
-  bingVerification: env("NEXT_PUBLIC_BING_SITE_VERIFICATION") || null,
+  bingVerification: env("NEXT_PUBLIC_BING_SITE_VERIFICATION") || "a8dd456765ad4335a9a1962a893e9120",
   isProduction: process.env.NODE_ENV === "production" && env("NEXT_PUBLIC_ENV") !== "staging",
 };
 
