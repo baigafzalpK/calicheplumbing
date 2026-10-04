@@ -1,8 +1,14 @@
-// Notify Bing/Yandex via IndexNow. Needs INDEXNOW_KEY and public/<key>.txt containing the key.
-// npm run indexnow            -> every URL in the live sitemaps
-// npm run indexnow -- /a/ /b/ -> only those paths
+import { readFileSync, existsSync } from "node:fs";
+
 const SITE = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.calicheplumbing.com").replace(/\/$/, "");
-const key = process.env.INDEXNOW_KEY;
+
+let key = process.env.INDEXNOW_KEY;
+if (!key && existsSync(".env.local")) {
+  const envContent = readFileSync(".env.local", "utf-8");
+  const match = envContent.match(/^INDEXNOW_KEY=(.+)$/m);
+  if (match) key = match[1].trim();
+}
+
 if (!key) {
   console.error("Set INDEXNOW_KEY and add public/<key>.txt first.");
   process.exit(1);
