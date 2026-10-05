@@ -1,8 +1,6 @@
 import "server-only";
 import { site } from "@/content/site";
-import { indexableUrls, type SitemapGroup } from "./sitemap";
-
-export const groups: SitemapGroup[] = ["pages", "services", "locations", "guides"];
+import { indexableUrls, sitemapGroups as groups, type SitemapGroup } from "./sitemap";
 
 const xml = (body: string) =>
   new Response(`<?xml version="1.0" encoding="UTF-8"?>\n${body}`, { headers: { "content-type": "application/xml; charset=utf-8" } });

@@ -2,7 +2,7 @@ import type { Category, Service } from "./types";
 import { servicesMore } from "./servicesMore";
 
 export const categories: Category[] = [
-  { slug: "hard-water", name: "Hard Water & Filtration", blurb: "Softeners, reverse osmosis and whole-house filters for Valley water.", icon: "filter" },
+  { slug: "hard-water", name: "Hard Water & Filtration", blurb: "Softeners, reverse osmosis and whole-house filters for hard or poor-tasting water.", icon: "filter" },
   { slug: "hidden-leaks", name: "Slab & Hidden Leaks", blurb: "Leaks under the slab and inside walls, found and fixed.", icon: "slab" },
   { slug: "repiping", name: "Repiping", blurb: "PEX repipes for polybutylene, galvanized and pinholed copper.", icon: "pipe" },
   { slug: "water-heaters", name: "Water Heaters", blurb: "Tank and tankless replacement, recirculation and descaling.", icon: "flame" },
@@ -10,9 +10,10 @@ export const categories: Category[] = [
   { slug: "irrigation-backflow", name: "Irrigation & Backflow", blurb: "Backflow tests and irrigation line leaks.", icon: "sprinkler" },
   { slug: "drains-sewer", name: "Drains & Sewer", blurb: "Clogs, camera inspections and sewer line repair.", icon: "drain" },
   { slug: "gas-lines", name: "Gas Lines", blurb: "Gas line repair and appliance hookups.", icon: "gas" },
+  { slug: "freeze-flood", name: "Freeze & Flood Protection", blurb: "Frozen and burst pipes, sump pumps and basement water.", icon: "snow" },
 ];
 
-const U = "2026-09-27";
+const U = "2026-10-05";
 
 const core: Service[] = [
   {
@@ -21,15 +22,15 @@ const core: Service[] = [
     shortName: "Water softeners",
     category: "hard-water",
     status: "PUBLISHED",
-    seoTitle: "Water Softener Installation in Phoenix, AZ",
+    seoTitle: "Water Softener Installation: Sizing, Loops & Drains",
     metaDescription:
-      "Water softener installation across the Phoenix metro: sizing for Valley hardness, loop and bypass work, drain and overflow routing. Call or request service.",
-    h1: "Water softener installation in the Phoenix metro",
+      "Water softener installation explained: sizing to your measured hardness, loop and bypass work, and drain routing to code. Connect with a licensed plumber.",
+    h1: "Water softener installation",
     answer:
-      "A water softener removes the calcium and magnesium that make Valley water hard, which protects water heaters, fixtures and appliances from scale. A plumber sizes the unit to your household's water use and measured hardness, connects it at the softener loop or main line, and routes the drain correctly.",
+      "A water softener removes the calcium and magnesium that make water hard, which protects water heaters, fixtures and appliances from scale. A plumber sizes the unit to your household's water use and measured hardness, connects it at the softener loop or main line, and routes the drain correctly.",
     intro: [
-      "Phoenix-area water is some of the hardest in the country. You see it as white crust on faucets and shower glass, but the expensive damage happens where you can't see it: scale on water heater elements and tank bottoms, in tankless heat exchangers and in dishwasher valves.",
-      "Many Valley homes built since the 1990s have a pre-plumbed softener loop in the garage, which makes installation simpler. Older homes may need a loop added at the main line, with a bypass so outdoor hose bibs and irrigation stay on unsoftened water.",
+      "Hard water runs through most of the Southwest, Texas, Florida and much of the Midwest. You see it as white crust on faucets and shower glass, but the expensive damage happens where you can't see it: scale on water heater elements and tank bottoms, in tankless heat exchangers and in dishwasher valves.",
+      "Many homes built since the 1990s in hard-water areas have a pre-plumbed softener loop in the garage or basement, which makes installation simpler. Older homes may need a loop added at the main line, with a bypass so outdoor hose bibs and irrigation stay on unsoftened water. Homes on private wells usually need a water test first, since iron, manganese or sulfur change what equipment fits.",
     ],
     signs: [
       "White or tan crust on faucets, shower heads and glass",
@@ -56,7 +57,7 @@ const core: Service[] = [
       stop: ["Cutting into the main line to add a loop", "Running the drain line straight into a sewer pipe without an air gap"],
     },
     faqs: [
-      { q: "How hard is Phoenix water?", a: "Valley water providers generally report hardness in the teens of grains per gallon, and some areas run higher. Your city's annual water quality report lists the number, and a plumber can test at the tap." },
+      { q: "How do I find out how hard my water is?", a: "Your water provider's annual water quality report (the Consumer Confidence Report) lists hardness, often in grains per gallon or mg/L. Above about 7 grains per gallon (120 mg/L) is generally considered hard. On a well, a plumber or lab can test it." },
       { q: "Do I need a softener if I have a water heater with an anode rod?", a: "Yes, they solve different problems. The anode rod protects the tank from corrosion, while a softener keeps scale from building up on the elements and tank bottom." },
       { q: "Can a softener feed my irrigation?", a: "It shouldn't. Softened water adds sodium to soil, so a plumber normally keeps hose bibs and irrigation on the hard-water side of the bypass." },
     ],
@@ -64,7 +65,7 @@ const core: Service[] = [
     isEmergencyCapable: false,
     glance: [
       { term: "Typical visit", detail: "Half a day when a loop exists; longer when one must be added" },
-      { term: "Why it matters here", detail: "Valley hardness shortens water heater and fixture life" },
+      { term: "Why it matters", detail: "Scale shortens water heater and fixture life" },
       { term: "Permit", detail: "Usually not required for a like-for-like swap; new main-line work may need one" },
       { term: "Pairs with", detail: "Reverse osmosis for drinking water" },
     ],
@@ -76,14 +77,14 @@ const core: Service[] = [
     shortName: "Reverse osmosis",
     category: "hard-water",
     status: "PUBLISHED",
-    seoTitle: "Reverse Osmosis System Installation, Phoenix AZ",
+    seoTitle: "Reverse Osmosis System Installation",
     metaDescription:
-      "Under-sink and whole-kitchen reverse osmosis installation in the Phoenix metro: faucet, tank, drain saddle, fridge and ice-maker lines. Request service.",
+      "Under-sink reverse osmosis installation: faucet, tank, drain saddle with air gap, and fridge or ice-maker lines. What it removes and what it costs to run.",
     h1: "Reverse osmosis system installation",
     answer:
       "A reverse osmosis (RO) system pushes water through a fine membrane to cut dissolved minerals and many other contaminants in drinking water. A plumber mounts it under the kitchen sink, adds a dedicated faucet, connects the drain with an air gap, and can run a line to the fridge or ice maker.",
     intro: [
-      "Valley tap water is safe to drink, but it's high in dissolved solids and can taste of chlorine or minerals. That's why RO is one of the most common upgrades in Phoenix-area kitchens.",
+      "Most US tap water is safe to drink, but in many areas it's high in dissolved solids or tastes of chlorine or minerals. RO is the most common under-sink upgrade for better-tasting drinking water, and it also reduces many contaminants listed on water reports.",
       "RO works best on water that's already softened. Hard water fouls the membrane faster, so many homes install a softener and an RO system together.",
     ],
     signs: [
@@ -111,7 +112,7 @@ const core: Service[] = [
       stop: ["Drilling stone countertops", "Tapping into a copper line with a self-piercing valve"],
     },
     faqs: [
-      { q: "How often do RO filters need changing in the Valley?", a: "Pre-filters usually every 6 to 12 months and the membrane every few years, depending on water use and whether the water is softened first." },
+      { q: "How often do RO filters need changing?", a: "Pre-filters usually every 6 to 12 months and the membrane every few years, depending on water use and whether the water is softened first." },
       { q: "Does RO waste water?", a: "Yes, it sends some water to the drain as it filters. Newer units waste much less, and a permeate pump can improve efficiency." },
     ],
     related: ["water-softener-installation", "whole-house-filtration", "gas-appliance-hookup"],
@@ -128,15 +129,15 @@ const core: Service[] = [
     name: "Whole-House Filtration",
     category: "hard-water",
     status: "PUBLISHED",
-    seoTitle: "Whole-House Water Filtration Systems, Phoenix AZ",
+    seoTitle: "Whole-House Water Filtration Systems",
     metaDescription:
-      "Whole-house carbon and sediment filtration for Phoenix-area homes: sizing, main-line installation and bypass. Improve taste and chlorine at every tap.",
+      "Whole-house carbon and sediment filtration: sizing by flow rate, main-line installation and bypass. Reduce chlorine, taste and sediment at every tap.",
     h1: "Whole-house water filtration",
     answer:
       "A whole-house filter treats all the water entering the home, usually with sediment and carbon stages that reduce chlorine, taste and odor at every tap and shower. It doesn't soften water. For scale, it's paired with a softener.",
     intro: [
-      "Valley cities blend surface water from the Salt, Verde and Colorado rivers with groundwater, and the taste can change with the season and the source. A whole-house carbon system smooths that out for showers, laundry and every faucet.",
-      "The system mounts at the main line, usually in the garage or on the exterior wall where the line enters. It needs isolation valves and a bypass so the media can be serviced.",
+      "Many utilities blend surface water and groundwater, and the taste can change with the season and the source. Utilities that disinfect with chloramine produce water that ordinary carbon struggles with. A correctly chosen whole-house system smooths that out for showers, laundry and every faucet.",
+      "The system mounts at the main line, usually in the basement, garage or utility room where the line enters. It needs isolation valves and a bypass so the media can be serviced.",
     ],
     signs: ["Chlorine smell in the shower", "Seasonal changes in taste or odor", "Sediment in aerators", "Dry skin and hair complaints after showering", "An RO system that isn't enough"],
     process: [
@@ -147,7 +148,7 @@ const core: Service[] = [
     ],
     costFactors: ["Media type (carbon, catalytic carbon for chloramine)", "Flow rate and tank size", "Main-line access and location", "Combined softener/filter systems"],
     faqs: [
-      { q: "Is a whole-house filter the same as a softener?", a: "No. A filter reduces chlorine, taste and sediment. A softener removes hardness minerals. Many Valley homes use both, with the filter first." },
+      { q: "Is a whole-house filter the same as a softener?", a: "No. A filter reduces chlorine, taste and sediment. A softener removes hardness minerals. Many homes in hard-water areas use both, with the filter first." },
       { q: "Will it lower my water pressure?", a: "A correctly sized system shouldn't cause a noticeable drop. An undersized cartridge filter can." },
     ],
     related: ["water-softener-installation", "reverse-osmosis-systems", "pressure-regulator-valve"],
@@ -155,7 +156,7 @@ const core: Service[] = [
     glance: [
       { term: "Treats", detail: "Every tap, shower and appliance" },
       { term: "Does not", detail: "Remove hardness; pair it with a softener" },
-      { term: "Location", detail: "At the main line, garage or exterior wall" },
+      { term: "Location", detail: "At the main line: basement, garage or utility room" },
     ],
     updated: U,
   },
@@ -165,14 +166,14 @@ const core: Service[] = [
     shortName: "Slab leak detection",
     category: "hidden-leaks",
     status: "PUBLISHED",
-    seoTitle: "Slab Leak Detection in Phoenix, AZ",
+    seoTitle: "Slab Leak Detection: Signs, Tests & Next Steps",
     metaDescription:
-      "Slab leak detection for Phoenix-area homes: meter tests, pressure isolation, acoustic and thermal locating before anything is cut. Call or request service.",
+      "How plumbers find leaks under a concrete slab: meter tests, pressure isolation, acoustic and thermal locating before anything is cut. Signs and next steps.",
     h1: "Slab leak detection",
     answer:
       "Slab leak detection finds a leak in a water line under or inside the concrete slab without guessing. A plumber confirms the leak at the meter, isolates hot from cold, then pinpoints it with acoustic listening and thermal imaging so only one small spot is opened, or none at all if a reroute is the better repair.",
     intro: [
-      "Nearly every home in the Valley is built on a concrete slab, with copper or PEX supply lines running under or through it. When one of those lines leaks, the water goes into the soil and the first sign is often a high water bill.",
+      "Slab-on-grade homes are the norm across Florida, Texas, the Southwest and much of the South, with copper or PEX supply lines running under or through the concrete. When one of those lines leaks, the water goes into the soil and the first sign is often a high water bill.",
       "Hot-side slab leaks are especially common. Hot water lines expand and contract, rubbing against concrete and gravel, and the warm spot on the floor is a classic clue.",
     ],
     signs: [
@@ -194,8 +195,8 @@ const core: Service[] = [
       stop: ["Breaking up tile or concrete to hunt for the leak", "Leaving a hot-side leak running, which wastes energy and saturates the soil under the slab"],
     },
     faqs: [
-      { q: "Does homeowners insurance cover slab leaks in Arizona?", a: "Policies vary. Many cover the cost of accessing the leak and the resulting damage, but not replacing the pipe itself. Check your policy and document everything before repairs." },
-      { q: "Why are slab leaks so common in Phoenix?", a: "Slab construction is nearly universal here, hot lines expand against concrete, and hard water and pipe age take a toll on copper. Together they make slab leaks a routine Valley repair." },
+      { q: "Does homeowners insurance cover slab leaks?", a: "Policies vary. Many cover the cost of accessing the leak and the resulting damage, but not replacing the pipe itself. Check your policy and document everything before repairs." },
+      { q: "Why do some regions get so many slab leaks?", a: "Where slab construction is standard, hot lines expand against concrete, and hard water, shifting clay soil and pipe age take a toll on copper. Together they make slab leaks routine in places like Phoenix, Dallas, Houston and Florida." },
       { q: "How accurate is leak detection?", a: "A skilled technician usually narrows a leak to a small area, often within a foot or two, before any concrete is opened." },
     ],
     related: ["slab-leak-repair", "pinhole-leak-repair", "whole-house-repiping", "main-water-line-repair"],
@@ -214,15 +215,15 @@ const core: Service[] = [
     shortName: "Slab leak repair",
     category: "hidden-leaks",
     status: "PUBLISHED",
-    seoTitle: "Slab Leak Repair & Reroutes in Phoenix, AZ",
+    seoTitle: "Slab Leak Repair: Spot Repair vs. Reroute vs. Repipe",
     metaDescription:
-      "Slab leak repair in the Phoenix metro: spot repairs through the slab, attic and wall reroutes, and when a repipe makes more sense. Request service.",
+      "Slab leak repair options compared: spot repairs through the slab, attic and wall reroutes, and when a whole-house repipe makes more sense.",
     h1: "Slab leak repair and reroutes",
     answer:
-      "There are three ways to fix a slab leak: open the floor and repair the pipe in place, abandon the leaking line and reroute a new one through the attic or walls, or repipe the house if several lines are failing. A reroute is often the lasting choice in Phoenix homes because it takes the line out of the slab entirely.",
+      "There are three ways to fix a slab leak: open the floor and repair the pipe in place, abandon the leaking line and reroute a new one through the attic or walls, or repipe the house if several lines are failing. A reroute is often the lasting choice because it takes the line out of the slab entirely.",
     intro: [
       "Once the leak is located, the choice of repair depends on the pipe's condition, the floor covering and how many leaks the home has had. A single leak in otherwise sound PEX may only need a spot repair. A third leak in aging copper points toward a reroute or repipe.",
-      "Reroutes in Valley homes usually run PEX through the attic. The attic gets very hot in summer, so lines are insulated and run where they're protected, and drops come down through interior walls to the fixture.",
+      "Reroutes usually run PEX through the attic or walls. In hot climates attic lines are insulated against heat; in cold climates they're kept inside the insulated envelope so they can't freeze. Drops come down through interior walls to the fixture.",
     ],
     signs: ["A confirmed slab leak from leak detection", "More than one slab leak in a few years", "A leak under expensive flooring you'd rather not break", "Warm floor spots returning after a previous repair"],
     process: [
@@ -234,13 +235,13 @@ const core: Service[] = [
     costFactors: ["Spot repair vs. reroute vs. repipe", "Floor covering over the leak", "Attic access and run length for reroutes", "Number of fixtures fed by the leaking line", "Drywall patching scope"],
     faqs: [
       { q: "Is rerouting better than a spot repair?", a: "Often, yes. A reroute removes the line from the slab so the same problem can't return there. A spot repair is quicker when the pipe is otherwise in good shape." },
-      { q: "Do hot attics damage PEX in Phoenix?", a: "PEX is rated for high temperatures, but it shouldn't be exposed to UV. Installers insulate attic runs and keep them off hot surfaces." },
+      { q: "Can PEX go in the attic?", a: "Yes, with care. PEX handles high temperatures but shouldn't be exposed to UV, and in cold climates attic runs must stay on the warm side of the insulation so they don't freeze." },
     ],
     related: ["slab-leak-detection", "whole-house-repiping", "pinhole-leak-repair", "hot-water-recirculation"],
     isEmergencyCapable: true,
     glance: [
       { term: "Options", detail: "Spot repair, reroute or repipe" },
-      { term: "Common here", detail: "PEX reroutes through the attic" },
+      { term: "Most common", detail: "PEX reroutes through the attic or walls" },
       { term: "Permit", detail: "Reroutes and repipes often need a city or county permit" },
     ],
     updated: U,
@@ -250,14 +251,14 @@ const core: Service[] = [
     name: "Pinhole Leak Repair",
     category: "hidden-leaks",
     status: "PUBLISHED",
-    seoTitle: "Copper Pinhole Leak Repair, Phoenix AZ",
+    seoTitle: "Copper Pinhole Leak Repair: Fix or Repipe?",
     metaDescription:
       "Pinhole leaks in copper pipes: finding them in walls and ceilings, repairing them properly, and knowing when repiping is the smarter move.",
     h1: "Copper pinhole leak repair",
     answer:
       "Pinhole leaks are tiny holes that corrode through copper pipe from the inside, often showing up as a stain, a drip or a spray inside a wall. A plumber opens the wall, cuts out the damaged section and replaces it, and checks nearby pipe. If pinholes keep appearing, a repipe usually costs less than chasing them.",
     intro: [
-      "Copper pinhole leaks are common in Phoenix-area homes, especially in copper systems several decades old. Water chemistry, velocity and installation quality all play a part.",
+      "Copper pinhole leaks show up nationwide, especially in copper systems several decades old. Water chemistry plays a big part: both aggressive soft water, common in parts of the Northeast and Pacific Northwest, and some treated city water can thin copper from the inside. Velocity and installation quality matter too.",
       "One pinhole is a repair. A pattern of pinholes, meaning several in a few years or in different parts of the house, is a sign the whole system is thinning.",
     ],
     signs: ["A small water stain on drywall or a ceiling", "Hissing inside a wall", "Green or blue spots on exposed copper", "A musty smell in a closet or cabinet", "A repeat leak close to a previous repair"],
@@ -289,33 +290,33 @@ const core: Service[] = [
     shortName: "Repiping",
     category: "repiping",
     status: "PUBLISHED",
-    seoTitle: "Whole-House Repiping (PEX) in Phoenix, AZ",
+    seoTitle: "Whole-House Repiping: PEX vs. Copper, Timeline, Cost",
     metaDescription:
-      "Whole-house PEX repiping for Phoenix-area homes with polybutylene, galvanized or pinholed copper. What the job involves, timeline and cost factors.",
+      "Whole-house repiping for homes with galvanized, polybutylene or pinholed copper pipe. What the job involves, PEX vs. copper, timeline and cost factors.",
     h1: "Whole-house repiping",
     answer:
-      "A repipe replaces every water supply line in the house, usually with PEX run through the attic and walls instead of through the slab. It's the permanent fix for polybutylene, failing galvanized pipe, and copper with repeated pinhole or slab leaks.",
+      "A repipe replaces every water supply line in the house, usually with PEX or copper run through the walls, attic or basement ceiling. It's the permanent fix for failing galvanized pipe, polybutylene, and copper with repeated pinhole or slab leaks.",
     intro: [
-      "A repipe sounds like a huge project, but most single-family Valley homes are repiped in a few days while the family stays in the house. Water is off during working hours and restored most evenings.",
-      "In slab homes, the new lines run overhead: through the attic, with drops down interior walls to each fixture. Old lines in the slab are capped and abandoned, which also ends the risk of future slab leaks on those lines.",
+      "A repipe sounds like a huge project, but most single-family homes are repiped in a few days while the family stays in the house. Water is off during working hours and restored most evenings.",
+      "In basement homes, much of the new pipe runs along the basement ceiling with short runs up through walls, so there's less drywall to open. In slab homes the new lines run overhead through the attic, and the old lines in the slab are capped, ending the risk of future slab leaks on those lines.",
     ],
     signs: ["Gray polybutylene pipe at the water heater or under sinks", "Two or more slab or pinhole leaks", "Rusty or low-pressure water from galvanized pipe", "A home inspection or insurer flagging the pipe material"],
     process: [
       { title: "Walkthrough and plan", body: "The plumber maps fixtures and plans attic routes, drops and a manifold or trunk-and-branch layout." },
-      { title: "Permit", body: "Repipes usually need a permit from the city or, in unincorporated areas, Maricopa County." },
+      { title: "Permit", body: "Repipes usually need a permit from the city or, in unincorporated areas, the county." },
       { title: "Install", body: "New PEX lines are run and connected fixture by fixture, and the old lines are capped." },
       { title: "Test and patch", body: "The system is pressure-tested and inspected. Access holes are patched to the agreed level." },
     ],
     costFactors: ["Number of bathrooms and fixtures", "Single story vs. two story", "Attic access and clearances", "Drywall patching and texture matching", "Permit and inspection fees"],
     faqs: [
-      { q: "PEX or copper for a Phoenix repipe?", a: "PEX is the most common choice today: it resists scale better than older copper, has fewer joints, and handles attic routing well. Copper is still an option." },
+      { q: "PEX or copper for a repipe?", a: "PEX is the most common choice today: it costs less, has fewer joints, resists scale and tolerates freezing better than rigid pipe. Copper is still a good option and some local codes or buyers prefer it." },
       { q: "Can we live in the house during a repipe?", a: "Usually. Water is off during working hours and restored at night on most days." },
     ],
     related: ["polybutylene-replacement", "slab-leak-repair", "pinhole-leak-repair", "pressure-regulator-valve"],
     isEmergencyCapable: false,
     glance: [
       { term: "Typical length", detail: "A few working days for a single-family home" },
-      { term: "Material", detail: "PEX, run overhead instead of in the slab" },
+      { term: "Material", detail: "Usually PEX; copper where preferred" },
       { term: "Permit", detail: "Usually required" },
     ],
     updated: U,
@@ -326,14 +327,14 @@ const core: Service[] = [
     shortName: "Polybutylene replacement",
     category: "repiping",
     status: "PUBLISHED",
-    seoTitle: "Polybutylene Pipe Replacement in Arizona",
+    seoTitle: "Polybutylene Pipe Replacement: Identify & Replace",
     metaDescription:
-      "Polybutylene pipe in Phoenix-area homes built around 1978–1995: how to identify it, why it fails, and how replacement with PEX works.",
+      "Polybutylene pipe in US homes built around 1978–1995: how to identify it, why it fails, what insurers ask, and how replacement with PEX works.",
     h1: "Polybutylene pipe replacement",
     answer:
       "Polybutylene is a gray, blue or black plastic supply pipe installed in many homes from roughly 1978 to 1995. It can fail without warning, especially at fittings. Replacing it means a repipe, usually in PEX, and many insurers and buyers ask for it.",
     intro: [
-      "The Valley built a huge share of its housing during the polybutylene era, so the pipe turns up in homes across Mesa, Glendale, Peoria, Tempe, Phoenix and the Sun Cities.",
+      "Polybutylene was installed in millions of US homes, most heavily in the Sunbelt and other fast-growing regions that built a lot of housing between the late 1970s and mid-1990s.",
       "You can often spot it where the pipe comes out of the wall at the water heater, under sinks, or at the toilet supply, usually stamped 'PB2110'.",
     ],
     signs: ["Gray flexible pipe marked PB2110", "Plastic or copper crimp rings at fittings", "Built between about 1978 and 1995", "An insurer asking about pipe material"],
@@ -344,7 +345,7 @@ const core: Service[] = [
     ],
     costFactors: ["Home size and fixture count", "Attic access", "Drywall patching", "Permit fees"],
     faqs: [
-      { q: "Is polybutylene illegal in Arizona?", a: "It isn't illegal to have it, but it's no longer allowed for new installs under current codes, and some insurers limit coverage for homes that still have it." },
+      { q: "Is polybutylene illegal?", a: "It isn't illegal to have it, but it's no longer accepted for new installs under current US plumbing codes, and some insurers limit coverage for homes that still have it." },
     ],
     related: ["whole-house-repiping", "pinhole-leak-repair", "slab-leak-detection"],
     isEmergencyCapable: false,
@@ -361,14 +362,14 @@ const core: Service[] = [
     shortName: "Water heaters",
     category: "water-heaters",
     status: "PUBLISHED",
-    seoTitle: "Water Heater Replacement in Phoenix, AZ",
+    seoTitle: "Water Heater Replacement: Gas, Electric & Code Items",
     metaDescription:
-      "Gas and electric tank water heater replacement in the Phoenix metro: sizing, venting, expansion tanks, pans and code upgrades. Call or request service.",
+      "Gas and electric tank water heater replacement: sizing, venting, expansion tanks, pans and code upgrades, plus signs it's time. Connect with a plumber.",
     h1: "Water heater replacement",
     answer:
-      "Replacing a tank water heater means draining and removing the old unit, then installing a correctly sized gas or electric tank with current-code venting, a relief valve line, a thermal expansion tank where required, and a drain pan where the location calls for one. Hard water is the main reason Valley tanks wear out early.",
+      "Replacing a tank water heater means draining and removing the old unit, then installing a correctly sized gas or electric tank with current-code venting, a relief valve line, a thermal expansion tank where required, and a drain pan where the location calls for one. Sediment and hard-water scale are the main reasons tanks wear out early.",
     intro: [
-      "Most Phoenix-area water heaters live in the garage, some in an interior closet or the attic. Sediment and scale from hard water settle at the bottom of the tank, which makes gas units rumble and electric elements burn out.",
+      "Water heaters live in basements, garages, utility closets and, in some regions, attics. Wherever they are, sediment and scale settle at the bottom of the tank, which makes gas units rumble and electric elements burn out. A leaking tank in a closet or attic can do serious damage, which is why pans and drains matter there.",
       "Replacement is a good time to fix older installs: missing expansion tanks, a relief valve line that doesn't terminate properly, or a flue with poor clearances.",
     ],
     signs: ["Water leaking from the tank or pooling in the pan", "Rusty hot water", "Rumbling or popping when heating", "Hot water running out much faster than before", "A tank more than about 10 years old"],
@@ -384,16 +385,16 @@ const core: Service[] = [
       stop: ["Gas connections and venting", "Replacing a relief valve on a hot, pressurized tank"],
     },
     faqs: [
-      { q: "How long do water heaters last in Phoenix?", a: "Hard water shortens tank life. Many Valley tanks need replacing in the 8 to 12 year range, sooner without softening or regular flushing." },
+      { q: "How long does a tank water heater last?", a: "Typically 8 to 12 years. Hard water, high pressure and skipped flushing shorten that; a softener, a working expansion tank and periodic anode checks extend it." },
       { q: "Do I need an expansion tank?", a: "When the home has a pressure regulator or check valve, as most do, code generally requires a thermal expansion tank." },
     ],
     related: ["tankless-water-heaters", "water-heater-flush", "hot-water-recirculation", "water-softener-installation"],
     isEmergencyCapable: true,
     glance: [
       { term: "Typical visit", detail: "Same-day swap for like-for-like tanks when stock is available" },
-      { term: "Wear factor here", detail: "Hard-water scale and sediment" },
+      { term: "Main wear factor", detail: "Sediment and hard-water scale" },
       { term: "Code items", detail: "Expansion tank, relief valve discharge, pan, venting" },
-      { term: "Permit", detail: "Many Valley cities require one" },
+      { term: "Permit", detail: "Most cities and counties require one" },
     ],
     updated: U,
   },
@@ -403,12 +404,12 @@ const core: Service[] = [
     shortName: "Tankless",
     category: "water-heaters",
     status: "PUBLISHED",
-    seoTitle: "Tankless Water Heater Installation, Phoenix AZ",
+    seoTitle: "Tankless Water Heater Installation & Conversion",
     metaDescription:
-      "Tankless water heater installation and conversion in the Phoenix metro: gas line sizing, venting, descaling valves and hard-water protection.",
+      "Tankless water heater installation and conversion: gas line sizing, venting, descaling valves and hard-water protection. Is it worth it for your home?",
     h1: "Tankless water heater installation",
     answer:
-      "A tankless water heater heats water on demand instead of storing it. Converting from a tank usually means upsizing the gas line, new venting and isolation valves for descaling. In the Valley's hard water, a softener or scale inhibitor and yearly flushing are what keep a tankless unit working.",
+      "A tankless water heater heats water on demand instead of storing it. Converting from a tank usually means upsizing the gas line, new venting and isolation valves for descaling. In hard water, a softener or scale inhibitor and yearly flushing are what keep a tankless unit working.",
     intro: [
       "Tankless heaters save space and never run out of hot water, but they're less forgiving of hard water than tanks. Scale builds up in the heat exchanger and triggers error codes.",
       "Gas tankless units need much more gas than a tank. The plumber checks the meter capacity and line sizing before recommending one.",
@@ -422,7 +423,8 @@ const core: Service[] = [
     ],
     costFactors: ["Gas line upsizing", "Venting route", "Indoor vs. outdoor unit", "Condensing vs. non-condensing", "Adding scale protection"],
     faqs: [
-      { q: "Is tankless worth it with hard water?", a: "It can be, with scale protection and a yearly descaling flush. Without them, heat exchanger problems are common in the Valley." },
+      { q: "Is tankless worth it with hard water?", a: "It can be, with scale protection and a yearly descaling flush. Without them, heat exchanger problems are common in hard-water areas." },
+      { q: "Do tankless heaters work in cold climates?", a: "Yes, but incoming water is much colder in winter, so the unit has to be sized for a bigger temperature rise. Outdoor units need freeze protection, and indoor installs are more common in the North." },
     ],
     related: ["water-heater-replacement", "water-softener-installation", "gas-line-repair", "hot-water-recirculation"],
     isEmergencyCapable: false,

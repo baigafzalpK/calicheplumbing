@@ -24,7 +24,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ key: st
             <span style={{ fontSize: 26, color: "#9fd8d9", textTransform: "uppercase", letterSpacing: 2 }}>{card.eyebrow}</span>
             <span style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.1, marginTop: 16 }}>{card.title}</span>
           </div>
-          <span style={{ fontSize: 26, color: "rgba(255,255,255,0.75)" }}>Phoenix · Scottsdale · West Valley · East Valley</span>
+          <span style={{ fontSize: 26, color: "rgba(255,255,255,0.75)" }}>Licensed local plumbers · All 50 states</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", flex: 1, background: "#efe6d6" }}>
           <div style={{ height: 120, background: "#e8c9a0", display: "flex" }} />

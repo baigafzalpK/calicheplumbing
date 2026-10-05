@@ -1,0 +1,262 @@
+{
+ "coverageSource": "LeadSmart plumbing coverage",
+ "coverageDate": "2026-10-04",
+ "acs": "ACS 2023 5-year estimates, aggregated over covered ZCTAs",
+ "states": [
+  {
+   "abbr": "AL",
+   "cities": 297,
+   "zips": 446
+  },
+  {
+   "abbr": "AK",
+   "cities": 54,
+   "zips": 63
+  },
+  {
+   "abbr": "AZ",
+   "cities": 175,
+   "zips": 424
+  },
+  {
+   "abbr": "AR",
+   "cities": 97,
+   "zips": 131
+  },
+  {
+   "abbr": "CA",
+   "cities": 997,
+   "zips": 2293
+  },
+  {
+   "abbr": "CO",
+   "cities": 188,
+   "zips": 413
+  },
+  {
+   "abbr": "CT",
+   "cities": 259,
+   "zips": 385
+  },
+  {
+   "abbr": "DE",
+   "cities": 58,
+   "zips": 98
+  },
+  {
+   "abbr": "DC",
+   "cities": 2,
+   "zips": 84
+  },
+  {
+   "abbr": "FL",
+   "cities": 489,
+   "zips": 1420
+  },
+  {
+   "abbr": "GA",
+   "cities": 470,
+   "zips": 759
+  },
+  {
+   "abbr": "HI",
+   "cities": 69,
+   "zips": 112
+  },
+  {
+   "abbr": "ID",
+   "cities": 101,
+   "zips": 151
+  },
+  {
+   "abbr": "IL",
+   "cities": 694,
+   "zips": 983
+  },
+  {
+   "abbr": "IN",
+   "cities": 493,
+   "zips": 663
+  },
+  {
+   "abbr": "IA",
+   "cities": 253,
+   "zips": 277
+  },
+  {
+   "abbr": "KS",
+   "cities": 109,
+   "zips": 182
+  },
+  {
+   "abbr": "KY",
+   "cities": 606,
+   "zips": 715
+  },
+  {
+   "abbr": "LA",
+   "cities": 178,
+   "zips": 362
+  },
+  {
+   "abbr": "ME",
+   "cities": 64,
+   "zips": 67
+  },
+  {
+   "abbr": "MD",
+   "cities": 387,
+   "zips": 554
+  },
+  {
+   "abbr": "MA",
+   "cities": 478,
+   "zips": 644
+  },
+  {
+   "abbr": "MI",
+   "cities": 348,
+   "zips": 526
+  },
+  {
+   "abbr": "MN",
+   "cities": 218,
+   "zips": 372
+  },
+  {
+   "abbr": "MS",
+   "cities": 123,
+   "zips": 149
+  },
+  {
+   "abbr": "MO",
+   "cities": 249,
+   "zips": 403
+  },
+  {
+   "abbr": "MT",
+   "cities": 70,
+   "zips": 79
+  },
+  {
+   "abbr": "NE",
+   "cities": 106,
+   "zips": 162
+  },
+  {
+   "abbr": "NV",
+   "cities": 94,
+   "zips": 242
+  },
+  {
+   "abbr": "NH",
+   "cities": 191,
+   "zips": 218
+  },
+  {
+   "abbr": "NJ",
+   "cities": 578,
+   "zips": 719
+  },
+  {
+   "abbr": "NM",
+   "cities": 61,
+   "zips": 91
+  },
+  {
+   "abbr": "NY",
+   "cities": 1005,
+   "zips": 1454
+  },
+  {
+   "abbr": "NC",
+   "cities": 523,
+   "zips": 815
+  },
+  {
+   "abbr": "ND",
+   "cities": 12,
+   "zips": 12
+  },
+  {
+   "abbr": "OH",
+   "cities": 781,
+   "zips": 1096
+  },
+  {
+   "abbr": "OK",
+   "cities": 246,
+   "zips": 403
+  },
+  {
+   "abbr": "OR",
+   "cities": 229,
+   "zips": 331
+  },
+  {
+   "abbr": "PA",
+   "cities": 1243,
+   "zips": 1586
+  },
+  {
+   "abbr": "RI",
+   "cities": 68,
+   "zips": 87
+  },
+  {
+   "abbr": "SC",
+   "cities": 322,
+   "zips": 473
+  },
+  {
+   "abbr": "SD",
+   "cities": 54,
+   "zips": 57
+  },
+  {
+   "abbr": "TN",
+   "cities": 356,
+   "zips": 576
+  },
+  {
+   "abbr": "TX",
+   "cities": 583,
+   "zips": 1419
+  },
+  {
+   "abbr": "UT",
+   "cities": 203,
+   "zips": 296
+  },
+  {
+   "abbr": "VT",
+   "cities": 29,
+   "zips": 29
+  },
+  {
+   "abbr": "VA",
+   "cities": 383,
+   "zips": 661
+  },
+  {
+   "abbr": "WA",
+   "cities": 347,
+   "zips": 573
+  },
+  {
+   "abbr": "WV",
+   "cities": 197,
+   "zips": 294
+  },
+  {
+   "abbr": "WI",
+   "cities": 218,
+   "zips": 288
+  },
+  {
+   "abbr": "WY",
+   "cities": 31,
+   "zips": 36
+  }
+ ]
+}

@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { coveredZips } from "@/content/coverage";
+import { lookupZip } from "@/lib/useZipCoverage";
 import { track } from "@/lib/analytics";
 
 export function ZipChecker({ dark = false }: { dark?: boolean }) {
   const [zip, setZip] = useState("");
   const [result, setResult] = useState<null | { ok: boolean; city?: string }>(null);
 
-  function check(e: React.FormEvent) {
+  async function check(e: React.FormEvent) {
     e.preventDefault();
     if (!/^\d{5}$/.test(zip)) return setResult({ ok: false });
-    const c = coveredZips[zip];
-    setResult(c ? { ok: true, city: c.city } : { ok: false });
+    const c = await lookupZip(zip).catch(() => null);
+    setResult(c ? { ok: true, city: `${c.city}, ${c.state}` } : { ok: false });
     track("location_selected", { zip, inArea: Boolean(c) });
   }
 
@@ -30,7 +30,7 @@ export function ZipChecker({ dark = false }: { dark?: boolean }) {
           value={zip}
           onChange={(e) => setZip(e.target.value.replace(/\D/g, ""))}
           className="field"
-          placeholder="e.g. 85308"
+          placeholder="e.g. 60614"
         />
         <button className="btn btn-primary">Check</button>
       </div>

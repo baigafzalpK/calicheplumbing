@@ -1,8 +1,7 @@
 import "server-only";
 import { site } from "@/content/site";
 import { publishedServices, categories } from "@/content/services";
-import { states } from "@/content/locations";
-import { indexableCities } from "./sitemap";
+import { allStates } from "./geo";
 import { routes } from "./routes";
 import type { Faq } from "@/content/types";
 
@@ -13,8 +12,7 @@ export const ids = {
   website: `${U}/#website`,
   logo: `${U}/#logo`,
   service: (slug: string) => `${U}${routes.service(slug)}#service`,
-  place: (city: string) => `${U}/#place-${city}`,
-  county: `${U}/#place-maricopa-county`,
+  place: (state: string, city: string) => `${U}${routes.city(state, city)}#place`,
   state: (s: string) => `${U}/#place-${s}`,
   page: (path: string) => `${U}${path}#webpage`,
   breadcrumb: (path: string) => `${U}${path}#breadcrumb`,
@@ -22,7 +20,7 @@ export const ids = {
 };
 
 export function siteGraph() {
-  const cities = indexableCities();
+  const states = allStates();
   const org: Record<string, unknown> = {
     "@type": "Organization",
     "@id": ids.org,
@@ -31,9 +29,9 @@ export function siteGraph() {
     url: `${U}/`,
     logo: { "@id": ids.logo },
     description:
-      "Caliche Plumbing is a plumbing referral service for the Phoenix metro. It connects homeowners with independent, licensed plumbing contractors for leaks, repiping, water heaters, hard water treatment, drains, gas lines and backflow.",
-    areaServed: cities.map((c) => ({ "@id": ids.place(c.slug) })),
-    knowsAbout: ["Slab leaks", "Hard water", "Water softeners", "Repiping", "Polybutylene pipe", "Water heaters", "Backflow testing", "Gas lines"],
+      "Caliche Plumbing is a nationwide plumbing referral service. It connects homeowners in all 50 states and Washington, DC with independent, licensed plumbing contractors for leaks, repiping, water heaters, frozen pipes, sump pumps, hard water treatment, drains, sewer lines and gas lines.",
+    areaServed: states.map((s) => ({ "@id": ids.state(s.slug) })),
+    knowsAbout: ["Slab leaks", "Frozen pipes", "Sump pumps", "Hard water", "Water softeners", "Repiping", "Galvanized pipe", "Polybutylene pipe", "Water heaters", "Sewer lines", "Backflow testing", "Gas lines"],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Plumbing services",
@@ -55,14 +53,7 @@ export function siteGraph() {
     { "@type": "ImageObject", "@id": ids.logo, url: `${U}/brand/logo.png`, width: 970, height: 345, caption: site.name },
     { "@type": "WebSite", "@id": ids.website, url: `${U}/`, name: site.name, publisher: { "@id": ids.org }, inLanguage: "en-US" },
     ...publishedServices.map((s) => ({ "@type": "Service", "@id": ids.service(s.slug), name: s.name, url: `${U}${routes.service(s.slug)}` })),
-    ...states.map((s) => ({ "@type": "State", "@id": ids.state(s.slug), name: s.name })),
-    { "@type": "AdministrativeArea", "@id": ids.county, name: "Maricopa County", containedInPlace: { "@id": ids.state("arizona") } },
-    ...cities.map((c) => ({
-      "@type": "City",
-      "@id": ids.place(c.slug),
-      name: `${c.name}, AZ`,
-      containedInPlace: { "@id": ids.county },
-    })),
+    ...states.map((s) => ({ "@type": s.abbr === "DC" ? "AdministrativeArea" : "State", "@id": ids.state(s.slug), name: s.name, url: `${U}${routes.state(s.slug)}` })),
   ];
 }
 
@@ -109,4 +100,15 @@ export function pageGraph(opts: {
 
 export function graph(nodes: unknown[]) {
   return { "@context": "https://schema.org", "@graph": nodes };
+}
+
+/** A City node for one location page, contained in its county (when known) and state. */
+export function cityNodes(c: { slug: string; name: string; stateSlug: string; county: string }, stateAbbr: string) {
+  const id = ids.place(c.stateSlug, c.slug);
+  const city: Record<string, unknown> = { "@type": "City", "@id": id, name: `${c.name}, ${stateAbbr}`, containedInPlace: { "@id": ids.state(c.stateSlug) } };
+  if (!c.county) return [city];
+  const countyName = /(County|Parish|Borough|Area|city)$/i.test(c.county) ? c.county : `${c.county} County`;
+  const countyId = `${id}-county`;
+  city.containedInPlace = { "@id": countyId };
+  return [city, { "@type": "AdministrativeArea", "@id": countyId, name: `${countyName}, ${stateAbbr}`, containedInPlace: { "@id": ids.state(c.stateSlug) } }];
 }

@@ -58,6 +58,7 @@ export async function POST(req: Request) {
     zip: lead.zip,
     inArea: Boolean(cov),
     coverageCity: cov?.city ?? null,
+    coverageState: cov?.state ?? null,
     timing: lead.timing ?? null,
     name: lead.name,
     phone: lead.phone.replace(/\D/g, ""),

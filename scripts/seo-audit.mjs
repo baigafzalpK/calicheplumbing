@@ -8,9 +8,15 @@ const warn = (u, m) => warns.push(`${u}: ${m}`);
 
 const BANNED = [/in today's fast-paced world/i, /look no further/i, /your trusted partner/i, /we understand that/i, /comprehensive solutions/i, /world-class/i, /one-stop shop/i, /hassle-free/i, /state-of-the-art/i, /peace of mind/i, /lorem ipsum/i, /\{\{[A-Z_]+\}\}/];
 
-async function get(path, opts = {}) {
-  const res = await fetch(BASE + path, { redirect: "manual", ...opts });
-  return { res, text: res.status < 300 ? await res.text() : "" };
+async function get(path, opts = {}, tries = 3) {
+  try {
+    const res = await fetch(BASE + path, { redirect: "manual", ...opts });
+    return { res, text: res.status < 300 ? await res.text() : "" };
+  } catch (e) {
+    // transient socket resets on local servers (seen on Windows); real failures still surface after retries
+    if (tries > 1) return get(path, opts, tries - 1);
+    throw e;
+  }
 }
 const toPath = (loc) => new URL(loc).pathname;
 const attr = (html, re) => (html.match(re) || [])[1];
@@ -20,7 +26,7 @@ const robots = (await get("/robots.txt")).text;
 if (!robots) err("/robots.txt", "missing");
 const index = (await get("/sitemap.xml")).text;
 const subs = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => toPath(m[1]));
-if (subs.length !== 4) err("/sitemap.xml", `expected 4 sitemaps, got ${subs.length}`);
+if (subs.length !== 6) err("/sitemap.xml", `expected 6 sitemaps, got ${subs.length}`);
 const urls = [];
 for (const s of subs) {
   const x = (await get(s)).text;
@@ -35,6 +41,7 @@ const titles = new Map();
 const descs = new Map();
 const h1s = new Map();
 const links = new Map();
+const bodies = new Map(); // location pages: main-content shingles for near-duplicate checks
 for (const path of urls) {
   const { res, text: html } = await get(path);
   if (res.status !== 200) {
@@ -57,7 +64,21 @@ for (const path of urls) {
   if (h1.length !== 1) err(path, `${h1.length} h1 tags`);
   const text = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   for (const re of BANNED) if (re.test(text)) err(path, `banned phrase ${re}`);
-  if (/, NC\b|, SC\b/.test(title || "")) err(path, "wrong state in title");
+  const seg = path.split("/").filter(Boolean);
+  if (seg[0] === "locations" && seg.length >= 3) {
+    const words = (html.match(/<main[\s\S]*<\/main>/) || [""])[0]
+      .replace(/<script[\s\S]*?<\/script>/g, "")
+      .replace(/<(form|aside|nav)\b[\s\S]*?<\/(form|aside|nav)>/g, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&[a-z#0-9]+;/g, " ")
+      .toLowerCase()
+      .replace(/[0-9]+/g, "#")
+      .split(/\W+/)
+      .filter(Boolean);
+    const sh = new Set();
+    for (let i = 0; i + 5 <= words.length; i++) sh.add(words.slice(i, i + 5).join(" "));
+    bodies.set(path, { kind: seg.length === 3 ? "city" : "city-service", sh });
+  }
   for (const [m, v] of [[titles, title], [descs, desc], [h1s, h1[0]?.[1]]]) {
     if (!v) continue;
     m.set(v, [...(m.get(v) || []), path]);
@@ -106,6 +127,38 @@ for (const path of urls) {
 for (const [m, label] of [[titles, "title"], [descs, "description"], [h1s, "h1"]])
   for (const [v, ps] of m) if (ps.length > 1) err(ps.join(", "), `duplicate ${label}: ${v.slice(0, 50)}`);
 
+// 2b. near-duplicate clusters among sibling location pages.
+// Digits are normalized to "#", so this measures shared wording, not shared numbers.
+const dup = { city: [], "city-service": [] };
+for (const kind of Object.keys(dup)) {
+  const pages = [...bodies].filter(([, b]) => b.kind === kind);
+  const freq = new Map();
+  for (const [, b] of pages) for (const s of b.sh) freq.set(s, (freq.get(s) || 0) + 1);
+  for (const [p, b] of pages) {
+    // unique contribution: shingles that appear on fewer than 10% of sibling pages
+    let uniq = 0;
+    for (const s of b.sh) if (freq.get(s) < Math.max(2, pages.length * 0.1)) uniq++;
+    const ratio = b.sh.size ? uniq / b.sh.size : 0;
+    let best = 0;
+    let bestP = "";
+    for (const [q, c] of pages) {
+      if (q === p) continue;
+      let inter = 0;
+      for (const s of b.sh) if (c.sh.has(s)) inter++;
+      const j = inter / (b.sh.size + c.sh.size - inter);
+      if (j > best) [best, bestP] = [j, q];
+    }
+    dup[kind].push({ p, ratio, best });
+    if (best > 0.85) err(p, `near-duplicate of ${bestP} (Jaccard ${best.toFixed(2)})`);
+    else if (best > 0.7) warn(p, `similar to ${bestP} (Jaccard ${best.toFixed(2)})`);
+  }
+}
+const stat = (a, k) => {
+  if (!a.length) return "n/a";
+  const v = a.map((x) => x[k]).sort((x, y) => x - y);
+  return `median ${v[Math.floor(v.length / 2)].toFixed(2)}, worst ${(k === "ratio" ? v[0] : v.at(-1)).toFixed(2)}`;
+};
+
 // 3. orphans + click depth (BFS from home)
 const depth = new Map([["/", 0]]);
 const queue = ["/"];
@@ -141,6 +194,8 @@ const cross = await fetch(BASE + "/api/lead", { method: "POST", headers: { "cont
 if (cross.status !== 403) err("/api/lead", `cross-origin not rejected (${cross.status})`);
 
 console.log(`Audited ${urls.length} sitemap URLs · max click depth ${maxDepth}`);
+for (const k of Object.keys(dup))
+  console.log(`${k} pages (${dup[k].length}): closest-sibling similarity ${stat(dup[k], "best")} · unique-wording share ${stat(dup[k], "ratio")}`);
 if (warns.length) console.log(`\nWarnings (${warns.length}):\n  ` + warns.join("\n  "));
 console.log(errors.length ? `\nErrors (${errors.length}):\n  ` + errors.join("\n  ") : "\n0 errors");
 process.exit(errors.length ? 1 : 0);

@@ -9,7 +9,7 @@ export function Footer() {
   const cities = locationGroups().flatMap((g) => g.links);
   return (
     <footer className="bg-ink pb-24 text-white/85 lg:pb-0">
-      <div className="container-x grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container-x grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-5">
         <div>
           <Logo light />
           <p className="mt-4 text-sm">Plumbing help for {site.marketLong}, connected to independent, licensed local plumbers.</p>
@@ -30,9 +30,9 @@ export function Footer() {
             <li><Link href={routes.emergency()} className="hover:text-white hover:underline">Emergency plumbing</Link></li>
           </ul>
         </div>
-        <div>
+        <div className="md:col-span-2">
           <h2 className="font-sans text-sm font-semibold tracking-wider text-white uppercase">Service areas</h2>
-          <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+          <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:grid-cols-3">
             {cities.map((c) => (
               <li key={c.href}>
                 <Link href={c.href} className="hover:text-white hover:underline">{c.name}</Link>

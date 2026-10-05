@@ -20,7 +20,7 @@ export function Header() {
         <div className="container-x flex h-9 items-center justify-between gap-4">
           <span className="truncate">Serving {site.marketLong}</span>
           <span className="hidden md:inline">{availability}</span>
-          <span className="hidden lg:inline">Licensed, independent Arizona plumbers</span>
+          <span className="hidden lg:inline">Licensed, independent local plumbers</span>
         </div>
       </div>
       <HeaderShell>
@@ -43,8 +43,8 @@ export function Header() {
             href="/locations/"
             groups={locations}
             feature={{
-              title: "Across the Valley",
-              body: "Phoenix, the West and Northwest Valley, Scottsdale and the East Valley.",
+              title: "All 50 states + DC",
+              body: "Thousands of covered cities and towns. Pick your state, or check your ZIP code.",
               href: routes.locations(),
               cta: "All service areas",
             }}

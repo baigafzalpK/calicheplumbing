@@ -8,7 +8,7 @@ import { PhoneLink } from "@/components/PhoneLink";
 import { LeadFormBlock } from "@/components/lead/LeadFormBlock";
 
 const title = "Contact Caliche Plumbing";
-const description = "Call or send a request to get connected with a licensed plumber in the Phoenix metro. Emergencies: shut off your main valve and call.";
+const description = "Call or send a request to get connected with a licensed plumber who serves your ZIP code. Emergencies: shut off your main valve and call.";
 const path = routes.contact();
 export const metadata = pageMeta({ title, description, path });
 

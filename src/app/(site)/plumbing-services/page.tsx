@@ -10,9 +10,9 @@ import { JsonLd, ServiceCard } from "@/components/ui";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/CtaBand";
 
-const title = "Plumbing Services in the Phoenix Metro";
+const title = "Plumbing Services: Leaks, Pipes, Heaters, Drains";
 const description =
-  "Every plumbing service we connect Valley homeowners with: hard water treatment, slab leaks, repiping, water heaters, pressure, backflow, drains and gas lines.";
+  "Every plumbing service we connect homeowners with: leaks, frozen pipes, repiping, water heaters, sump pumps, hard water, drains, sewer and gas lines.";
 const path = routes.services();
 
 export const metadata = pageMeta({ title, description, path });
@@ -28,9 +28,9 @@ export default function ServicesHub() {
       <Hero
         crumbs={crumbs}
         eyebrow="Plumbing services"
-        title="Plumbing services for Valley homes"
-        lead={<p>Eight categories, 21 services, each explained with the signs, the process and what drives cost. Pick a service, or call and describe the problem.</p>}
-        facts={[availability, "Licensed Arizona contractors"]}
+        title="Plumbing services, explained"
+        lead={<p>Nine categories, 23 services, each explained with the signs, the process and what drives cost. Pick a service, or call and describe the problem.</p>}
+        facts={[availability, "Licensed local contractors"]}
         photo={photos.plumber}
       />
       <section className="py-14">

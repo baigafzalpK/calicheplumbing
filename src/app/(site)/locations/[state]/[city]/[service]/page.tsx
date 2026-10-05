@@ -1,26 +1,26 @@
 import { notFound } from "next/navigation";
 import { getService } from "@/content/services";
-import { getCity, getState, cityLabel } from "@/content/locations";
-import { indexableCityServices } from "@/lib/sitemap";
+import { getCityPage, getStateView, cityLabel } from "@/lib/geo";
+import { indexableCities, indexableCityServices } from "@/lib/sitemap";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
-import { graph, ids, pageGraph } from "@/lib/schema";
+import { cityNodes, graph, ids, pageGraph } from "@/lib/schema";
 import { site } from "@/content/site";
 import { JsonLd } from "@/components/ui";
 import { ServiceTemplate } from "@/components/templates/ServiceTemplate";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return indexableCityServices().map((cs) => ({ state: "arizona", city: cs.citySlug, service: cs.serviceSlug }));
+  return indexableCityServices().map((cs) => ({ state: cs.stateSlug, city: cs.citySlug, service: cs.serviceSlug }));
 }
 
 type P = { params: Promise<{ state: string; city: string; service: string }> };
 
 function load(p: { state: string; city: string; service: string }) {
-  const cs = indexableCityServices().find((x) => x.citySlug === p.city && x.serviceSlug === p.service);
-  const city = getCity(p.state, p.city);
+  const cs = indexableCityServices().find((x) => x.stateSlug === p.state && x.citySlug === p.city && x.serviceSlug === p.service);
+  const city = getCityPage(p.state, p.city);
   const s = getService(p.service);
-  const st = getState(p.state);
+  const st = getStateView(p.state);
   if (!cs || !city || !s || !st) return null;
   return { cs, city, s, st };
 }
@@ -51,13 +51,31 @@ export default async function CityServicePage({ params }: P) {
     description: cs.answer,
     provider: { "@id": ids.org },
     broker: { "@id": ids.org },
-    areaServed: { "@id": ids.place(city.slug) },
+    areaServed: { "@id": ids.place(st.slug, city.slug) },
     isRelatedTo: { "@id": ids.service(s.slug) },
   };
   return (
     <>
-      <JsonLd data={graph(pageGraph({ path, name: cs.seoTitle, description: cs.metaDescription, type: "ItemPage", crumbs, faqs, about: [`${site.url}${path}#service`], extra: [node] }))} />
-      <ServiceTemplate s={s} path={path} crumbs={crumbs} city={city} local={cs} faqs={faqs} />
+      <JsonLd data={graph(pageGraph({ path, name: cs.seoTitle, description: cs.metaDescription, type: "ItemPage", crumbs, faqs, about: [`${site.url}${path}#service`], extra: [node, ...cityNodes(city, st.abbr)] }))} />
+      <ServiceTemplate
+        s={s}
+        path={path}
+        crumbs={crumbs}
+        city={city}
+        cityLabel={cityLabel(city)}
+        local={cs}
+        faqs={faqs}
+        towns={[
+          { name: `All of ${city.name}`, href: routes.city(st.slug, city.slug) },
+          ...indexableCities()
+            .filter((c) => c.stateSlug === st.slug && city.nearby.includes(c.slug))
+            .map((c) => {
+              const combo = indexableCityServices().some((x) => x.stateSlug === st.slug && x.citySlug === c.slug && x.serviceSlug === s.slug);
+              return { name: c.name, href: combo ? routes.cityService(st.slug, c.slug, s.slug) : routes.city(st.slug, c.slug) };
+            }),
+          { name: `All of ${st.name}`, href: routes.state(st.slug) },
+        ]}
+      />
     </>
   );
 }

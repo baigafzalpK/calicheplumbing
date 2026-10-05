@@ -30,11 +30,13 @@ export const categoryPhotos: Record<CategorySlug, Photo> = {
   "irrigation-backflow": photos.sprinkler,
   "drains-sewer": photos.drain,
   "gas-lines": photos.gas,
+  "freeze-flood": photos.wrench,
 };
 
 export const servicePhotoOverrides: Record<string, Photo> = {
   "reverse-osmosis-systems": photos.tapWater,
   "whole-house-filtration": photos.tapWater,
+  "frozen-pipe-repair": photos.drip,
 };
 
 export const guidePhotos: Record<Article["category"], Photo> = {

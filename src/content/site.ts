@@ -10,9 +10,8 @@ export const site = {
   shortName: "Caliche",
   domain: "calicheplumbing.com",
   url: (env("NEXT_PUBLIC_SITE_URL") || "https://www.calicheplumbing.com").replace(/\/$/, ""),
-  market: "Phoenix metro",
-  marketLong: "the Phoenix metro and Maricopa County",
-  stateAbbr: "AZ",
+  market: "United States",
+  marketLong: "homeowners in all 50 states and Washington, DC",
   phone: env("NEXT_PUBLIC_BUSINESS_PHONE") || TEMP_PHONE,
   phoneE164: env("NEXT_PUBLIC_BUSINESS_PHONE_E164") || TEMP_PHONE_E164,
   phoneIsReal: Boolean(env("NEXT_PUBLIC_BUSINESS_PHONE")),
@@ -35,10 +34,10 @@ export const availability = site.emergency247
   : "Same-day service when a plumber is available";
 
 export const BRAND_PROMISE =
-  "One call connects you with an independent, licensed plumber who works your part of the Valley.";
+  "One call connects you with an independent, licensed plumber who works your area.";
 
 export const DISCLOSURE =
-  "Caliche Plumbing is a referral service. We do not perform plumbing work. Calls and requests are connected to independent, licensed plumbing contractors in our network who set their own prices and are responsible for their own work. Verify any contractor's license with the Arizona Registrar of Contractors.";
+  "Caliche Plumbing is a referral service. We do not perform plumbing work. Calls and requests are connected to independent, licensed plumbing contractors in our network who set their own prices and are responsible for their own work. Verify any contractor's license with your state or local licensing authority before work begins.";
 
 export function telHref(e164 = site.phoneE164) {
   return `tel:${e164}`;

@@ -108,13 +108,13 @@ export default async function Guide({ params }: P) {
             </div>
             <FaqList faqs={a.faqs} title="Common questions" />
             <p className="mt-8 rounded-xl bg-sand-deep p-4 text-sm text-muted">
-              Editorial note: this guide is general information for Phoenix-area homeowners, not a diagnosis. Conditions vary by home, so a licensed plumber should confirm the cause before any repair.
+              Editorial note: this guide is general information for homeowners, not a diagnosis. Conditions vary by home, so a licensed plumber should confirm the cause before any repair.
             </p>
           </article>
           <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
             <div className="card p-5">
               <p className="font-serif text-xl font-semibold">Need a plumber for this?</p>
-              <p className="mt-1 text-sm text-muted">Get connected with a licensed plumber in your part of the Valley.</p>
+              <p className="mt-1 text-sm text-muted">Get connected with a licensed plumber who serves your ZIP code.</p>
               <PhoneLink phone={site.phone} e164={site.phoneE164} location="guide_sidebar" className="btn btn-primary mt-4 w-full whitespace-normal" label={`Call ${site.phone}`} />
               <Link href={routes.request({ service: primary?.slug })} className="btn btn-secondary mt-2 w-full whitespace-normal">
                 Request service

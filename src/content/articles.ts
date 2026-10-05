@@ -5,19 +5,19 @@ const P = "2026-09-27";
 export const articles: Article[] = [
   {
     slug: "why-is-my-water-bill-so-high",
-    title: "Why is my water bill so high? A Phoenix homeowner's checklist",
-    seoTitle: "Why Is My Water Bill So High? (Phoenix Checklist)",
+    title: "Why is my water bill so high? A homeowner's leak checklist",
+    seoTitle: "Why Is My Water Bill So High? A 15-Minute Leak Check",
     metaDescription:
-      "A sudden jump in your Valley water bill usually means a running toilet, an irrigation leak or a slab leak. Here's how to find which one in 15 minutes.",
+      "A sudden jump in your water bill usually means a running toilet, a hidden leak or an irrigation problem. Here's how to find which one in 15 minutes.",
     category: "Leaks",
     status: "PUBLISHED",
     answer:
-      "A high water bill in the Phoenix area usually comes from one of four things: a running toilet, an irrigation leak, a slab leak, or seasonal watering. Turn off every fixture and the irrigation controller, then watch the meter's leak indicator. If it moves, you have a leak, and a few simple shutoff tests tell you where.",
+      "A high water bill usually comes from one of four things: a running toilet, a leak in the yard or under the house, an irrigation problem, or seasonal use. Turn off every fixture and the irrigation controller, then watch the meter's leak indicator. If it moves, you have a leak, and a few simple shutoff tests tell you where.",
     sections: [
       {
         heading: "First, compare the right months",
         body: [
-          "Valley water use swings hard with the seasons because irrigation and pools use far more in summer. Compare this month's bill to the same month last year, not to last month. A 30% or larger jump over last year with no change in habits is worth investigating.",
+          "Water use swings with the seasons, especially where lawns, irrigation and pools use far more in summer. Compare this month's bill to the same month last year, not to last month. A 30% or larger jump over last year with no change in habits is worth investigating.",
         ],
       },
       {
@@ -39,9 +39,9 @@ export const articles: Article[] = [
         ],
       },
       {
-        heading: "The usual suspects in Valley homes",
+        heading: "The usual suspects",
         body: [
-          "Toilet flappers and fill valves wear out faster in hard water. Irrigation mainlines leak quietly under desert landscaping. Slab leaks on copper hot lines are common in homes built from the 1960s through the 1990s.",
+          "Toilet flappers and fill valves are the most common culprit, and they wear out faster in hard water. Irrigation mainlines leak quietly underground. Slab-foundation homes get leaks on copper hot lines under the concrete, and basement homes can have a leaking service line or a pipe that split in a freeze.",
         ],
       },
     ],
@@ -52,12 +52,12 @@ export const articles: Article[] = [
     ],
     faqs: [
       { q: "Can a running toilet really raise my bill that much?", a: "Yes. A constantly running toilet can waste thousands of gallons a month, which is often more than a slow slab leak." },
-      { q: "Will my city adjust the bill for a leak?", a: "Some Valley water providers offer a one-time leak adjustment once it's repaired. Ask your provider and keep the repair invoice." },
+      { q: "Will my water utility adjust the bill for a leak?", a: "Many water providers offer a one-time leak adjustment once it's repaired. Ask your provider and keep the repair invoice." },
     ],
     services: ["slab-leak-detection", "irrigation-leak-repair", "main-water-line-repair"],
     relatedArticles: ["warm-spot-on-floor", "burst-pipe-what-to-do"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
@@ -72,9 +72,9 @@ export const articles: Article[] = [
       "A warm spot on a tile or concrete floor almost always means a hot-water line is leaking under the slab. Confirm it by shutting the cold inlet valve on your water heater. If the meter's leak indicator stops, the leak is on the hot side. Leave the water heater's supply off between uses until it's repaired.",
     sections: [
       {
-        heading: "Why it happens in Valley homes",
+        heading: "Why it happens",
         body: [
-          "Most Phoenix-area homes are on slab foundations with copper hot lines running under the concrete. Hot lines expand and contract every time they're used, and over years they wear against gravel and concrete until a pinhole forms. The escaping hot water warms the slab above it.",
+          "Slab-on-grade homes, the norm across the South and Southwest, often have copper hot lines running under the concrete. Hot lines expand and contract every time they're used, and over years they wear against gravel and concrete until a pinhole forms. The escaping hot water warms the slab above it.",
         ],
       },
       {
@@ -110,26 +110,26 @@ export const articles: Article[] = [
       { q: "Can I keep using hot water until it's fixed?", a: "Briefly, but it wastes energy and water. Many homeowners close the water heater's cold inlet except when they need hot water." },
     ],
     services: ["slab-leak-detection", "slab-leak-repair", "whole-house-repiping"],
-    relatedArticles: ["why-is-my-water-bill-so-high", "polybutylene-pipes-arizona"],
+    relatedArticles: ["why-is-my-water-bill-so-high", "polybutylene-pipes"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
     slug: "white-crust-on-faucets",
-    title: "White crust on faucets and shower glass: Valley hard water explained",
-    seoTitle: "White Crust on Faucets? Phoenix Hard Water Explained",
+    title: "White crust on faucets and shower glass: hard water explained",
+    seoTitle: "White Crust on Faucets? Hard Water Scale Explained",
     metaDescription:
-      "That white crust is calcium and magnesium scale from Valley hard water. What it does inside your plumbing, how to clean it, and how to stop it.",
+      "That white crust is calcium and magnesium scale from hard water. What it does inside your plumbing, how to clean it, and how to stop it.",
     category: "Hard water",
     status: "PUBLISHED",
     answer:
       "The white or tan crust on faucets, shower heads and glass is scale: calcium and magnesium left behind when hard water dries. Vinegar removes it from surfaces, but the same scale builds up inside water heaters, tankless units and valves. A water softener is the fix that stops it at the source.",
     sections: [
       {
-        heading: "Why Valley water is so hard",
+        heading: "Why some water is so hard",
         body: [
-          "Phoenix-area water comes from the Salt and Verde rivers, the Colorado River by way of the CAP canal, and groundwater, all of which carry dissolved minerals from desert rock. Providers generally report hardness in the teens of grains per gallon, and some sources run higher.",
+          "Water picks up calcium and magnesium as it moves through limestone, chalk and desert rock. That's why water is generally hard across the Southwest, Texas, Florida and much of the Midwest, and softer in New England, the Southeast and the Pacific Northwest. Above about 7 grains per gallon (120 mg/L) is considered hard, and some Southwest systems report well into the teens. Your provider's annual water quality report lists your number.",
         ],
       },
       {
@@ -151,7 +151,7 @@ export const articles: Article[] = [
       {
         heading: "Stopping it",
         body: [
-          "A water softener removes hardness minerals from all the water that passes through it. Many Valley homes have a pre-plumbed softener loop in the garage. Reverse osmosis at the kitchen sink handles drinking water.",
+          "A water softener removes hardness minerals from all the water that passes through it. Many homes in hard-water areas have a pre-plumbed softener loop in the garage or basement. Reverse osmosis at the kitchen sink handles drinking water.",
         ],
       },
     ],
@@ -166,7 +166,7 @@ export const articles: Article[] = [
     services: ["water-softener-installation", "reverse-osmosis-systems", "water-heater-flush"],
     relatedArticles: ["softener-vs-ro-vs-filter", "water-heater-rumbling"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
@@ -174,11 +174,11 @@ export const articles: Article[] = [
     title: "Water softener vs. reverse osmosis vs. whole-house filter",
     seoTitle: "Water Softener vs Reverse Osmosis vs Whole-House Filter",
     metaDescription:
-      "Softeners remove hardness, RO purifies drinking water, and carbon filters fix taste and chlorine. Which ones a Phoenix-area home actually needs.",
+      "Softeners remove hardness, RO purifies drinking water, and carbon filters fix taste and chlorine. Which ones your home actually needs.",
     category: "Hard water",
     status: "PUBLISHED",
     answer:
-      "They solve different problems. A softener removes hardness to protect plumbing and appliances. Reverse osmosis purifies drinking water at one tap. A whole-house carbon filter improves taste and chlorine at every tap. Many Valley homes use a softener plus RO, and add a carbon filter if chlorine taste bothers them.",
+      "They solve different problems. A softener removes hardness to protect plumbing and appliances. Reverse osmosis purifies drinking water at one tap. A whole-house carbon filter improves taste and chlorine at every tap. Many hard-water homes use a softener plus RO, and add a carbon filter if chlorine taste bothers them.",
     sections: [
       {
         heading: "Water softener",
@@ -198,7 +198,7 @@ export const articles: Article[] = [
       {
         heading: "Putting it together",
         body: [
-          "For most Valley homes the order is filter (optional), then softener, then RO at the kitchen. Keep irrigation and hose bibs on hard water so softened water doesn't add sodium to the soil.",
+          "For most homes the order is filter (optional), then softener, then RO at the kitchen. Keep irrigation and hose bibs on hard water so softened water doesn't add sodium to the soil.",
         ],
       },
     ],
@@ -209,24 +209,24 @@ export const articles: Article[] = [
     services: ["water-softener-installation", "reverse-osmosis-systems", "whole-house-filtration"],
     relatedArticles: ["white-crust-on-faucets", "water-heater-rumbling"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
-    slug: "polybutylene-pipes-arizona",
-    title: "Polybutylene pipes in Arizona homes: how to spot them and what to do",
-    seoTitle: "Polybutylene Pipes in Arizona: How to Identify Them",
+    slug: "polybutylene-pipes",
+    title: "Polybutylene pipes: how to spot them and what to do",
+    seoTitle: "Polybutylene Pipes: How to Identify Them & What to Do",
     metaDescription:
-      "Many Valley homes built around 1978–1995 have polybutylene supply pipe. How to identify it, why it fails, and what replacement involves.",
+      "Many US homes built around 1978–1995 have polybutylene supply pipe. How to identify it, why it fails, what insurers ask, and what replacement involves.",
     category: "Pipes",
     status: "PUBLISHED",
     answer:
       "Polybutylene is a gray (sometimes blue or black) plastic supply pipe used in many homes from about 1978 to 1995. Look for 'PB2110' stamped on the pipe at the water heater, under sinks or at toilet supplies. It can fail without warning, so most owners plan a repipe, usually in PEX.",
     sections: [
       {
-        heading: "Why it matters in the Valley",
+        heading: "Where it turns up",
         body: [
-          "The Phoenix metro built enormous numbers of homes during the polybutylene years, especially in Mesa, Glendale, Peoria, Chandler, Tempe, north Phoenix and Sun City West. Insurers and buyers frequently ask about it.",
+          "Polybutylene was installed in millions of homes, most heavily in the Sunbelt and other fast-growing areas that built a lot of housing between the late 1970s and mid-1990s: Florida, Texas, Arizona, Georgia, the Carolinas and the West Coast among them. It also turns up in manufactured homes from the period. Insurers and buyers frequently ask about it.",
         ],
       },
       {
@@ -260,7 +260,7 @@ export const articles: Article[] = [
     services: ["polybutylene-replacement", "whole-house-repiping"],
     relatedArticles: ["warm-spot-on-floor", "water-pressure-too-high"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
@@ -277,7 +277,7 @@ export const articles: Article[] = [
       {
         heading: "What's happening inside",
         body: [
-          "Every time the tank heats Valley water, calcium carbonate drops out and settles. Over years it forms a layer that traps water against the heat source. That water flashes to steam, and you hear it as pops, cracks and rumbles.",
+          "Every time the tank heats hard water, calcium carbonate drops out and settles. Over years it forms a layer that traps water against the heat source. That water flashes to steam, and you hear it as pops, cracks and rumbles.",
         ],
       },
       {
@@ -299,7 +299,7 @@ export const articles: Article[] = [
     services: ["water-heater-flush", "water-heater-replacement", "water-softener-installation"],
     relatedArticles: ["white-crust-on-faucets", "softener-vs-ro-vs-filter"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
@@ -327,7 +327,7 @@ export const articles: Article[] = [
       {
         heading: "What a failing PRV looks like",
         body: [
-          "PRVs wear out, commonly in 10 to 15 years in the Valley. A failed PRV may let full street pressure through or creep up over time. Adjusting a worn valve rarely holds, so replacement is the usual fix.",
+          "PRVs wear out, commonly in 10 to 15 years. A failed PRV may let full street pressure through or creep up over time. Adjusting a worn valve rarely holds, so replacement is the usual fix.",
         ],
       },
     ],
@@ -336,26 +336,26 @@ export const articles: Article[] = [
       { q: "Does high pressure cause slab leaks?", a: "It adds stress to every pipe and joint. It isn't the only cause, but it can speed up failures in aging pipe." },
     ],
     services: ["pressure-regulator-valve", "water-heater-replacement", "whole-house-repiping"],
-    relatedArticles: ["polybutylene-pipes-arizona", "burst-pipe-what-to-do"],
+    relatedArticles: ["polybutylene-pipes", "burst-pipe-what-to-do"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
     slug: "protect-backflow-from-freezing",
     title: "How to protect your backflow preventer on freezing nights",
-    seoTitle: "Protect Your Backflow Preventer From Freezing (Phoenix)",
+    seoTitle: "Protect Your Backflow Preventer From Freezing",
     metaDescription:
-      "A few Valley winter nights drop into the 20s and crack exposed backflow assemblies. How to insulate, when to drain, and what to do if it breaks.",
+      "Exposed backflow assemblies crack when they freeze. How to winterize in cold climates, cover them on rare freeze nights, and what to do if one breaks.",
     category: "Outdoor",
     status: "PUBLISHED",
     answer:
-      "Valley freezes are rare but real, and exposed brass backflow assemblies crack when water inside them freezes. Put an insulated cover or wrap over the assembly when forecasts drop below freezing. On hard-freeze nights, shut the irrigation supply and drain it per the manufacturer's instructions.",
+      "Exposed brass backflow assemblies crack when water inside them freezes. In cold climates, shut off the irrigation supply and drain or blow out the system each fall. In warm climates, put an insulated cover over the assembly when a freeze is forecast, and on hard-freeze nights shut the supply and drain it per the manufacturer's instructions.",
     sections: [
       {
-        heading: "Why backflows break here",
+        heading: "Why backflows break",
         body: [
-          "Irrigation backflow assemblies sit above ground, fully exposed. Homeowners rarely think about freezing in Phoenix, so an overnight low in the 20s can crack a body or bonnet that has never been protected.",
+          "Irrigation backflow assemblies sit above ground, fully exposed. In the North they're winterized every fall as routine. The bigger risk is in warm-winter places like Phoenix, Texas and Florida, where homeowners rarely think about freezing, so a single night in the 20s can crack a body or bonnet that has never been protected.",
         ],
       },
       {
@@ -377,7 +377,7 @@ export const articles: Article[] = [
     services: ["backflow-testing", "irrigation-leak-repair"],
     relatedArticles: ["burst-pipe-what-to-do", "why-is-my-water-bill-so-high"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
@@ -385,19 +385,20 @@ export const articles: Article[] = [
     title: "Burst pipe or major leak: what to do in the first 10 minutes",
     seoTitle: "Burst Pipe? What to Do in the First 10 Minutes",
     metaDescription:
-      "Step-by-step: find your main shutoff, protect electrical, start drying, document for insurance, and call a plumber. Written for Phoenix-area homes.",
+      "Step-by-step: find your main shutoff, protect electrical, start drying, document for insurance, and call a plumber. Where to find the shutoff in any home.",
     category: "Emergencies",
     status: "PUBLISHED",
     answer:
-      "Shut off the main water valve first. In most Valley homes it's on the main line near the front hose bib or in the garage by the water heater or softener. Then turn off power to any wet area, move valuables, start removing water, photograph everything for insurance, and call a plumber.",
+      "Shut off the main water valve first. In basement homes it's usually on the wall where the main enters, near the meter. In slab homes it's often on the main line near the front hose bib or in the garage by the water heater. Then turn off power to any wet area, move valuables, start removing water, photograph everything for insurance, and call a plumber.",
     sections: [
       {
         heading: "1. Stop the water",
-        body: ["Find the main shutoff. In Valley homes, look:"],
+        body: ["Find the main shutoff. Depending on how your home is built, look:"],
         list: [
-          "On the main line where it rises out of the ground near the front hose bib",
-          "In the garage near the water heater or softener loop",
-          "At the meter box by the street (it may need a meter key)",
+          "In the basement or crawl space on the front wall, where the main enters next to the water meter",
+          "In a utility closet or near the water heater, in homes without basements",
+          "On the main line where it rises out of the ground near the front hose bib, common on slab homes",
+          "At the curb box or meter pit by the street (it may need a meter key)",
         ],
       },
       {
@@ -425,19 +426,19 @@ export const articles: Article[] = [
     services: ["slab-leak-repair", "pinhole-leak-repair", "main-water-line-repair"],
     relatedArticles: ["smell-gas-what-to-do", "protect-backflow-from-freezing"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
   {
     slug: "smell-gas-what-to-do",
     title: "Smell gas at home? What to do right now",
-    seoTitle: "Smell Gas at Home? What to Do Right Now (Phoenix)",
+    seoTitle: "Smell Gas at Home? What to Do Right Now",
     metaDescription:
-      "If you smell gas, leave first and call from outside. Who to call in the Valley (Southwest Gas, City of Mesa gas, 911) and what happens next.",
+      "If you smell gas, leave first and call from outside. Who to call (your gas utility's emergency line or 911), what not to touch, and what happens next.",
     category: "Emergencies",
     status: "PUBLISHED",
     answer:
-      "Leave the house immediately. Don't switch lights on or off, use the garage door, or make calls inside. From a safe distance, call 911 or your gas utility: Southwest Gas for most of the Valley, or the City of Mesa gas utility for some Mesa addresses. Once the utility has made it safe, a plumber repairs the leak.",
+      "Leave the house immediately. Don't switch lights on or off, use the garage door, or make calls inside. From a safe distance, call 911 or your gas utility's emergency number, which is printed on your gas bill. Once the utility has made it safe, a plumber repairs the leak.",
     sections: [
       {
         heading: "Get out first",
@@ -448,7 +449,7 @@ export const articles: Article[] = [
       {
         heading: "Who to call",
         body: [],
-        list: ["911 for an immediate hazard", "Southwest Gas's emergency line for most Valley homes", "The City of Mesa gas utility if Mesa is your gas provider"],
+        list: ["911 for an immediate hazard", "Your gas utility's 24-hour emergency line, printed on your bill and on the utility's website", "Your propane supplier, if your home runs on a propane tank"],
       },
       {
         heading: "After the utility visit",
@@ -464,7 +465,7 @@ export const articles: Article[] = [
     services: ["gas-line-repair", "gas-appliance-hookup"],
     relatedArticles: ["burst-pipe-what-to-do", "water-heater-rumbling"],
     published: P,
-    updated: P,
+    updated: "2026-10-05",
     reviewedBy: null,
   },
 ];

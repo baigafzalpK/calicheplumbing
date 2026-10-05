@@ -26,6 +26,8 @@ const TOPICS: [RegExp, string][] = [
   [/\bgas lines?\b/i, routes.service("gas-line-repair")],
   [/\bwater bill\b/i, routes.guide("why-is-my-water-bill-so-high")],
   [/\bwater pressure\b/i, routes.guide("water-pressure-too-high")],
+  [/\b(?:frozen|burst) pipes?\b/i, routes.service("frozen-pipe-repair")],
+  [/\bsump pumps?\b/i, routes.service("sump-pump-installation")],
 ];
 
 const EXPLICIT = /\[([^\]]+)\]\(([^)]+)\)/g;

@@ -12,7 +12,8 @@ export type CategorySlug =
   | "pressure-supply"
   | "irrigation-backflow"
   | "drains-sewer"
-  | "gas-lines";
+  | "gas-lines"
+  | "freeze-flood";
 
 export type Category = {
   slug: CategorySlug;
@@ -39,7 +40,8 @@ export type IconName =
   | "shield"
   | "wrench"
   | "sun"
-  | "search";
+  | "search"
+  | "snow";
 
 export type Service = {
   slug: string;
@@ -92,13 +94,30 @@ export type City = {
   localIssues: { title: string; body: string }[];
   popularServices: string[];
   nearby: string[];
-  water: string;
-  permits: string;
+  water: string | null;
+  permits: string | null;
   faqs: Faq[];
   updated: string;
+  /** Census profile of the covered ZIP codes. Present on generated (data-driven) pages. */
+  profile?: PlaceProfile;
+  /** Covered towns near this one that don't have their own page. */
+  alsoCovered?: { name: string; mi: number }[];
+  /** Hand-written page (true) or composed from coverage + Census data (false). */
+  curated?: boolean;
+};
+
+export type PlaceProfile = {
+  pop: number;
+  units: number;
+  built: { pre1940: number; y1940_59: number; y1960_79: number; y1980_99: number; y2000p: number };
+  heat: { gas: number; lp: number; electric: number; oil: number };
+  detached: number | null;
+  owner: number | null;
 };
 
 export type CityService = {
+  /** Defaults to "arizona" for the original hand-written pages. */
+  stateSlug?: string;
   citySlug: string;
   serviceSlug: string;
   status: Status;

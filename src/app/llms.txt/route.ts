@@ -9,20 +9,25 @@ export function GET() {
     `## ${h}\n\n` + urls.filter((u) => u.group === g).map((u) => `- [${u.title}](${site.url}${u.path})`).join("\n");
   const body = `# ${site.name}
 
-> Plumbing referral service for the Phoenix metro (Maricopa County, Arizona). Connects homeowners with independent, licensed plumbers for slab leaks, hard water treatment, repiping, water heaters, pressure regulators, backflow, drains and gas lines.
+> Nationwide plumbing referral service covering all 50 states and Washington, DC. Connects homeowners with independent, licensed local plumbers for leaks, frozen and burst pipes, repiping, water heaters, sump pumps, hard water treatment, drains, sewer lines and gas lines.
 
 ## Quick Facts
 - **Phone:** ${site.phone} (${site.phoneE164})
 - **Market:** ${site.marketLong}
 - **Website:** ${site.url}
-- **Contractor Licensing:** Connected contractors are licensed by the Arizona Registrar of Contractors (ROC).
-- **Core Specialties:** Slab leak detection & attic PEX reroutes, hard water softeners & reverse osmosis, polybutylene pipe replacement & whole-house repipes, water heater repair & replacement, pressure reducing valves (PRVs).
+- **Contractor Licensing:** Connected contractors hold the licenses their state or city requires; each state page names the licensing authority.
+- **Location data:** City pages use US Census ACS 2023 5-year estimates for the covered ZIP codes.
+- **Core Topics:** Leak detection and slab leaks, frozen and burst pipes, galvanized and polybutylene repiping, water heaters, sump pumps, hard water treatment, drains and sewer lines, gas lines.
 
 ${DISCLOSURE}
 
 ${section("services", "Services")}
 
-${section("locations", "Service areas")}
+${section("states", "States")}
+
+${section("cities", "City pages")}
+
+${section("city-services", "Local service pages")}
 
 ${section("guides", "Guides")}
 

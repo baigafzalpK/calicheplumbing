@@ -1,5 +1,5 @@
 import { categories, servicesInCategory } from "@/content/services";
-import { regions, publishedCities } from "@/content/locations";
+import { stateFacts, type Region } from "@/content/stateFacts";
 import { routes } from "@/lib/routes";
 import type { IconName } from "@/content/types";
 
@@ -14,11 +14,13 @@ export function serviceGroups(): NavGroup[] {
   }));
 }
 
+const REGIONS: Region[] = ["Northeast", "Midwest", "South", "West"];
+
 export function locationGroups(): NavGroup[] {
-  return regions.map((r) => ({
-    title: r.name,
-    href: `${routes.locations()}#${r.slug}`,
-    links: publishedCities.filter((c) => c.region === r.slug).map((c) => ({ name: c.name, href: routes.city(c.stateSlug, c.slug) })),
+  return REGIONS.map((r) => ({
+    title: r,
+    href: `${routes.locations()}#${r.toLowerCase()}`,
+    links: stateFacts.filter((s) => s.region === r).map((s) => ({ name: s.name, href: routes.state(s.slug) })),
   }));
 }
 

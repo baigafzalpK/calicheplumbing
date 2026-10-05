@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { City, CityService, Service } from "@/content/types";
 import { getService, getCategory } from "@/content/services";
-import { publishedCities, cityLabel } from "@/content/locations";
 import { publishedArticles } from "@/content/articles";
 import { availability, site } from "@/content/site";
 import { routes } from "@/lib/routes";
@@ -15,15 +14,25 @@ import { LeadFormBlock } from "../lead/LeadFormBlock";
 import { PhoneLink } from "../PhoneLink";
 import { CtaBand } from "../CtaBand";
 
-type Props = { s: Service; path: string; crumbs: Crumb[]; city?: City; local?: CityService; faqs: Service["faqs"] };
+type Props = {
+  s: Service;
+  path: string;
+  crumbs: Crumb[];
+  city?: City;
+  cityLabel?: string;
+  local?: CityService;
+  faqs: Service["faqs"];
+  /** Location pages to link from this page: nearby towns (city pages) or the biggest markets (national pages). */
+  towns?: { name: string; href: string }[];
+  states?: { name: string; href: string }[];
+};
 
-export function ServiceTemplate({ s, path, crumbs, city, local, faqs }: Props) {
+export function ServiceTemplate({ s, path, crumbs, city, cityLabel, local, faqs, towns = [], states = [] }: Props) {
   const link = createLinker(path);
   const cat = getCategory(s.category);
   const related = s.related.map(getService).filter(Boolean) as Service[];
   const guides = publishedArticles.filter((a) => a.services.includes(s.slug)).slice(0, 3);
-  const towns = city ? publishedCities.filter((c) => city.nearby.includes(c.slug)) : publishedCities.filter((c) => c.popularServices.includes(s.slug));
-  const place = city ? cityLabel(city) : "the Phoenix metro";
+  const place = city ? cityLabel! : "your area";
   const sections = [
     ["overview", "Overview"],
     ...(local ? [["local", `In ${city!.name}`]] : []),
@@ -43,7 +52,7 @@ export function ServiceTemplate({ s, path, crumbs, city, local, faqs }: Props) {
         lead={<p>{local?.answer ?? s.answer}</p>}
         service={s.slug}
         emergency={false}
-        facts={[availability, `Serving ${place}`, "Quote before work"]}
+        facts={[availability, city ? `Serving ${place}` : "Licensed local plumbers", "Quote before work"]}
         photo={servicePhotoOverrides[s.slug] ?? categoryPhotos[s.category]}
       />
 
@@ -78,9 +87,12 @@ export function ServiceTemplate({ s, path, crumbs, city, local, faqs }: Props) {
                     <p key={i}>{link(p)}</p>
                   ))}
                 </div>
-                <p className="text-muted">
-                  <strong className="text-ink">Water:</strong> {city.water} <strong className="text-ink">Permits:</strong> {city.permits}
-                </p>
+                {(city.water || city.permits) && (
+                  <p className="text-muted">
+                    {city.water && (<><strong className="text-ink">Water:</strong> {city.water} </>)}
+                    {city.permits && (<><strong className="text-ink">{city.curated === false ? "Licensing:" : "Permits:"}</strong> {city.permits}</>)}
+                  </p>
+                )}
               </div>
             )}
 
@@ -139,17 +151,30 @@ export function ServiceTemplate({ s, path, crumbs, city, local, faqs }: Props) {
               <FaqList faqs={faqs} />
             </div>
 
-            {towns.length > 0 && (
+            {(towns.length > 0 || states.length > 0) && (
               <div>
-                <h2 className="text-2xl font-semibold">{city ? "Nearby towns" : `${s.shortName ?? s.name} across the Valley`}</h2>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {towns.map((c) => (
-                    <Chip key={c.slug} href={routes.city(c.stateSlug, c.slug)}>
-                      {c.name}
-                    </Chip>
-                  ))}
-                  {city && <Chip href={routes.service(s.slug)}>{s.name} (all areas)</Chip>}
-                </div>
+                <h2 className="text-2xl font-semibold">{city ? "Nearby areas" : `Where to get ${(s.shortName ?? s.name).toLowerCase()}`}</h2>
+                {towns.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {towns.map((c) => (
+                      <Chip key={c.href} href={c.href}>
+                        {c.name}
+                      </Chip>
+                    ))}
+                    {city && <Chip href={routes.service(s.slug)}>{s.name} (all areas)</Chip>}
+                  </div>
+                )}
+                {states.length > 0 && (
+                  <p className="mt-4 text-sm leading-relaxed text-muted">
+                    By state:{" "}
+                    {states.map((x, i) => (
+                      <span key={x.href}>
+                        {i > 0 && ", "}
+                        <Link href={x.href} className="link">{x.name}</Link>
+                      </span>
+                    ))}
+                  </p>
+                )}
               </div>
             )}
             <Reviews />
@@ -190,7 +215,7 @@ export function ServiceTemplate({ s, path, crumbs, city, local, faqs }: Props) {
           )}
         </div>
       </section>
-      <CtaBand service={s.slug} title={`Need ${(s.shortName ?? s.name).toLowerCase()} in ${city ? city.name : "the Valley"}?`} />
+      <CtaBand service={s.slug} title={`Need ${(s.shortName ?? s.name).toLowerCase()}${city ? ` in ${city.name}` : ""}?`} />
     </main>
   );
 }

@@ -3,7 +3,7 @@ import { site, availability } from "@/content/site";
 import { routes } from "@/lib/routes";
 import { PhoneLink } from "./PhoneLink";
 
-export function CtaBand({ title = "Talk to a Valley plumber today", service }: { title?: string; service?: string }) {
+export function CtaBand({ title = "Talk to a local plumber today", service }: { title?: string; service?: string }) {
   return (
     <section className="bg-ink py-14 text-white">
       <div className="container-x flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">

@@ -10,13 +10,14 @@ import { FaqList, JsonLd, ServiceCard } from "@/components/ui";
 import { LeadFormBlock } from "@/components/lead/LeadFormBlock";
 import { CtaBand } from "@/components/CtaBand";
 
-const title = "Emergency Plumber in the Phoenix Metro";
+const title = "Emergency Plumber: What to Do Right Now";
 const description =
-  "Burst pipe, major leak, sewer backup or gas smell? What to do right now, where your shutoff is, and how to reach a licensed Valley plumber fast.";
+  "Burst pipe, major leak, sewer backup or gas smell? What to do right now, where your shutoff is, and how to reach a licensed local plumber fast.";
 const path = routes.emergency();
 
 const faqs = [
-  { q: "Where is the main water shutoff in a Phoenix-area home?", a: "Usually on the main line where it rises from the ground near the front hose bib, or in the garage near the water heater or softener loop. The meter box at the street has a shutoff too, which may need a meter key." },
+  { q: "Where is the main water shutoff?", a: "In basement homes, usually on the front wall where the main enters, next to the meter. In slab homes, often near the front hose bib or in the garage by the water heater. The curb box or meter pit at the street has a shutoff too, which may need a meter key." },
+  { q: "What should I do if a pipe froze or burst?", a: "Shut off the main, open the faucets on that line, and turn off power to anything near the water. Thaw an intact pipe gently with a hair dryer, never an open flame. If it has split, keep the water off and call." },
   { q: "What counts as a plumbing emergency?", a: "Water you can't stop, sewage backing up, water near electrical, no water at all, or a gas smell (leave and call the gas utility or 911 first)." },
   { q: `Is emergency service available ${site.emergency247 ? "24/7" : "at night"}?`, a: site.emergency247 ? "Yes, emergency calls are answered 24/7." : "Availability after hours depends on the plumbers serving your area. Call and we'll connect you with whoever is available." },
 ];
@@ -37,7 +38,7 @@ export default function Emergency() {
         crumbs={crumbs}
         eyebrow="Emergency plumbing"
         title="Plumbing emergency? Stop the water, then call"
-        lead={<p>Close your main shutoff first. It's usually near the front hose bib or in the garage by the water heater. Then call and we'll connect you with a licensed plumber in your part of the Valley.</p>}
+        lead={<p>Close your main shutoff first. In basement homes it's usually where the main enters by the meter; in slab homes, near the front hose bib or the water heater. Then call and we'll connect you with a licensed plumber who serves your ZIP code.</p>}
         facts={[availability, "Burst pipes · slab leaks · sewer backups"]}
         photo={photos.wrench}
       />

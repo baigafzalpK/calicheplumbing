@@ -4,7 +4,9 @@ import { routes } from "@/lib/routes";
 import { pageGraph, graph, ids } from "@/lib/schema";
 import { site, availability, BRAND_PROMISE } from "@/content/site";
 import { categories, servicesInCategory, getService } from "@/content/services";
-import { regions, publishedCities } from "@/content/locations";
+import { allStates } from "@/lib/geo";
+import { indexableCities } from "@/lib/sitemap";
+import { stateFacts, type Region } from "@/content/stateFacts";
 import { publishedArticles } from "@/content/articles";
 import { generalFaqs, problems } from "@/content/misc";
 import Image from "next/image";
@@ -18,34 +20,38 @@ import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { beforeAfter } from "@/content/beforeAfter";
 import { PhoneLink } from "@/components/PhoneLink";
 
-const title = "Phoenix Metro Plumbing Help: Leaks, Hard Water & Repipes";
+const title = "Find a Licensed Plumber Near You, in All 50 States";
 const description =
-  "Connect with a licensed Valley plumber for slab leaks, water heaters, softeners and repiping across Phoenix, Scottsdale, the West Valley and East Valley.";
+  "Connect with an independent, licensed local plumber for leaks, frozen pipes, water heaters, drains, sewer lines and repiping in all 50 states and DC.";
 
 export const metadata = pageMeta({ title, description, path: "/" });
 
 const faqs = generalFaqs.slice(0, 4);
+const REGIONS: Region[] = ["Northeast", "Midwest", "South", "West"];
 
 export default function Home() {
+  const states = allStates();
+  const places = states.reduce((n, s) => n + s.coveredPlaces, 0);
+  const topCities = [...indexableCities()].sort((a, b) => (b.profile?.pop ?? 0) - (a.profile?.pop ?? 0)).slice(0, 24);
   return (
     <main id="main" data-home>
       <JsonLd data={graph(pageGraph({ path: "/", name: title, description, crumbs: [{ name: "Home", path: "/" }], faqs, about: [ids.org] }))} />
       <Hero
-        eyebrow="Phoenix metro · Maricopa County"
-        title="Plumbing help built for desert homes"
+        eyebrow="Nationwide · All 50 states + DC"
+        title="Plumbing help that knows your kind of house"
         lead={
           <p>
-            Slab leaks, hard water, polybutylene and worn-out water heaters are the Valley's everyday plumbing problems. {BRAND_PROMISE}
+            A 1920s rowhouse, a 1980s slab ranch and a new build with a basement fail in different ways. We explain the problem, then connect you with a licensed plumber in {places.toLocaleString("en-US")} cities and towns. {BRAND_PROMISE}
           </p>
         }
-        facts={[availability, "Licensed Arizona contractors", "Free to request"]}
-        photo={photos.phoenixAerial}
+        facts={[availability, "Licensed local contractors", "Free to request"]}
+        photo={photos.copper}
       />
 
       <section className="border-b border-line bg-white">
         <div className="container-x grid gap-4 py-6 text-sm sm:grid-cols-3">
           {[
-            ["shield", "Plumbers licensed by the Arizona ROC"],
+            ["shield", "Plumbers licensed where you live"],
             ["search", "Diagnosis before digging or cutting"],
             ["clock", "Quotes before work begins"],
           ].map(([i, t]) => (
@@ -74,7 +80,7 @@ export default function Home() {
 
       <section className="py-16">
         <div className="container-x">
-          <SectionHeading eyebrow="Services" title="What Valley homes call a plumber for" lead="Eight categories built around how plumbing actually fails in the desert." />
+          <SectionHeading eyebrow="Services" title="What homeowners call a plumber for" lead="Nine categories built around how plumbing actually fails, from frozen pipes in the North to slab leaks in the South." />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((c) => {
               const list = servicesInCategory(c.slug);
@@ -134,12 +140,13 @@ export default function Home() {
 
       <section className="bg-ink py-16 text-white">
         <div className="container-x">
-          <SectionHeading light eyebrow="Local knowledge" title="Why Valley plumbing is different" />
-          <div className="grid gap-6 md:grid-cols-3">
+          <SectionHeading light eyebrow="Local knowledge" title="Why your plumbing depends on where you live" />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: "filter" as const, t: "Some of the hardest water in the US", b: "Scale shortens water heater life, clogs tankless units and ruins fixtures. Softeners and RO are standard upgrades here.", href: routes.guide("white-crust-on-faucets") },
-              { icon: "slab" as const, t: "Everything sits on a slab", b: "Supply lines under concrete mean slab leaks, and a warm spot on the floor is the classic clue.", href: routes.guide("warm-spot-on-floor") },
-              { icon: "pipe" as const, t: "A boom in the polybutylene years", b: "Many homes built around 1978–1995 have polybutylene supply pipe that insurers and buyers ask about.", href: routes.guide("polybutylene-pipes-arizona") },
+              { icon: "snow" as const, t: "Cold winters freeze pipes", b: "Across the North and in mountain states, pipes in exterior walls, crawl spaces and garages split every winter, and basements need working sump pumps.", href: routes.service("frozen-pipe-repair") },
+              { icon: "filter" as const, t: "Hard water wears out heaters", b: "Water is hard across the Southwest, Texas, Florida and much of the Midwest. Scale shortens water heater life and clogs tankless units.", href: routes.guide("white-crust-on-faucets") },
+              { icon: "slab" as const, t: "Slab homes get slab leaks", b: "Where houses sit on concrete, as in much of the South and West, copper lines under the slab leak, and a warm spot on the floor is the classic clue.", href: routes.guide("warm-spot-on-floor") },
+              { icon: "pipe" as const, t: "Housing age sets the pipe", b: "Pre-1960 homes often still have galvanized pipe and cast iron drains; homes from about 1978 to 1995 may have polybutylene.", href: routes.guide("polybutylene-pipes") },
             ].map((c) => (
               <div key={c.t} className="rounded-2xl bg-ink-soft p-6 ring-1 ring-white/10">
                 <Icon name={c.icon} className="h-8 w-8 text-[#7fc8c9]" />
@@ -188,18 +195,18 @@ export default function Home() {
       <section className="bg-sand-deep py-16">
         <div className="container-x grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <div>
-            <SectionHeading eyebrow="Service area" title="Across the Valley" lead="City pages cover local housing, water providers and permits." />
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {regions.map((r) => (
-                <div key={r.slug}>
-                  <h3 className="font-sans text-sm font-semibold tracking-wider text-muted uppercase">{r.name}</h3>
+            <SectionHeading eyebrow="Service area" title="All 50 states and DC" lead="State pages cover licensing, winters, water and every town we serve. City pages add local housing data." />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {REGIONS.map((r) => (
+                <div key={r}>
+                  <h3 className="font-sans text-sm font-semibold tracking-wider text-muted uppercase">{r}</h3>
                   <ul className="mt-2 space-y-1">
-                    {publishedCities
-                      .filter((c) => c.region === r.slug)
-                      .map((c) => (
-                        <li key={c.slug}>
-                          <Link href={routes.city(c.stateSlug, c.slug)} className="link">
-                            {c.name}
+                    {stateFacts
+                      .filter((s) => s.region === r)
+                      .map((s) => (
+                        <li key={s.slug}>
+                          <Link href={routes.state(s.slug)} className="link">
+                            {s.name}
                           </Link>
                         </li>
                       ))}
@@ -207,6 +214,15 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <h3 className="mt-10 font-sans text-sm font-semibold tracking-wider text-muted uppercase">Largest cities</h3>
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              {topCities.map((c) => (
+                <Link key={c.stateSlug + c.slug} href={routes.city(c.stateSlug, c.slug)} className="link">
+                  {c.name}
+                </Link>
+              ))}
+              <Link href={routes.locations()} className="link font-semibold">All locations</Link>
+            </p>
           </div>
           <div className="card self-start p-6">
             <ZipChecker />
@@ -216,7 +232,7 @@ export default function Home() {
 
       <section className="py-16">
         <div className="container-x">
-          <SectionHeading eyebrow="Resources" title="Straight answers for Valley homeowners" />
+          <SectionHeading eyebrow="Resources" title="Straight answers for homeowners" />
           <div className="grid gap-5 md:grid-cols-3">
             {publishedArticles.slice(0, 6).map((a) => (
               <Link key={a.slug} href={routes.guide(a.slug)} className="card group p-6">

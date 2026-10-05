@@ -9,7 +9,7 @@ import { PhoneLink } from "@/components/PhoneLink";
 const path = routes.request();
 export const metadata = pageMeta({
   title: "Request Plumbing Service",
-  description: "Send a free request and get connected with a licensed plumber who serves your ZIP code in the Phoenix metro.",
+  description: "Send a free request and get connected with a licensed plumber who serves your ZIP code.",
   path,
   noindex: true,
 });

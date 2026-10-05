@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@/lib/analytics";
 import { readAttribution } from "@/lib/attribution";
-import { coveredZips } from "@/content/coverage";
+import { useZipCoverage } from "@/lib/useZipCoverage";
 import { phoneRe } from "@/lib/lead/phone";
 
 type Opt = { value: string; label: string };
@@ -50,7 +50,7 @@ export function LeadForm({ services, defaultService = "", defaultZip = "", phone
   };
 
   const total = emergency ? 2 : 3;
-  const zipInfo = /^\d{5}$/.test(f.zip) ? coveredZips[f.zip] ?? null : undefined;
+  const zipInfo = useZipCoverage(f.zip);
 
   useEffect(() => {
     const first = formRef.current?.querySelector<HTMLElement>("[aria-invalid='true']");
@@ -205,7 +205,7 @@ export function LeadForm({ services, defaultService = "", defaultZip = "", phone
             {err("zip")}
             {zipInfo !== undefined && !errors.zip && (
               <p className={`mt-1 text-sm ${zipInfo ? "text-sage" : "text-muted"}`} aria-live="polite">
-                {zipInfo ? `✓ ${zipInfo.city} is in our network.` : "This ZIP may be outside our network. Send the request anyway and we'll try to help."}
+                {zipInfo ? `✓ ${zipInfo.city}, ${zipInfo.state} is in our network.` : "This ZIP may be outside our network. Send the request anyway and we'll try to help."}
               </p>
             )}
           </div>
