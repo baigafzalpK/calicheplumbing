@@ -25,6 +25,8 @@ ${section("services", "Services")}
 
 ${section("states", "States")}
 
+${section("counties", "County pages")}
+
 ${section("cities", "City pages")}
 
 ${section("city-services", "Local service pages")}

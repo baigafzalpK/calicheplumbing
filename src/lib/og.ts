@@ -19,6 +19,9 @@ export function ogCards(): OgCard[] {
         eyebrow = getCategory(s.category).name;
         title = s.h1;
       }
+    } else if (parts[0] === "locations" && parts[2] === "county") {
+      eyebrow = `Service area · ${getStateView(parts[1])?.name}`;
+      title = `Plumbers in ${u.title}`;
     } else if (parts[0] === "locations" && parts[2]) {
       const c = getCityPage(parts[1], parts[2]);
       const st = getStateView(parts[1]);

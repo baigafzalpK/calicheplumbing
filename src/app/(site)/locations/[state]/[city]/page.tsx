@@ -16,6 +16,7 @@ import { Icon } from "@/components/icons";
 import { LeadFormBlock } from "@/components/lead/LeadFormBlock";
 import { CtaBand } from "@/components/CtaBand";
 import { HousingBars } from "@/components/HousingBars";
+import { countyForLabel } from "@/lib/counties";
 import type { Service } from "@/content/types";
 
 export const dynamicParams = false;
@@ -61,6 +62,7 @@ export default async function CityPage({ params }: P) {
   const guides = publishedArticles.filter((a) => a.services.some((s) => c.popularServices.includes(s))).slice(0, 3);
   const prof = c.profile;
   const county = c.county ? countyName(c.county) : null;
+  const countyPage = countyForLabel(st.slug, c.county);
 
   return (
     <main id="main">
@@ -199,6 +201,7 @@ export default async function CityPage({ params }: P) {
                 {nearby.map((n) => (
                   <Chip key={n.slug} href={routes.city(n.stateSlug, n.slug)}>{n.name}</Chip>
                 ))}
+                {countyPage && <Chip href={routes.county(st.slug, countyPage.slug)}>All of {countyPage.name}</Chip>}
                 <Chip href={routes.state(st.slug)}>All of {st.name}</Chip>
               </div>
               {c.alsoCovered && c.alsoCovered.length > 0 && (

@@ -9,6 +9,7 @@ export const routes = {
   emergency: () => "/emergency-plumbing/",
   locations: () => "/locations/",
   state: (s: string) => `/locations/${s}/`,
+  county: (s: string, c: string) => `/locations/${s}/county/${c}/`,
   city: (s: string, c: string) => `/locations/${s}/${c}/`,
   cityService: (s: string, c: string, svc: string) => `/locations/${s}/${c}/${svc}/`,
   resources: () => "/resources/",

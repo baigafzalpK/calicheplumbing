@@ -27,9 +27,9 @@ export function eras(p: PlaceProfile): Era[] {
 }
 export const pre1960 = (p: PlaceProfile) => p.built.pre1940 + p.built.y1940_59;
 
-type Issue = { title: string; body: string; service: string; weight: number };
+export type Issue = { title: string; body: string; service: string; weight: number };
 
-function issuesFor(name: string, p: PlaceProfile, f: StateFact): Issue[] {
+export function issuesFor(name: string, p: PlaceProfile, f: StateFact): Issue[] {
   const out: Issue[] = [];
   const old = pre1960(p);
   if (old >= 25)

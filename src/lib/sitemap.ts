@@ -5,9 +5,10 @@ import { publishedArticles } from "@/content/articles";
 import { dates } from "@/content/misc";
 import { cityQuality, cityServiceQuality } from "./quality";
 import { allCityPages, allCityServices, allStates, getCityPage } from "./geo";
+import { allCounties } from "./counties";
 
-export type SitemapGroup = "pages" | "services" | "states" | "cities" | "city-services" | "guides";
-export const sitemapGroups: SitemapGroup[] = ["pages", "services", "states", "cities", "city-services", "guides"];
+export type SitemapGroup = "pages" | "services" | "states" | "counties" | "cities" | "city-services" | "guides";
+export const sitemapGroups: SitemapGroup[] = ["pages", "services", "states", "counties", "cities", "city-services", "guides"];
 export type IndexUrl = { path: string; lastmod: string; group: SitemapGroup; title: string };
 
 let citiesMemo: ReturnType<typeof allCityPages> | null = null;
@@ -33,6 +34,7 @@ export function indexableUrls(): IndexUrl[] {
     ...publishedServices.map((s) => ({ path: routes.service(s.slug), lastmod: s.updated, group: "services" as const, title: s.name })),
     { path: routes.locations(), lastmod: dates.locations, group: "states", title: "Service areas" },
     ...allStates().map((s) => ({ path: routes.state(s.slug), lastmod: dates.locations, group: "states" as const, title: s.name })),
+    ...allCounties().map((c) => ({ path: routes.county(c.stateSlug, c.slug), lastmod: "2026-10-06", group: "counties" as const, title: `${c.name}, ${c.state.abbr}` })),
     ...indexableCities().map((c) => ({ path: routes.city(c.stateSlug, c.slug), lastmod: c.updated, group: "cities" as const, title: c.name })),
     ...indexableCityServices().map((cs) => ({
       path: routes.cityService(cs.stateSlug, cs.citySlug, cs.serviceSlug),

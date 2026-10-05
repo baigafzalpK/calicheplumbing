@@ -5,6 +5,7 @@ import { freezeLabel } from "@/content/stateFacts";
 import { getService } from "@/content/services";
 import { indexableCities, indexableCityServices } from "@/lib/sitemap";
 import { eras } from "@/lib/localContent";
+import { allCounties } from "@/lib/counties";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { graph, ids, pageGraph } from "@/lib/schema";
@@ -78,6 +79,8 @@ export default async function StatePage({ params }: P) {
   }
   const counties = [...byCounty.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   const faqs = stateFaqs(st);
+  const countyPages = allCounties().filter((c) => c.stateSlug === st.slug).sort((a, b) => a.name.localeCompare(b.name));
+  const countyHref = new Map(countyPages.map((c) => [c.places[0].countyLabel, routes.county(st.slug, c.slug)]));
   const focus = [
     st.freeze === "severe" || st.freeze === "seasonal" ? "frozen-pipe-repair" : null,
     st.hardness === "hard" || st.hardness === "very hard" ? "water-softener-installation" : null,
@@ -188,6 +191,23 @@ export default async function StatePage({ params }: P) {
         </div>
       </section>
 
+      {countyPages.length > 0 && (
+        <section className="py-14">
+          <div className="container-x">
+            <h2 className="text-3xl font-semibold">{st.name} counties</h2>
+            <p className="mt-2 max-w-3xl text-muted">County pages list every covered town and compare housing age across them.</p>
+            <ul className="mt-6 grid gap-x-6 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {countyPages.map((c) => (
+                <li key={c.slug}>
+                  <Link href={routes.county(st.slug, c.slug)} className="link">{c.name}</Link>{" "}
+                  <span className="text-sm text-muted">({c.places.length})</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {counties.length > 0 && (
         <section className="py-14">
           <div className="container-x">
@@ -201,6 +221,9 @@ export default async function StatePage({ params }: P) {
                   <summary className="cursor-pointer font-semibold">
                     {county} <span className="font-normal text-muted">({names.length})</span>
                   </summary>
+                  {countyHref.get(county) && (
+                    <Link href={countyHref.get(county)!} className="link mt-2 inline-block text-sm">{county} plumbing page</Link>
+                  )}
                   <p className="mt-2 text-sm leading-relaxed text-muted">{names.sort().join(", ")}</p>
                 </details>
               ))}

@@ -26,7 +26,7 @@ const robots = (await get("/robots.txt")).text;
 if (!robots) err("/robots.txt", "missing");
 const index = (await get("/sitemap.xml")).text;
 const subs = [...index.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => toPath(m[1]));
-if (subs.length !== 6) err("/sitemap.xml", `expected 6 sitemaps, got ${subs.length}`);
+if (subs.length !== 7) err("/sitemap.xml", `expected 7 sitemaps, got ${subs.length}`);
 const urls = [];
 for (const s of subs) {
   const x = (await get(s)).text;
@@ -77,7 +77,7 @@ for (const path of urls) {
       .filter(Boolean);
     const sh = new Set();
     for (let i = 0; i + 5 <= words.length; i++) sh.add(words.slice(i, i + 5).join(" "));
-    bodies.set(path, { kind: seg.length === 3 ? "city" : "city-service", sh });
+    bodies.set(path, { kind: seg[2] === "county" ? "county" : seg.length === 3 ? "city" : "city-service", sh });
   }
   for (const [m, v] of [[titles, title], [descs, desc], [h1s, h1[0]?.[1]]]) {
     if (!v) continue;
@@ -129,7 +129,7 @@ for (const [m, label] of [[titles, "title"], [descs, "description"], [h1s, "h1"]
 
 // 2b. near-duplicate clusters among sibling location pages.
 // Digits are normalized to "#", so this measures shared wording, not shared numbers.
-const dup = { city: [], "city-service": [] };
+const dup = { county: [], city: [], "city-service": [] };
 for (const kind of Object.keys(dup)) {
   const pages = [...bodies].filter(([, b]) => b.kind === kind);
   const freq = new Map();
