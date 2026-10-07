@@ -10,16 +10,16 @@ This project was built from the **Local Service Lead-Gen Website Playbook** (the
 |---|---|
 | Market | All 50 states + DC. LeadSmart plumbing **call** coverage spans 24,627 ZIPs / 15,392 places (export 2026-10-04), so every state has real buyers |
 | Services | **23 in 9 categories**: added Freeze & Flood Protection (frozen/burst pipe repair, sump pumps). All service pages and guides rewritten for a national audience |
-| Locations | 51 state hubs · **389 city pages** · 3 hand-written city+service pages. Every other covered place is listed (unlinked) on its state hub |
-| Indexable URLs | **487** in 6 sitemaps (pages, services, states, cities, city-services, guides), max click depth 2 |
-| Audit | `npm run audit:seo`: **0 errors**, 28 similarity warnings (city pages at 0.70–0.77 Jaccard to a sibling) |
+| Locations | 51 state hubs · 675 county hubs · **1,186 city pages** · 3 hand-written city+service pages. Every other covered place is listed (unlinked) on its state hub |
+| Indexable URLs | **1,959** in 7 sitemaps (pages, services, states, counties, cities, city-services, guides), max click depth 2 |
+| Audit | `npm run audit:seo`: **0 errors**, 74 similarity warnings (city pages at 0.70–0.78 Jaccard to a sibling) |
 | Coverage ZIPs | `src/data/geo/zips.json` (server-only), served by `/api/zip/` to the ZIP checker and lead form |
 
 ### How the nationwide location pages work
 
 - **Data:** `scripts/build-geo.mjs` joins the LeadSmart coverage shards with Census ACS 2023 5-year tables (B01003, B25034, B25040, B25024, B25003) aggregated over each place's covered ZCTAs, and writes `src/data/geo/{ST}.json`. Re-run it when coverage changes (instructions in the script header).
 - **State facts:** `src/content/stateFacts.ts` holds licensing authority, freeze exposure, broad water hardness and 2–3 notes per state. Where licensing is local (NY, PA, MO, KS, NE, WY) it says so.
-- **City pages:** `src/lib/localContent.ts` writes sections only when the numbers support them (pre-1960 housing ≥25%, 1980–99 ≥28%, gas heat ≥50%, oil ≥8%, etc.). A place gets a page when its covered ZIPs hold ≥100,000 people, plus each state's two largest places. Arizona's 16 hand-written cities override the generated version.
+- **City pages:** `src/lib/localContent.ts` writes sections only when the numbers support them (pre-1960 housing ≥25%, 1980–99 ≥28%, gas heat ≥50%, oil ≥8%, etc.). A place gets a page when its covered ZIPs hold ≥40,000 people, plus each state's two largest places. Arizona's 16 hand-written cities override the generated version.
 - **Quality gate:** `src/lib/quality.ts` (indexing) and the crawler's near-duplicate check (`scripts/seo-audit.mjs`, 5-word shingles, numbers normalized). Generated city+service pages exist in code but are **off** (`GENERATE_CITY_SERVICES`): they measured 0.89 similarity to siblings. Turn one on only after writing real local content for it.
 
 ## Snapshot (2026-09-27, Phoenix launch)

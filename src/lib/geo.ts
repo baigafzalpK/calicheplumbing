@@ -42,7 +42,7 @@ export const geoMeta = JSON.parse(fs.readFileSync(path.join(DIR, "meta.json"), "
 // A covered place gets its own page when enough people live in its covered ZIPs for distinct search demand,
 // and when the Census profile is complete enough to say something specific. Every state's largest two places
 // always qualify so no state hub is a dead end. Everything else is listed (unlinked) on its state hub.
-export const CITY_PAGE_MIN_POP = 100_000;
+export const CITY_PAGE_MIN_POP = 40_000;
 const MIN_UNITS = 3_000;
 
 function eligible(st: RawState): Set<string> {
