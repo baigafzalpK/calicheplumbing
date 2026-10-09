@@ -431,6 +431,8 @@ export const servicesMore: Service[] = [
       { q: "At what temperature do pipes freeze?", a: "Pipes in unheated spaces are at risk once outdoor temperatures drop into the low 20s °F for several hours, sooner with wind. Pipes in exterior walls and crawl spaces freeze first." },
       { q: "Does homeowners insurance cover burst pipes?", a: "Many policies cover sudden damage from a burst pipe but may exclude it if the home was left unheated or the leak was long-running. Check your policy and document the damage before cleanup." },
       { q: "Should I leave the heat on if I travel in winter?", a: "Yes. Keep the thermostat at 55 °F or higher, and for a long trip consider shutting off the main and draining the lines." },
+      { q: "Can PEX pipe freeze without bursting?", a: "PEX expands slightly when water freezes inside it, making it more freeze-resistant than rigid copper or PVC, but fittings and repeated hard freezes can still cause ruptures or joint separation." },
+      { q: "How do plumbers thaw pipes hidden inside walls?", a: "Plumbers use professional heating cables, pipe-thawing equipment, or infrared thermal heat directed at the wall cavity, keeping the faucet open so melting water can escape safely without pressure buildup." },
     ],
     related: ["pinhole-leak-repair", "whole-house-repiping", "sump-pump-installation", "main-water-line-repair"],
     isEmergencyCapable: true,
@@ -479,6 +481,8 @@ export const servicesMore: Service[] = [
     faqs: [
       { q: "Do I need a battery backup sump pump?", a: "If your basement has finished space or the pump runs often during storms, a backup is good insurance, because storms that fill the pit often knock out power too." },
       { q: "Can my sump pump drain into the sewer?", a: "Usually not. Most cities prohibit connecting sump discharge to the sanitary sewer. The water should go to the yard, a storm drain or another approved outlet." },
+      { q: "Why is my sump pump running constantly even without rain?", a: "Continuous running usually indicates a stuck float switch, a broken check valve allowing discharged water to flow backward into the pit, or a high seasonal water table underground." },
+      { q: "What horsepower sump pump do I need?", a: "A 1/3 HP pump handles average water volume in most single-family basements with standard vertical lift. Homes with heavy groundwater inflow or higher vertical lift benefit from a 1/2 HP pump." },
     ],
     related: ["frozen-pipe-repair", "drain-cleaning", "sewer-line-repair", "sewer-camera-inspection"],
     isEmergencyCapable: true,

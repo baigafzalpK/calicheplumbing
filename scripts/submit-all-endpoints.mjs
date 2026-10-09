@@ -1,6 +1,8 @@
-import { existsSync, readFileSync } from "node:fs";
-
-const key = "a8dd456765ad4335a9a1962a893e9120";
+let key = process.env.INDEXNOW_KEY || "2a368135cc8e44f4ba14f0711bdf2137";
+if (existsSync(".env.local")) {
+  const match = readFileSync(".env.local", "utf8").match(/^INDEXNOW_KEY=(.+)$/m);
+  if (match) key = match[1].trim();
+}
 const SITE = "https://www.calicheplumbing.com";
 
 const ENDPOINTS = [

@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { createLinker } from "@/lib/linker";
-import { graph, ids, pageGraph } from "@/lib/schema";
+import { graph, howToNode, ids, pageGraph } from "@/lib/schema";
 import { Breadcrumbs, FaqList, JsonLd, ServiceCard } from "@/components/ui";
 import { PhoneLink } from "@/components/PhoneLink";
 import { CtaBand } from "@/components/CtaBand";
@@ -55,9 +55,31 @@ export default async function Guide({ params }: P) {
     about: services.map((s) => ({ "@id": ids.service(s.slug) })),
   };
 
+  const steps = a.sections
+    .filter((s) => s.list && s.list.length > 0)
+    .flatMap((s) =>
+      s.list!.map((item, idx) => ({
+        name: s.list!.length === 1 ? s.heading : `${s.heading} (${idx + 1})`,
+        text: item,
+      }))
+    );
+
+  const extra: Record<string, unknown>[] = [article];
+  if (steps.length >= 2) {
+    extra.push(
+      howToNode({
+        path,
+        name: a.title,
+        description: a.metaDescription,
+        image: [`${site.url}${guidePhotos[a.category].src}`],
+        steps,
+      })
+    );
+  }
+
   return (
     <main id="main">
-      <JsonLd data={graph(pageGraph({ path, name: a.seoTitle, description: a.metaDescription, crumbs, faqs: a.faqs, about: [`${site.url}${path}#article`], extra: [article] }))} />
+      <JsonLd data={graph(pageGraph({ path, name: a.seoTitle, description: a.metaDescription, crumbs, faqs: a.faqs, about: [`${site.url}${path}#article`], extra }))} />
       <section className="bg-ink py-12 text-white">
         <div className="container-x max-w-4xl">
           <Breadcrumbs items={crumbs} light />

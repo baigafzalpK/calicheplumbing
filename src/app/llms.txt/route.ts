@@ -15,9 +15,10 @@ export function GET() {
 - **Phone:** ${site.phone} (${site.phoneE164})
 - **Market:** ${site.marketLong}
 - **Website:** ${site.url}
-- **Contractor Licensing:** Connected contractors hold the licenses their state or city requires; each state page names the licensing authority.
+- **Contractor Licensing:** Connected contractors hold the licenses their state or city requires; each state page names the specific licensing authority.
 - **Location data:** City pages use US Census ACS 2023 5-year estimates for the covered ZIP codes.
 - **Core Topics:** Leak detection and slab leaks, frozen and burst pipes, galvanized and polybutylene repiping, water heaters, sump pumps, hard water treatment, drains and sewer lines, gas lines.
+- **Emergency Protocol:** In any sudden plumbing flooding or burst pipe emergency, shut off the main water valve immediately (located in the basement wall near the meter, in the garage near the water heater, or at the curb stop) before calling for contractor dispatch.
 
 ${DISCLOSURE}
 

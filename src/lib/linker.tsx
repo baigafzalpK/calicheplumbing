@@ -28,6 +28,10 @@ const TOPICS: [RegExp, string][] = [
   [/\bwater pressure\b/i, routes.guide("water-pressure-too-high")],
   [/\b(?:frozen|burst) pipes?\b/i, routes.service("frozen-pipe-repair")],
   [/\bsump pumps?\b/i, routes.service("sump-pump-installation")],
+  [/\bemergency plumbing\b/i, routes.emergency()],
+  [/\bgalvanized(?: supply| pipes?)?\b/i, routes.service("whole-house-repiping")],
+  [/\bsewer backups?\b|\bsewage backup\b/i, routes.service("sewer-line-repair")],
+  [/\b(?:whole-house|water) filtration\b/i, routes.service("whole-house-filtration")],
 ];
 
 const EXPLICIT = /\[([^\]]+)\]\(([^)]+)\)/g;

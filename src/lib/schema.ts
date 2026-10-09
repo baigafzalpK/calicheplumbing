@@ -112,3 +112,25 @@ export function cityNodes(c: { slug: string; name: string; stateSlug: string; co
   city.containedInPlace = { "@id": countyId };
   return [city, { "@type": "AdministrativeArea", "@id": countyId, name: `${countyName}, ${stateAbbr}`, containedInPlace: { "@id": ids.state(c.stateSlug) } }];
 }
+
+export function howToNode(opts: {
+  path: string;
+  name: string;
+  description: string;
+  image?: string[];
+  steps: { name: string; text: string }[];
+}) {
+  return {
+    "@type": "HowTo",
+    "@id": `${site.url}${opts.path}#howto`,
+    name: opts.name,
+    description: opts.description,
+    ...(opts.image?.length ? { image: opts.image } : {}),
+    step: opts.steps.map((s, idx) => ({
+      "@type": "HowToStep",
+      position: idx + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
