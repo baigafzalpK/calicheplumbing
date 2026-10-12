@@ -19,6 +19,8 @@ import { CtaBand } from "@/components/CtaBand";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { beforeAfter } from "@/content/beforeAfter";
 import { PhoneLink } from "@/components/PhoneLink";
+import { VideoBlock } from "@/components/VideoBlock";
+import { videos } from "@/content/videos";
 
 const title = "Find a Licensed Plumber Near You, in All 50 States";
 const description =
@@ -175,6 +177,7 @@ export default function Home() {
       <section className="py-16">
         <div className="container-x">
           <SectionHeading eyebrow="How it works" title="From your call to a fixed problem" />
+          <VideoBlock video={videos.brand} className="mb-10 max-w-3xl" />
           <ol className="grid gap-5 md:grid-cols-4">
             {[
               ["Call or request", "Tell us the problem and ZIP code. Requests are free."],

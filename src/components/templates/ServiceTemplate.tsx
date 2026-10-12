@@ -13,6 +13,8 @@ import { Icon } from "../icons";
 import { LeadFormBlock } from "../lead/LeadFormBlock";
 import { PhoneLink } from "../PhoneLink";
 import { CtaBand } from "../CtaBand";
+import { VideoBlock } from "../VideoBlock";
+import { serviceVideos } from "@/content/videos";
 
 type Props = {
   s: Service;
@@ -74,6 +76,8 @@ export function ServiceTemplate({ s, path, crumbs, city, cityLabel, local, faqs,
                 <p key={i}>{link(p)}</p>
               ))}
             </div>
+
+            {serviceVideos[s.slug] && <VideoBlock video={serviceVideos[s.slug]} />}
 
             <Glance title={`${s.shortName ?? s.name} at a glance`} items={s.glance} />
 

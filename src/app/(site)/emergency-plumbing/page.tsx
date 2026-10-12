@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { VideoBlock } from "@/components/VideoBlock";
+import { videos } from "@/content/videos";
 import { publishedServices } from "@/content/services";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
@@ -45,6 +47,10 @@ export default function Emergency() {
       <section className="py-14">
         <div className="container-x grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
           <div className="min-w-0 space-y-10">
+            <div className="grid gap-6 md:grid-cols-2">
+              <VideoBlock video={videos.frozen} />
+              <VideoBlock video={videos.gas} />
+            </div>
             <div className="prose-cp text-lg">
               <h2 className="mb-4 text-3xl font-semibold">What to do in the first 10 minutes</h2>
               <p>

@@ -28,6 +28,9 @@ export async function generateMetadata({ params }: P) {
 
 const fmt = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 
+import { guideVideos } from "@/content/videos";
+import { VideoBlock } from "@/components/VideoBlock";
+
 export default async function Guide({ params }: P) {
   const a = getArticle((await params).guide);
   if (!a || a.status !== "PUBLISHED") notFound();
@@ -95,9 +98,13 @@ export default async function Guide({ params }: P) {
               <p className="mb-1 text-sm font-bold tracking-wider text-teal-deep uppercase">Short answer</p>
               <p>{a.answer}</p>
             </div>
-            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl bg-sand-deep">
-              <Image src={guidePhotos[a.category].src} alt={guidePhotos[a.category].alt} fill priority sizes="(min-width: 1024px) 720px, 100vw" className="object-cover" />
-            </div>
+            {guideVideos[a.slug] ? (
+              <VideoBlock video={guideVideos[a.slug]} className="mt-8" />
+            ) : (
+              <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl bg-sand-deep">
+                <Image src={guidePhotos[a.category].src} alt={guidePhotos[a.category].alt} fill priority sizes="(min-width: 1024px) 720px, 100vw" className="object-cover" />
+              </div>
+            )}
             <div className="prose-cp mt-10 text-lg">
               {a.sections.map((s) => (
                 <div key={s.heading} className="mb-8">
