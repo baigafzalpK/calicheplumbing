@@ -10,8 +10,8 @@ This project was built from the **Local Service Lead-Gen Website Playbook** (the
 |---|---|
 | Market | All 50 states + DC. LeadSmart plumbing **call** coverage spans 24,627 ZIPs / 15,392 places (export 2026-10-04), so every state has real buyers |
 | Services | **23 in 9 categories**: added Freeze & Flood Protection (frozen/burst pipe repair, sump pumps). All service pages and guides rewritten for a national audience |
-| Locations | 51 state hubs · 675 county hubs · **1,186 city pages** · 3 hand-written city+service pages. Every other covered place is listed (unlinked) on its state hub |
-| Indexable URLs | **1,959** in 7 sitemaps (pages, services, states, counties, cities, city-services, guides), max click depth 2 |
+| Locations | 51 state hubs · 675 county hubs · **1,186 city pages** · **2,351 data-driven service+city pages** (best category + best sub-service per city, `src/lib/localServices.ts`) · 3 hand-written city+service pages · 9 category hubs. Every other covered place is listed (unlinked) on its state hub |
+| Indexable URLs | **4,316** in 7 sitemaps (pages, services, states, counties, cities, city-services, guides), max click depth 2 |
 | Audit | `npm run audit:seo`: **0 errors**, 74 similarity warnings (city pages at 0.70–0.78 Jaccard to a sibling) |
 | Coverage ZIPs | `src/data/geo/zips.json` (server-only), served by `/api/zip/` to the ZIP checker and lead form |
 

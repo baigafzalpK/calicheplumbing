@@ -77,7 +77,8 @@ for (const path of urls) {
       .filter(Boolean);
     const sh = new Set();
     for (let i = 0; i + 5 <= words.length; i++) sh.add(words.slice(i, i + 5).join(" "));
-    bodies.set(path, { kind: seg[2] === "county" ? "county" : seg.length === 3 ? "city" : "city-service", sh });
+    // city-service pages are compared only with pages for the same service (seg[3]), their real siblings
+    bodies.set(path, { kind: seg[2] === "county" ? "county" : seg.length === 3 ? "city" : "city-service", group: seg.length === 4 && seg[2] !== "county" ? seg[3] : "", sh });
   }
   for (const [m, v] of [[titles, title], [descs, desc], [h1s, h1[0]?.[1]]]) {
     if (!v) continue;
@@ -135,13 +136,14 @@ for (const kind of Object.keys(dup)) {
   const freq = new Map();
   for (const [, b] of pages) for (const s of b.sh) freq.set(s, (freq.get(s) || 0) + 1);
   for (const [p, b] of pages) {
+    const sibs = pages.filter(([, c]) => c.group === b.group);
     // unique contribution: shingles that appear on fewer than 10% of sibling pages
     let uniq = 0;
     for (const s of b.sh) if (freq.get(s) < Math.max(2, pages.length * 0.1)) uniq++;
     const ratio = b.sh.size ? uniq / b.sh.size : 0;
     let best = 0;
     let bestP = "";
-    for (const [q, c] of pages) {
+    for (const [q, c] of sibs) {
       if (q === p) continue;
       let inter = 0;
       for (const s of b.sh) if (c.sh.has(s)) inter++;

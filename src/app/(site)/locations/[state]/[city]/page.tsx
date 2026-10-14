@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getCityPage, getStateView, cityLabel } from "@/lib/geo";
 import { getService } from "@/content/services";
 import { publishedArticles } from "@/content/articles";
-import { indexableCities, indexableCityServices } from "@/lib/sitemap";
+import { indexableCities, indexableCityServices, indexableLocalServices } from "@/lib/sitemap";
 import { eras } from "@/lib/localContent";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
@@ -55,7 +55,13 @@ export default async function CityPage({ params }: P) {
     { name: st.name, path: routes.state(st.slug) },
     { name: c.name, path },
   ];
-  const combos = indexableCityServices().filter((cs) => cs.stateSlug === st.slug && cs.citySlug === c.slug);
+  const combos = [
+    ...indexableCityServices().filter((cs) => cs.stateSlug === st.slug && cs.citySlug === c.slug),
+    ...indexableLocalServices()
+      .filter((x) => x.stateSlug === st.slug && x.citySlug === c.slug)
+      .map((x) => ({ serviceSlug: x.slug, h1: x.h1 })),
+  ];
+  const localPages = combos.filter((x) => !c.popularServices.includes(x.serviceSlug));
   const popular = c.popularServices.map(getService).filter(Boolean) as Service[];
   const paged = indexableCities();
   const nearby = c.nearby.map((slug) => paged.find((x) => x.stateSlug === st.slug && x.slug === slug)).filter((x) => x !== undefined);
@@ -160,6 +166,18 @@ export default async function CityPage({ params }: P) {
                   );
                 })}
               </ul>
+              {localPages.length > 0 && (
+                <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {localPages.map((x) => (
+                    <li key={x.serviceSlug}>
+                      <Link href={routes.cityService(st.slug, c.slug, x.serviceSlug)} className="card flex items-center gap-3 p-4 font-semibold hover:text-teal-deep">
+                        <Icon name="wrench" className="h-5 w-5 text-teal" />
+                        {x.h1}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <p className="mt-4 text-muted">
                 Also available in {c.name}: <Link href={routes.emergency()} className="link">emergency plumbing</Link> and{" "}
                 <Link href={routes.services()} className="link">every plumbing service</Link>.
