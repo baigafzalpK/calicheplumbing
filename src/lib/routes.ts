@@ -1,5 +1,12 @@
 // Every URL builder. Single source of truth. Rename SERVICES for another trade.
+import { stateBySlug } from "@/content/stateFacts";
+
 export const SERVICES = "plumbing-services";
+
+/** Flat service + location slug: "sewer-line-repair-in-cleveland-oh". The state code disambiguates same-named cities. */
+export const cityServiceSlug = (s: string, c: string, svc: string) => `${svc}-in-${c}-${(stateBySlug.get(s)?.abbr ?? s).toLowerCase()}`;
+/** Pre-2026-10-16 nested path, kept only as a 308 redirect source. */
+export const legacyCityServicePath = (s: string, c: string, svc: string) => `/locations/${s}/${c}/${svc}/`;
 
 export const routes = {
   home: () => "/",
@@ -11,7 +18,7 @@ export const routes = {
   state: (s: string) => `/locations/${s}/`,
   county: (s: string, c: string) => `/locations/${s}/county/${c}/`,
   city: (s: string, c: string) => `/locations/${s}/${c}/`,
-  cityService: (s: string, c: string, svc: string) => `/locations/${s}/${c}/${svc}/`,
+  cityService: (s: string, c: string, svc: string) => `/${cityServiceSlug(s, c, svc)}/`,
   resources: () => "/resources/",
   guide: (slug: string) => `/resources/${slug}/`,
   about: () => "/about/",

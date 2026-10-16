@@ -41,7 +41,8 @@ const titles = new Map();
 const descs = new Map();
 const h1s = new Map();
 const links = new Map();
-const bodies = new Map(); // location pages: main-content shingles for near-duplicate checks
+const bodies = new Map();
+const pageInfo = new Map(); // url -> status/title/h1/canonical, for the CSV report // location pages: main-content shingles for near-duplicate checks
 for (const path of urls) {
   const { res, text: html } = await get(path);
   if (res.status !== 200) {
@@ -65,7 +66,10 @@ for (const path of urls) {
   const text = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   for (const re of BANNED) if (re.test(text)) err(path, `banned phrase ${re}`);
   const seg = path.split("/").filter(Boolean);
-  if (seg[0] === "locations" && seg.length >= 3) {
+  // flat service + location pages: /{service}-in-{city}-{st}/
+  const flat = seg.length === 1 && /^[a-z0-9-]+-in-[a-z0-9-]+-[a-z]{2}$/.test(seg[0]) ? seg[0].split("-in-")[0] : null;
+  pageInfo.set(path, { status: res.status, title, h1: (h1[0]?.[1] || "").replace(/<[^>]+>/g, ""), canonicalOk: Boolean(canon) && toPath(canon) === path });
+  if ((seg[0] === "locations" && seg.length >= 3) || flat) {
     const words = (html.match(/<main[\s\S]*<\/main>/) || [""])[0]
       .replace(/<script[\s\S]*?<\/script>/g, "")
       .replace(/<(form|aside|nav)\b[\s\S]*?<\/(form|aside|nav)>/g, "")
@@ -78,7 +82,7 @@ for (const path of urls) {
     const sh = new Set();
     for (let i = 0; i + 5 <= words.length; i++) sh.add(words.slice(i, i + 5).join(" "));
     // city-service pages are compared only with pages for the same service (seg[3]), their real siblings
-    bodies.set(path, { kind: seg[2] === "county" ? "county" : seg.length === 3 ? "city" : "city-service", group: seg.length === 4 && seg[2] !== "county" ? seg[3] : "", sh });
+    bodies.set(path, { kind: flat ? "city-service" : seg[2] === "county" ? "county" : seg.length === 3 ? "city" : "city-service", group: flat ?? (seg.length === 4 && seg[2] !== "county" ? seg[3] : ""), sh });
   }
   for (const [m, v] of [[titles, title], [descs, desc], [h1s, h1[0]?.[1]]]) {
     if (!v) continue;
@@ -194,6 +198,51 @@ const llms = (await get("/llms.txt")).text;
 for (const u of urls) if (!llms.includes(u === "/" ? "](" : u)) err("/llms.txt", `missing ${u}`);
 const cross = await fetch(BASE + "/api/lead", { method: "POST", headers: { "content-type": "application/json", origin: "https://evil.example" }, body: "{}" });
 if (cross.status !== 403) err("/api/lead", `cross-origin not rejected (${cross.status})`);
+
+// legacy nested service+location URLs must 308 to their flat canonical page
+const sampleFlat = urls.find((x) => /^\/[a-z0-9-]+-in-[a-z0-9-]+-[a-z]{2}\/$/.test(x));
+if (sampleFlat) {
+  const html = (await get(sampleFlat)).text;
+  const crumbs = [...html.matchAll(/href="(\/locations\/[a-z0-9-]+\/[a-z0-9-]+\/)"/g)].map((m) => m[1]);
+  const svc = sampleFlat.slice(1).split("-in-")[0];
+  if (crumbs[0]) {
+    const legacy = await get(`${crumbs[0]}${svc}/`);
+    const loc = legacy.res.headers.get("location") || "";
+    if (![301, 308].includes(legacy.res.status) || !loc.endsWith(sampleFlat)) err(`${crumbs[0]}${svc}/`, `legacy URL should 308 to ${sampleFlat} (got ${legacy.res.status} ${loc})`);
+  }
+}
+
+// CSV report: one row per sitemap URL
+{
+  const inbound = new Map();
+  for (const [, out] of links) for (const l of out) inbound.set(l, (inbound.get(l) || 0) + 1);
+  const dupBy = new Map(Object.values(dup).flat().map((d) => [d.p, d]));
+  const issuesBy = new Map();
+  for (const line of [...errors.map((e) => ["error", e]), ...warns.map((w) => ["warning", w])]) {
+    const [u, ...rest] = line[1].split(": ");
+    for (const p of u.split(", ")) issuesBy.set(p, [...(issuesBy.get(p) || []), `${line[0]}: ${rest.join(": ")}`]);
+  }
+  const type = (u) => {
+    const s = u.split("/").filter(Boolean);
+    if (!s.length) return "home";
+    if (/-in-[a-z0-9-]+-[a-z]{2}$/.test(s[0])) return "service-location";
+    if (s[0] === "plumbing-services") return s.length === 1 ? "service-hub" : "service";
+    if (s[0] === "locations") return ["location-hub", "state", s[2] === "county" ? "county" : "city", "county"][Math.min(s.length - 1, 3)];
+    if (s[0] === "resources") return s.length === 1 ? "guide-hub" : "guide";
+    return "page";
+  };
+  const q = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const rows = [["url", "type", "status", "canonical_ok", "in_sitemap", "inbound_links", "click_depth", "closest_sibling_similarity", "unique_wording_share", "title", "h1", "issues"].join(",")];
+  for (const u of urls) {
+    const i = pageInfo.get(u) || {};
+    const d = dupBy.get(u);
+    rows.push([u, type(u), i.status ?? "", i.canonicalOk ?? "", true, inbound.get(u) || 0, depth.get(u) ?? "", d ? d.best.toFixed(2) : "", d ? d.ratio.toFixed(2) : "", i.title ?? "", i.h1 ?? "", (issuesBy.get(u) || []).join(" | ")].map(q).join(","));
+  }
+  const fs = await import("node:fs");
+  fs.mkdirSync("reports", { recursive: true });
+  fs.writeFileSync("reports/seo-audit.csv", rows.join("\n"));
+  console.log(`Wrote reports/seo-audit.csv (${urls.length} rows)`);
+}
 
 console.log(`Audited ${urls.length} sitemap URLs · max click depth ${maxDepth}`);
 for (const k of Object.keys(dup))
