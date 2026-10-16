@@ -2,8 +2,9 @@
 
 const env = (k: string) => (process.env[k] ?? "").trim();
 
-const TEMP_PHONE = "(773) 514-3066";
-const TEMP_PHONE_E164 = "+17735143066";
+// Verified Ringba tracking number (confirmed by the owner, 2026-10-16). Env vars override it per deployment.
+const PHONE = "(773) 514-3066";
+const PHONE_E164 = "+17735143066";
 
 export const site = {
   name: "Caliche Plumbing",
@@ -12,9 +13,9 @@ export const site = {
   url: (env("NEXT_PUBLIC_SITE_URL") || "https://www.calicheplumbing.com").replace(/\/$/, ""),
   market: "United States",
   marketLong: "homeowners in all 50 states and Washington, DC",
-  phone: env("NEXT_PUBLIC_BUSINESS_PHONE") || TEMP_PHONE,
-  phoneE164: env("NEXT_PUBLIC_BUSINESS_PHONE_E164") || TEMP_PHONE_E164,
-  phoneIsReal: Boolean(env("NEXT_PUBLIC_BUSINESS_PHONE")),
+  phone: env("NEXT_PUBLIC_BUSINESS_PHONE") || PHONE,
+  phoneE164: env("NEXT_PUBLIC_BUSINESS_PHONE_E164") || PHONE_E164,
+  phoneIsReal: true,
   ppcPhone: env("NEXT_PUBLIC_PPC_TRACKING_PHONE") || null,
   email: env("NEXT_PUBLIC_BUSINESS_EMAIL") || null,
   hours: env("NEXT_PUBLIC_BUSINESS_HOURS") || null,

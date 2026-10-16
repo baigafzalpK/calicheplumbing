@@ -36,7 +36,7 @@ This project was built from the **Local Service Lead-Gen Website Playbook** (the
 | Indexable URLs | **62** in 4 sitemaps, max click depth 2 |
 | Audit | `npm run audit:seo`: **0 errors, 0 warnings** |
 | Coverage ZIPs | All 123 LeadSmart AZ plumbing ZIPs in `src/content/coverage.ts` (used by the ZIP checker and lead routing) |
-| Temporary phone | `(602) 555-0147` (fictional range, kept out of schema) |
+| Phone | `(773) 514-3066`, verified Ringba tracking number (in Organization schema) |
 
 ## Run it
 
