@@ -22,10 +22,14 @@ export async function deliverLead(lead: StoredLead): Promise<boolean> {
   }
   // DATABASE_URL: wire Prisma here (prisma/schema.prisma has the Lead model).
   if (process.env.NODE_ENV !== "production") {
-    const dir = path.join(process.cwd(), ".data");
-    await mkdir(dir, { recursive: true });
-    await appendFile(path.join(dir, "leads.jsonl"), JSON.stringify(lead) + "\n");
-    return true;
+    try {
+      const dir = path.join(process.cwd(), ".data");
+      await mkdir(dir, { recursive: true });
+      await appendFile(path.join(dir, "leads.jsonl"), JSON.stringify(lead) + "\n");
+      return true;
+    } catch {
+      return false;
+    }
   }
   return false;
 }

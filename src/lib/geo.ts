@@ -1,10 +1,9 @@
 import "server-only";
-import fs from "node:fs";
-import path from "node:path";
 import type { City, CityService, PlaceProfile, State } from "@/content/types";
 import { cities as curatedCities, cityServices as curatedCityServices, states as curatedStates } from "@/content/locations";
 import { stateFacts, stateByAbbr, stateBySlug, type StateFact } from "@/content/stateFacts";
 import { composeCity, composeCityServices } from "./localContent";
+import { getRawState } from "./geoStates";
 
 // Nationwide geography. Coverage (cities, ZIPs, counties) comes from the LeadSmart plumbing coverage export;
 // housing facts come from Census ACS 2023 5-year data for the covered ZIP codes. See scripts/build-geo.mjs.
@@ -22,18 +21,16 @@ export type RawPlace = {
 };
 type RawState = { abbr: string; acs: PlaceProfile | null; cities: RawPlace[] };
 
-const DIR = path.join(process.cwd(), "src/data/geo");
-const cache = new Map<string, RawState>();
 export function rawState(abbr: string): RawState {
-  let d = cache.get(abbr);
-  if (!d) {
-    d = JSON.parse(fs.readFileSync(path.join(DIR, `${abbr}.json`), "utf8")) as RawState;
-    cache.set(abbr, d);
-  }
-  return d;
+  const d = getRawState<RawState>(abbr);
+  if (d) return d;
+  return { abbr, acs: null, cities: [] };
 }
 
-export const geoMeta = JSON.parse(fs.readFileSync(path.join(DIR, "meta.json"), "utf8")) as {
+export const geoMeta = {
+  coverageDate: "2026-10-04",
+  states: [],
+} as {
   coverageDate: string | null;
   states: { abbr: string; cities: number; zips: number }[];
 };
