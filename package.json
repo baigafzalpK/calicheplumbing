@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "opennextjs-cloudflare build",
+    "build:worker": "opennextjs-cloudflare build",
+    "build:next": "next build",
     "deploy": "opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare preview",
-    "build:next": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "audit:seo": "node scripts/seo-audit.mjs",
