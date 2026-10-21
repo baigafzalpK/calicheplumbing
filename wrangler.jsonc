@@ -1,11 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "caliche-plumbing",
+  "name": "calicheplumbing",
   "main": ".open-next/worker.js",
-  "compatibility_date": "2026-09-01",
+  "compatibility_date": "2026-10-19",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "calicheplumbing"
+    }
+  ],
+  "observability": {
+    "enabled": true
   }
 }

@@ -1,13 +1,13 @@
 {
-  "name": "caliche-plumbing",
+  "name": "calicheplumbing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:cf": "opennextjs-cloudflare build",
-    "preview:cf": "opennextjs-cloudflare preview",
-    "deploy:cf": "opennextjs-cloudflare deploy",
+    "build": "opennextjs-cloudflare build",
+    "deploy": "opennextjs-cloudflare deploy",
+    "preview": "opennextjs-cloudflare preview",
+    "build:next": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "audit:seo": "node scripts/seo-audit.mjs",
