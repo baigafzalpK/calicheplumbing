@@ -69,7 +69,16 @@ export function allStates(): StateView[] {
   return statesMemo;
 }
 export function getStateView(slug: string) {
-  return allStates().find((s) => s.slug === slug);
+  const f = stateBySlug.get(slug);
+  if (!f) return undefined;
+  const raw = rawState(f.abbr);
+  return {
+    ...f,
+    curated: curatedStates.find((s) => s.slug === f.slug && s.status === "PUBLISHED"),
+    acs: raw.acs,
+    coveredPlaces: raw.cities.length,
+    coveredZips: raw.cities.reduce((n, c) => n + c.zips.length, 0),
+  };
 }
 export function stateAbbrOf(stateSlug: string) {
   return stateBySlug.get(stateSlug)?.abbr ?? "";
@@ -115,8 +124,27 @@ function unpaged(raw: RawPlace, ok: Set<string>, curated: City[], bySlug: Map<st
 }
 
 export function getCityPage(stateSlug: string, citySlug: string) {
-  return allCityPages().find((c) => c.stateSlug === stateSlug && c.slug === citySlug);
+  const f = stateBySlug.get(stateSlug);
+  if (!f) return undefined;
+  const st = rawState(f.abbr);
+  const ok = eligible(st);
+  const bySlug = new Map(st.cities.map((c) => [c.slug, c]));
+  const curatedHere = curatedCities.filter((c) => c.stateSlug === f.slug);
+  const curated = curatedHere.find((c) => c.slug === citySlug);
+  const raw = bySlug.get(citySlug);
+  if (curated) {
+    return { ...curated, curated: true, profile: raw?.acs ?? undefined, alsoCovered: raw ? unpaged(raw, ok, curatedHere, bySlug) : [] };
+  }
+  if (!raw || !ok.has(raw.slug)) return undefined;
+  const pagedNearby = raw.nearby.filter((n) => ok.has(n.slug) || curatedHere.some((c) => c.slug === n.slug)).slice(0, 6);
+  return composeCity(raw, f, {
+    nearby: pagedNearby.map((n) => n.slug),
+    nearbyNames: pagedNearby.map((n) => ({ name: bySlug.get(n.slug)?.name ?? n.slug, mi: n.mi })),
+    alsoCovered: unpaged(raw, ok, curatedHere, bySlug),
+    rankInState: st.cities.indexOf(raw) + 1,
+  });
 }
+
 export function cityLabel(c: City) {
   return `${c.name}, ${stateAbbrOf(c.stateSlug)}`;
 }

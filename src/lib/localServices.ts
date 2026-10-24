@@ -411,4 +411,42 @@ export function allLocalServicePages(cities: City[]): LocalServicePage[] {
   return out;
 }
 
+export function localServicesForCity(c: City, peers?: City[]): LocalServicePage[] {
+  if (!c.profile) return [];
+  const f = stateBySlug.get(c.stateSlug);
+  if (!f) return [];
+  const st = rawState(f.abbr);
+  const statePeers = peers ?? (st.cities.map((rc) => ({ slug: rc.slug, profile: rc.acs ?? undefined })) as unknown as City[]);
+  const ctx: Ctx = { c, p: c.profile, f, s: st.acs, peers: statePeers, label: `${c.name}, ${f.abbr}` };
+  const scored = DEFS.map((d) => ({ d, v: d.score(ctx) })).filter((x) => x.v >= x.d.min).sort((a, b) => b.v - a.v);
+  if (!scored.length) return [];
+  const out: LocalServicePage[] = [];
+  const top = scored[0].d;
+  out.push({ ...categoryPage(ctx, top), stateSlug: c.stateSlug, citySlug: c.slug, updated: U });
+  const sub = scored.find((x) => CATEGORY_OF[x.d.slug] !== CATEGORY_OF[top.slug])?.d;
+  if (sub) {
+    const svc = getService(sub.slug);
+    if (svc) {
+      const b = withStateNote(ctx, sub.build(ctx));
+      out.push({
+        stateSlug: c.stateSlug,
+        citySlug: c.slug,
+        slug: sub.slug,
+        kind: "service",
+        name: svc.name,
+        h1: `${svc.name} in ${ctx.label}`,
+        seoTitle: `${svc.name} in ${ctx.label}`,
+        metaDescription: `${svc.name} in ${ctx.label}: ${b.metaHook}. What local housing data says, permits, and a licensed local plumber.`.slice(0, 158),
+        answer: b.answer,
+        sections: b.sections,
+        facts: b.facts,
+        faqs: b.faqs,
+        related: b.related,
+        updated: U,
+      });
+    }
+  }
+  return out;
+}
+
 export const localServiceHref = (x: { stateSlug: string; citySlug: string; slug: string }) => routes.cityService(x.stateSlug, x.citySlug, x.slug);

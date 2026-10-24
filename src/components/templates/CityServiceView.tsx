@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { getService, getCategory } from "@/content/services";
 import { getCityPage, getStateView, cityLabel } from "@/lib/geo";
 import { indexableCities, indexableCityServices, indexableLocalServices } from "@/lib/sitemap";
-import type { LocalServicePage } from "@/lib/localServices";
+import { localServicesForCity, type LocalServicePage } from "@/lib/localServices";
+import { cityServices } from "@/content/locations";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { createLinker } from "@/lib/linker";
@@ -33,12 +34,12 @@ function load(p: { state: string; city: string; service: string }) {
   const city = getCityPage(p.state, p.city);
   const st = getStateView(p.state);
   if (!city || !st) return null;
-  const cs = indexableCityServices().find((x) => x.stateSlug === p.state && x.citySlug === p.city && x.serviceSlug === p.service);
+  const cs = cityServices.find((x) => (x.stateSlug ?? "arizona") === p.state && x.citySlug === p.city && x.serviceSlug === p.service);
   if (cs) {
     const s = getService(p.service);
     return s ? ({ kind: "curated", cs, city, s, st } as const) : null;
   }
-  const lp = indexableLocalServices().find((x) => x.stateSlug === p.state && x.citySlug === p.city && x.slug === p.service);
+  const lp = localServicesForCity(city).find((x) => x.slug === p.service);
   return lp ? ({ kind: "local", lp, city, st } as const) : null;
 }
 

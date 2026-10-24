@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { getCityPage, getStateView, cityLabel } from "@/lib/geo";
 import { getService } from "@/content/services";
 import { publishedArticles } from "@/content/articles";
-import { indexableCities, indexableCityServices, indexableLocalServices } from "@/lib/sitemap";
+import { indexableCities } from "@/lib/sitemap";
+import { localServicesForCity } from "@/lib/localServices";
+import { cityServices } from "@/content/locations";
 import { eras } from "@/lib/localContent";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
@@ -56,15 +58,12 @@ export default async function CityPage({ params }: P) {
     { name: c.name, path },
   ];
   const combos = [
-    ...indexableCityServices().filter((cs) => cs.stateSlug === st.slug && cs.citySlug === c.slug),
-    ...indexableLocalServices()
-      .filter((x) => x.stateSlug === st.slug && x.citySlug === c.slug)
-      .map((x) => ({ serviceSlug: x.slug, h1: x.h1 })),
+    ...cityServices.filter((cs) => (cs.stateSlug ?? "arizona") === st.slug && cs.citySlug === c.slug),
+    ...localServicesForCity(c).map((x) => ({ serviceSlug: x.slug, h1: x.h1 })),
   ];
   const localPages = combos.filter((x) => !c.popularServices.includes(x.serviceSlug));
   const popular = c.popularServices.map(getService).filter(Boolean) as Service[];
-  const paged = indexableCities();
-  const nearby = c.nearby.map((slug) => paged.find((x) => x.stateSlug === st.slug && x.slug === slug)).filter((x) => x !== undefined);
+  const nearby = c.nearby.map((slug) => getCityPage(st.slug, slug)).filter((x): x is NonNullable<typeof x> => Boolean(x));
   const guides = publishedArticles.filter((a) => a.services.some((s) => c.popularServices.includes(s))).slice(0, 3);
   const prof = c.profile;
   const county = c.county ? countyName(c.county) : null;
