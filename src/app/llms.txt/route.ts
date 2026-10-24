@@ -3,11 +3,14 @@ import { indexableUrls } from "@/lib/sitemap";
 
 export const dynamic = "force-static";
 
+let cachedBody: string | null = null;
+
 export function GET() {
-  const urls = indexableUrls();
-  const section = (g: string, h: string) =>
-    `## ${h}\n\n` + urls.filter((u) => u.group === g).map((u) => `- [${u.title}](${site.url}${u.path})`).join("\n");
-  const body = `# ${site.name}
+  if (!cachedBody) {
+    const urls = indexableUrls();
+    const section = (g: string, h: string) =>
+      `## ${h}\n\n` + urls.filter((u) => u.group === g).map((u) => `- [${u.title}](${site.url}${u.path})`).join("\n");
+    cachedBody = `# ${site.name}
 
 > Nationwide plumbing referral service covering all 50 states and Washington, DC. Connects homeowners with independent, licensed local plumbers for leaks, frozen and burst pipes, repiping, water heaters, sump pumps, hard water treatment, drains, sewer lines and gas lines.
 
@@ -36,5 +39,11 @@ ${section("guides", "Guides")}
 
 ${section("pages", "Company")}
 `;
-  return new Response(body, { headers: { "content-type": "text/plain; charset=utf-8" } });
+  }
+  return new Response(cachedBody, {
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "public, max-age=86400, s-maxage=604800",
+    },
+  });
 }

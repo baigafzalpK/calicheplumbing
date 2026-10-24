@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thank-you/
+Disallow: /*?utm_
+Disallow: /*&utm_
+Disallow: /*?gclid
+Disallow: /*&gclid
+Disallow: /*?gbraid
+Disallow: /*&gbraid
+Disallow: /*?wbraid
+Disallow: /*&wbraid
+Disallow: /*?fbclid
+Disallow: /*&fbclid
+Disallow: /*?msclkid
+Disallow: /*&msclkid
+Disallow: /*?kw
+Disallow: /*&kw
+Disallow: /*?ref
+Disallow: /*&ref
+
+Sitemap: https://www.calicheplumbing.com/sitemap.xml
+Host: https://www.calicheplumbing.com
