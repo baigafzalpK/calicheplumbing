@@ -1,7 +1,7 @@
 import "server-only";
 import { site } from "@/content/site";
 import { publishedServices, categories } from "@/content/services";
-import { allStates } from "./geo";
+import { stateFacts } from "@/content/stateFacts";
 import { routes } from "./routes";
 import type { Faq } from "@/content/types";
 
@@ -20,7 +20,7 @@ export const ids = {
 };
 
 export function siteGraph() {
-  const states = allStates();
+  const states = stateFacts;
   const org: Record<string, unknown> = {
     "@type": "Organization",
     "@id": ids.org,
