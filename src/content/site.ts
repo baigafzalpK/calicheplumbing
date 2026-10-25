@@ -3,8 +3,8 @@
 const env = (k: string) => (process.env[k] ?? "").trim();
 
 // Verified Ringba tracking number (confirmed by the owner, 2026-10-16). Env vars override it per deployment.
-const PHONE = "(773) 514-3066";
-const PHONE_E164 = "+17735143066";
+const PHONE = "(831) 257-8139";
+const PHONE_E164 = "+18312578139";
 
 export const site = {
   name: "Caliche Plumbing",
