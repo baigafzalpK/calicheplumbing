@@ -75,6 +75,12 @@ export function CityServiceView({ k }: { k: CityServiceKey }) {
     broker: { "@id": ids.org },
     areaServed: { "@id": ids.place(st.slug, city.slug) },
     isRelatedTo: { "@id": ids.service(s.slug) },
+    hoursAvailable: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
   };
   return (
     <>
@@ -136,6 +142,12 @@ function LocalPage({ lp, city, st }: { lp: LocalServicePage; city: NonNullable<R
     provider: { "@id": ids.org },
     broker: { "@id": ids.org },
     areaServed: { "@id": ids.place(st.slug, city.slug) },
+    hoursAvailable: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "00:00",
+      closes: "23:59",
+    },
     ...(national ? { isRelatedTo: { "@id": ids.service(lp.slug) } } : {}),
   };
 

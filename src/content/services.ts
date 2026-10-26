@@ -22,9 +22,9 @@ const core: Service[] = [
     shortName: "Water softeners",
     category: "hard-water",
     status: "PUBLISHED",
-    seoTitle: "Water Softener Installation: Sizing, Loops & Drains",
+    seoTitle: "Water Softener Installation Near Me - Licensed Plumbers",
     metaDescription:
-      "Water softener installation explained: sizing to your measured hardness, loop and bypass work, and drain routing to code. Connect with a licensed plumber.",
+      "Professional water softener installation near you. Sized to your home's water hardness, loop plumbing & code-compliant drain routing. Call for a free estimate!",
     h1: "Water softener installation",
     answer:
       "A water softener removes the calcium and magnesium that make water hard, which protects water heaters, fixtures and appliances from scale. A plumber sizes the unit to your household's water use and measured hardness, connects it at the softener loop or main line, and routes the drain correctly.",
@@ -220,9 +220,9 @@ const core: Service[] = [
     shortName: "Slab leak repair",
     category: "hidden-leaks",
     status: "PUBLISHED",
-    seoTitle: "Slab Leak Repair: Spot Repair vs. Reroute vs. Repipe",
+    seoTitle: "Slab Leak Repair Near Me - 24/7 Detection & PEX Reroutes",
     metaDescription:
-      "Slab leak repair options compared: spot repairs through the slab, attic and wall reroutes, and when a whole-house repipe makes more sense.",
+      "Need fast slab leak repair or rerouting near you? 24/7 emergency service, non-invasive acoustic detection & long-lasting PEX reroutes. Free estimates & quotes.",
     h1: "Slab leak repair and reroutes",
     answer:
       "There are three ways to fix a slab leak: open the floor and repair the pipe in place, abandon the leaking line and reroute a new one through the attic or walls, or repipe the house if several lines are failing. A reroute is often the lasting choice because it takes the line out of the slab entirely.",
@@ -256,9 +256,9 @@ const core: Service[] = [
     name: "Pinhole Leak Repair",
     category: "hidden-leaks",
     status: "PUBLISHED",
-    seoTitle: "Copper Pinhole Leak Repair: Fix or Repipe?",
+    seoTitle: "Copper Pinhole Leak Repair - Fast 24/7 Emergency Service",
     metaDescription:
-      "Pinhole leaks in copper pipes: finding them in walls and ceilings, repairing them properly, and knowing when repiping is the smarter move.",
+      "Emergency copper pinhole leak repair & PEX rerouting. Fast leak detection, non-destructive access & permanent piping solutions. Call for 24/7 emergency service!",
     h1: "Copper pinhole leak repair",
     answer:
       "Pinhole leaks are tiny holes that corrode through copper pipe from the inside, often showing up as a stain, a drip or a spray inside a wall. A plumber opens the wall, cuts out the damaged section and replaces it, and checks nearby pipe. If pinholes keep appearing, a repipe usually costs less than chasing them.",
@@ -295,9 +295,9 @@ const core: Service[] = [
     shortName: "Repiping",
     category: "repiping",
     status: "PUBLISHED",
-    seoTitle: "Whole-House Repiping: PEX vs. Copper, Timeline, Cost",
+    seoTitle: "Whole House Repipe Near Me - PEX & Copper Repiping Pros",
     metaDescription:
-      "Whole-house repiping for homes with galvanized, polybutylene or pinholed copper pipe. What the job involves, PEX vs. copper, timeline and cost factors.",
+      "Looking for whole-house repiping contractors near you? Replace old galvanized, polybutylene or leaking copper with durable PEX. Licensed pros & free estimates.",
     h1: "Whole-house repiping",
     answer:
       "A repipe replaces every water supply line in the house, usually with PEX or copper run through the walls, attic or basement ceiling. It's the permanent fix for failing galvanized pipe, polybutylene, and copper with repeated pinhole or slab leaks.",
@@ -335,9 +335,9 @@ const core: Service[] = [
     shortName: "Polybutylene replacement",
     category: "repiping",
     status: "PUBLISHED",
-    seoTitle: "Polybutylene Pipe Replacement: Identify & Replace",
+    seoTitle: "Polybutylene Pipe Replacement - PEX Repipe Specialists",
     metaDescription:
-      "Polybutylene pipe in US homes built around 1978–1995: how to identify it, why it fails, what insurers ask, and how replacement with PEX works.",
+      "Expert polybutylene pipe replacement. Replace defective gray PB2110 plumbing with durable PEX before catastrophic leaks occur. Licensed pros & free estimates.",
     h1: "Polybutylene pipe replacement",
     answer:
       "Polybutylene is a gray, blue or black plastic supply pipe installed in many homes from roughly 1978 to 1995. It can fail without warning, especially at fittings. Replacing it means a repipe, usually in PEX, and many insurers and buyers ask for it.",
@@ -370,9 +370,9 @@ const core: Service[] = [
     shortName: "Water heaters",
     category: "water-heaters",
     status: "PUBLISHED",
-    seoTitle: "Water Heater Replacement: Gas, Electric & Code Items",
+    seoTitle: "Water Heater Replacement Near Me - Same-Day Installation",
     metaDescription:
-      "Gas and electric tank water heater replacement: sizing, venting, expansion tanks, pans and code upgrades, plus signs it's time. Connect with a plumber.",
+      "Need same-day water heater replacement near you? Gas, electric & tankless units installed to code by licensed plumbers. Upfront pricing & free estimates. Call now!",
     h1: "Water heater replacement",
     answer:
       "Replacing a tank water heater means draining and removing the old unit, then installing a correctly sized gas or electric tank with current-code venting, a relief valve line, a thermal expansion tank where required, and a drain pan where the location calls for one. Sediment and hard-water scale are the main reasons tanks wear out early.",
@@ -415,9 +415,9 @@ const core: Service[] = [
     shortName: "Tankless",
     category: "water-heaters",
     status: "PUBLISHED",
-    seoTitle: "Tankless Water Heater Installation & Conversion",
+    seoTitle: "Tankless Water Heater Installation - Fast Conversions",
     metaDescription:
-      "Tankless water heater installation and conversion: gas line sizing, venting, descaling valves and hard-water protection. Is it worth it for your home?",
+      "Expert tankless water heater installation & conversion near you. Endless hot water, gas line sizing, direct venting & descaling valves. Free estimates & quotes!",
     h1: "Tankless water heater installation",
     answer:
       "A tankless water heater heats water on demand instead of storing it. Converting from a tank usually means upsizing the gas line, new venting and isolation valves for descaling. In hard water, a softener or scale inhibitor and yearly flushing are what keep a tankless unit working.",

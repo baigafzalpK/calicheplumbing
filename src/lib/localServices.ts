@@ -100,7 +100,10 @@ const DEFS: Def[] = [
         { term: "Built 1960–1979", detail: pct(ctx.p.built.y1960_79) },
         { term: "Single-family detached", detail: ctx.p.detached != null ? pct(ctx.p.detached) : "n/a" },
       ],
-      faqs: [{ q: `How common is galvanized pipe in ${ctx.c.name}?`, a: `It's likely in many of the ${pct(old(ctx.p))} of local homes built before 1960 that haven't been repiped. Check where the main enters the house: galvanized is dull gray steel with threaded joints, and a magnet sticks to it.` }],
+      faqs: [
+        { q: `Who does whole-house repiping and water line upgrades in ${ctx.c.name}?`, a: `Caliche Plumbing connects homeowners across ${ctx.c.name} with licensed, vetted repiping contractors specializing in whole-house PEX and copper conversions with permits and drywall patching.` },
+        { q: `How common is galvanized pipe in ${ctx.c.name}?`, a: `It's likely in many of the ${pct(old(ctx.p))} of local homes built before 1960 that haven't been repiped. Check where the main enters the house: galvanized is dull gray steel with threaded joints, and a magnet sticks to it.` },
+      ],
       related: ["sewer-camera-inspection", "pinhole-leak-repair", "main-water-line-repair"],
     }),
   },
@@ -127,7 +130,10 @@ const DEFS: Def[] = [
         { term: "Built 2000 or later", detail: pct(ctx.p.built.y2000p) },
         { term: "Owner-occupied", detail: ctx.p.owner != null ? pct(ctx.p.owner) : "n/a" },
       ],
-      faqs: [{ q: `Do insurers in ${ctx.f.name} ask about polybutylene?`, a: "Some do, and some limit coverage or charge more for homes that still have it. Ask your insurer directly, and keep any repipe invoice to show the pipe was replaced." }],
+      faqs: [
+        { q: `Who replaces polybutylene pipes in ${ctx.c.name}?`, a: `Caliche Plumbing connects ${ctx.c.name} homeowners with licensed repiping plumbers who replace fragile gray polybutylene pipe with modern PEX, coordinate municipal permits, and pressure-test the full system.` },
+        { q: `Do insurers in ${ctx.f.name} ask about polybutylene?`, a: "Some do, and some limit coverage or charge more for homes that still have it. Ask your insurer directly, and keep any repipe invoice to show the pipe was replaced." },
+      ],
       related: ["whole-house-repiping", "pinhole-leak-repair"],
     }),
   },
@@ -156,7 +162,10 @@ const DEFS: Def[] = [
         { term: "Built 1960–1979", detail: pct(ctx.p.built.y1960_79) },
         { term: "Single-family detached", detail: ctx.p.detached != null ? pct(ctx.p.detached) : "n/a" },
       ],
-      faqs: [{ q: `Who owns the sewer line to my ${ctx.c.name} home?`, a: "In most cities the homeowner owns the lateral from the house to the public main, sometimes including the connection at the main. Your city's public works department can confirm where its responsibility starts." }],
+      faqs: [
+        { q: `Which companies offer pipe lining or trenchless sewer repair in ${ctx.c.name}?`, a: `Caliche Plumbing connects ${ctx.c.name} homeowners with licensed sewer contractors specializing in trenchless CIPP pipe lining, pipe bursting, and video camera inspections to repair damaged sewer lines with minimal digging.` },
+        { q: `Who owns the sewer line to my ${ctx.c.name} home?`, a: "In most cities the homeowner owns the lateral from the house to the public main, sometimes including the connection at the main. Your city's public works department can confirm where its responsibility starts." },
+      ],
       related: ["sewer-camera-inspection", "drain-cleaning", "whole-house-repiping"],
     }),
   },
@@ -191,7 +200,10 @@ const DEFS: Def[] = [
           ...(p.heat.oil >= 3 ? [{ term: "Heat with fuel oil", detail: pct(p.heat.oil) }] : []),
           { term: "Built 2000 or later", detail: pct(p.built.y2000p) },
         ],
-        faqs: [{ q: `Should I replace my ${ctx.c.name} water heater with the same fuel?`, a: `Usually, because switching fuels means new gas, venting or electrical work. In ${ctx.c.name}, where ${pct(Math.max(p.heat.gas, p.heat.electric))} of homes use ${fuel} heat, a like-for-like ${fuel} tank is the simplest swap.` }],
+        faqs: [
+          { q: `Can I get same-day water heater replacement in ${ctx.c.name}?`, a: `Yes, licensed plumbing contractors in ${ctx.c.name} offer same-day gas, electric, and tankless water heater replacements, including code upgrades, expansion tanks, and old unit disposal.` },
+          { q: `Should I replace my ${ctx.c.name} water heater with the same fuel?`, a: `Usually, because switching fuels means new gas, venting or electrical work. In ${ctx.c.name}, where ${pct(Math.max(p.heat.gas, p.heat.electric))} of homes use ${fuel} heat, a like-for-like ${fuel} tank is the simplest swap.` },
+        ],
         related: ["water-heater-flush", "tankless-water-heaters", "hot-water-recirculation"],
       };
     },
@@ -221,7 +233,10 @@ const DEFS: Def[] = [
         { term: "Built before 1980", detail: pct(pre80(ctx.p)) },
         { term: "Single-family detached", detail: ctx.p.detached != null ? pct(ctx.p.detached) : "n/a" },
       ],
-      faqs: [{ q: `What should I do before leaving my ${ctx.c.name} home in winter?`, a: "Keep the heat at 55 °F or higher, open sink cabinets on exterior walls, disconnect hoses, and for a long trip shut off the main and drain the lines." }],
+      faqs: [
+        { q: `Who fixes frozen or burst pipes in ${ctx.c.name}?`, a: `Licensed emergency plumbers in our network provide fast 24/7 response for frozen, cracked, and burst pipe repairs across ${ctx.c.name}. Shut off your main valve and call for emergency dispatch.` },
+        { q: `What should I do before leaving my ${ctx.c.name} home in winter?`, a: "Keep the heat at 55 °F or higher, open sink cabinets on exterior walls, disconnect hoses, and for a long trip shut off the main and drain the lines." },
+      ],
       related: ["sump-pump-installation", "pinhole-leak-repair", "whole-house-repiping"],
     }),
   },
@@ -248,7 +263,10 @@ const DEFS: Def[] = [
         { term: "Owner-occupied", detail: ctx.p.owner != null ? pct(ctx.p.owner) : "n/a" },
         { term: "Built before 1980", detail: pct(pre80(ctx.p)) },
       ],
-      faqs: [{ q: `Do ${ctx.c.name} homes need a backup sump pump?`, a: "If your basement is finished or the pump runs often in storms, a backup is worth it, because power outages and heavy rain tend to arrive together." }],
+      faqs: [
+        { q: `Who provides emergency sump pump installation and replacement in ${ctx.c.name}?`, a: `Caliche Plumbing connects ${ctx.c.name} residents with 24/7 licensed plumbing contractors for primary submersible sump pumps, battery backup installations, and check valve replacements.` },
+        { q: `Do ${ctx.c.name} homes need a backup sump pump?`, a: "If your basement is finished or the pump runs often in storms, a backup is worth it, because power outages and heavy rain tend to arrive together." },
+      ],
       related: ["frozen-pipe-repair", "sewer-line-repair", "drain-cleaning"],
     }),
   },
@@ -276,7 +294,10 @@ const DEFS: Def[] = [
         { term: "Heat with electricity", detail: pct(ctx.p.heat.electric) },
         { term: "Built 2000 or later", detail: pct(ctx.p.built.y2000p) },
       ],
-      faqs: [{ q: `How hard is ${ctx.c.name} water?`, a: `${ctx.f.name} water is generally ${ctx.f.hardness}, but it varies by utility and well. Your provider's annual water quality report lists the number for your system.` }],
+      faqs: [
+        { q: `Where can I find water softener installation services in ${ctx.c.name}?`, a: `Caliche Plumbing connects ${ctx.c.name} homeowners with licensed plumbers who test local hardness, install high-efficiency softeners and reverse osmosis filters, and plumb code-compliant loops.` },
+        { q: `How hard is ${ctx.c.name} water?`, a: `${ctx.f.name} water is generally ${ctx.f.hardness}, but it varies by utility and well. Your provider's annual water quality report lists the number for your system.` },
+      ],
       related: ["reverse-osmosis-systems", "water-heater-flush", "tankless-water-heaters"],
     }),
   },
@@ -303,7 +324,10 @@ const DEFS: Def[] = [
         { term: "Heat with propane", detail: pct(ctx.p.heat.lp) },
         { term: "Built before 1980", detail: pct(pre80(ctx.p)) },
       ],
-      faqs: [{ q: `Who do I call if I smell gas in ${ctx.c.name}?`, a: "Leave the house first, then call 911 or your gas utility's emergency line from outside. Don't use switches or phones inside." }],
+      faqs: [
+        { q: `Who handles emergency gas line repair and installation in ${ctx.c.name}?`, a: `Once your utility or 911 has secured the area, Caliche Plumbing connects you with licensed gas-certified plumbers in ${ctx.c.name} for leak repair, pressure testing, and appliance hookups.` },
+        { q: `Who do I call if I smell gas in ${ctx.c.name}?`, a: "Leave the house first, then call 911 or your gas utility's emergency line from outside. Don't use switches or phones inside." },
+      ],
       related: ["gas-appliance-hookup", "water-heater-replacement", "tankless-water-heaters"],
     }),
   },
@@ -329,7 +353,10 @@ const DEFS: Def[] = [
         { term: "Built 1980–1999", detail: pct(ctx.p.built.y1980_99) },
         { term: "Heat with electricity", detail: pct(ctx.p.heat.electric) },
       ],
-      faqs: [{ q: `How do I check for a slab leak in my ${ctx.c.name} home?`, a: "Turn off every fixture and watch the meter's leak indicator. If it moves, shut the cold inlet on the water heater; if the meter stops, the leak is on the hot side." }],
+      faqs: [
+        { q: `Who does slab leak detection and repair in ${ctx.c.name}?`, a: `Caliche Plumbing connects ${ctx.c.name} homeowners with licensed leak detection experts using acoustic sensors and thermal imaging to locate underground pipe leaks and perform non-invasive PEX reroutes.` },
+        { q: `How do I check for a slab leak in my ${ctx.c.name} home?`, a: "Turn off every fixture and watch the meter's leak indicator. If it moves, shut the cold inlet on the water heater; if the meter stops, the leak is on the hot side." },
+      ],
       related: ["slab-leak-repair", "whole-house-repiping", "pinhole-leak-repair"],
     }),
   },
@@ -348,6 +375,26 @@ function withStateNote<T extends { sections: { heading: string; paras: string[] 
   return { ...b, sections: [{ ...first, paras: [...first.paras, `In ${ctx.f.name}: ${notes[h % notes.length]}`] }, ...rest] };
 }
 
+function formatCatTitle(name: string, label: string): string {
+  const base = `${name} in ${label}`;
+  const withSuffix = `${base} - 24/7 Plumber`;
+  return withSuffix.length <= 60 ? withSuffix : base;
+}
+
+function formatCatDesc(name: string, label: string): string {
+  return `Reliable ${name.toLowerCase()} in ${label}. 24/7 emergency service, licensed local plumbers, clear quotes & fast dispatch. Call now for a free estimate!`.slice(0, 158);
+}
+
+function formatLocalTitle(name: string, label: string): string {
+  const base = `${name} in ${label}`;
+  const withSuffix = `${base} - 24/7 Fast Service`;
+  return withSuffix.length <= 60 ? withSuffix : base;
+}
+
+function formatLocalDesc(name: string, label: string): string {
+  return `Need ${name.toLowerCase()} in ${label}? 24/7 emergency service, licensed local plumbers, upfront pricing & fast dispatch. Call today for a free estimate!`.slice(0, 158);
+}
+
 function categoryPage(ctx: Ctx, member: Def): Omit<LocalServicePage, "stateSlug" | "citySlug" | "updated"> {
   const cat = getCategory(CATEGORY_OF[member.slug]);
   const b = withStateNote(ctx, member.build(ctx));
@@ -358,8 +405,8 @@ function categoryPage(ctx: Ctx, member: Def): Omit<LocalServicePage, "stateSlug"
     kind: "category",
     name: cat.name,
     h1: `${cat.name} in ${ctx.label}`,
-    seoTitle: `${cat.name} in ${ctx.label}`,
-    metaDescription: `${cat.name} help in ${ctx.label}: ${b.metaHook}. Local housing data, common problems and a licensed local plumber.`.slice(0, 158),
+    seoTitle: formatCatTitle(cat.name, ctx.label),
+    metaDescription: formatCatDesc(cat.name, ctx.label),
     answer: `${cat.blurb} ${b.answer}`,
     sections: [
       ...b.sections,
@@ -396,8 +443,8 @@ export function allLocalServicePages(cities: City[]): LocalServicePage[] {
         kind: "service",
         name: svc.name,
         h1: `${svc.name} in ${ctx.label}`,
-        seoTitle: `${svc.name} in ${ctx.label}`,
-        metaDescription: `${svc.name} in ${ctx.label}: ${b.metaHook}. What local housing data says, permits, and a licensed local plumber.`.slice(0, 158),
+        seoTitle: formatLocalTitle(svc.name, ctx.label),
+        metaDescription: formatLocalDesc(svc.name, ctx.label),
         answer: b.answer,
         sections: b.sections,
         facts: b.facts,
@@ -435,8 +482,8 @@ export function localServicesForCity(c: City, peers?: City[]): LocalServicePage[
         kind: "service",
         name: svc.name,
         h1: `${svc.name} in ${ctx.label}`,
-        seoTitle: `${svc.name} in ${ctx.label}`,
-        metaDescription: `${svc.name} in ${ctx.label}: ${b.metaHook}. What local housing data says, permits, and a licensed local plumber.`.slice(0, 158),
+        seoTitle: formatLocalTitle(svc.name, ctx.label),
+        metaDescription: formatLocalDesc(svc.name, ctx.label),
         answer: b.answer,
         sections: b.sections,
         facts: b.facts,

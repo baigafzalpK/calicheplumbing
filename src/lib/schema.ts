@@ -28,6 +28,15 @@ export function siteGraph() {
     alternateName: site.shortName,
     url: `${U}/`,
     logo: { "@id": ids.logo },
+    priceRange: "$$",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "00:00",
+        closes: "23:59",
+      },
+    ],
     description:
       "Caliche Plumbing is a nationwide plumbing referral service. It connects homeowners in all 50 states and Washington, DC with independent, licensed plumbing contractors for leaks, repiping, water heaters, frozen pipes, sump pumps, hard water treatment, drains, sewer lines and gas lines.",
     areaServed: states.map((s) => ({ "@id": ids.state(s.slug) })),

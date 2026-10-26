@@ -21,7 +21,7 @@ export const site = {
   hours: env("NEXT_PUBLIC_BUSINESS_HOURS") || null,
   license: env("NEXT_PUBLIC_LICENSE_NUMBER") || null,
   officeAddress: env("NEXT_PUBLIC_OFFICE_ADDRESS") || null,
-  emergency247: env("NEXT_PUBLIC_EMERGENCY_24_7") === "true",
+  emergency247: env("NEXT_PUBLIC_EMERGENCY_24_7") !== "false",
   googleReviewUrl: env("NEXT_PUBLIC_GOOGLE_REVIEW_URL") || null,
   googleProfileUrl: env("NEXT_PUBLIC_GOOGLE_PROFILE_URL") || null,
   gtmId: env("NEXT_PUBLIC_GTM_ID") || null,

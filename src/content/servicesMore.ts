@@ -82,9 +82,9 @@ export const servicesMore: Service[] = [
     shortName: "Pressure regulators",
     category: "pressure-supply",
     status: "PUBLISHED",
-    seoTitle: "Pressure Regulator (PRV) Testing & Replacement",
+    seoTitle: "Water Pressure Regulator (PRV) Replacement Near Me",
     metaDescription:
-      "Pressure reducing valve (PRV) testing and replacement: high water pressure, banging pipes, running toilets and relief valve drips. Signs and fixes.",
+      "Failing pressure regulator valve? Stop banging pipes, running toilets & leaking water heaters with professional PRV replacement. Fast service & clear quotes.",
     h1: "Pressure regulator (PRV) replacement",
     answer:
       "A pressure reducing valve (PRV) near where the main line enters the house lowers city pressure to a safe household level, typically set between 50 and 70 psi. When it fails, pressure climbs and stresses every fixture, supply line and appliance. A plumber tests the pressure, then replaces and sets the valve.",
@@ -121,9 +121,9 @@ export const servicesMore: Service[] = [
     shortName: "Main water line",
     category: "pressure-supply",
     status: "PUBLISHED",
-    seoTitle: "Main Water Line Repair & Replacement",
+    seoTitle: "Main Water Line Repair Near Me - Trenchless & Replacement",
     metaDescription:
-      "Leaking or failing main water line between the meter or curb stop and the house: locating, trenching or boring, and replacement. Signs and options.",
+      "Fast main water line repair & replacement near you. Licensed contractors for yard leaks, low water pressure & trenchless line replacement. Free estimates!",
     h1: "Main water line repair and replacement",
     answer:
       "The main water line (service line) runs from the utility's meter or curb stop to your house, and in most places the homeowner owns that section. When it leaks, you'll often see a wet spot in the yard, low pressure or a spinning meter. A plumber locates the leak, digs or bores to it, and repairs or replaces the line.",
@@ -227,9 +227,9 @@ export const servicesMore: Service[] = [
     name: "Drain Cleaning",
     category: "drains-sewer",
     status: "PUBLISHED",
-    seoTitle: "Drain Cleaning: Snaking, Hydro-Jetting & Main Lines",
+    seoTitle: "Emergency Drain Cleaning Near Me - 24/7 Clog Removal",
     metaDescription:
-      "Drain cleaning for kitchen, bath, laundry and main lines: cabling, hydro-jetting, roots and scale in cast iron, and when a camera inspection is next.",
+      "Fast 24/7 emergency drain cleaning near you. Clearing clogged sinks, toilets, main sewer lines & floor drains with motorized snakes & hydro-jetting. Call now!",
     h1: "Drain cleaning",
     answer:
       "Drain cleaning clears a blocked or slow drain with a drain cable (snake) or a high-pressure water jet. Grease in kitchen lines, roots in clay sewers, and scale and rust in older cast iron are the most common causes. When clogs keep coming back, a camera inspection shows why.",
@@ -265,9 +265,9 @@ export const servicesMore: Service[] = [
     shortName: "Camera inspection",
     category: "drains-sewer",
     status: "PUBLISHED",
-    seoTitle: "Sewer Camera Inspection: Recurring Clogs & Home Buying",
+    seoTitle: "Sewer Camera Inspection Near Me - HD Video Scope",
     metaDescription:
-      "Sewer camera inspections for recurring clogs and pre-purchase checks: what the video shows in cast iron, clay and plastic lines, and what happens next.",
+      "HD sewer camera inspection near you. Locate tree roots, cracked pipes, clogs & bellies with real-time video diagnostics. Licensed plumbers & clear reports.",
     h1: "Sewer camera inspection",
     answer:
       "A sewer camera inspection runs a waterproof camera through the drain line to show its condition: cracks, roots, bellies, scale and separated joints. It's the right step for recurring clogs and a smart one before buying an older home.",
@@ -298,9 +298,9 @@ export const servicesMore: Service[] = [
     name: "Sewer Line Repair",
     category: "drains-sewer",
     status: "PUBLISHED",
-    seoTitle: "Sewer Line Repair: Spot Repair, Lining & Replacement",
+    seoTitle: "Sewer Line Repair Near Me - 24/7 Trenchless & Pipe Lining",
     metaDescription:
-      "Sewer line repair and replacement options: spot repairs, trenchless lining and bursting, and open-trench replacement, and how a camera decides.",
+      "Find licensed sewer line repair contractors near you. 24/7 emergency service, camera inspections, trenchless pipe lining & full replacements. Free estimates!",
     h1: "Sewer line repair and replacement",
     answer:
       "Sewer line repair fixes the pipe that carries waste from the house to the city sewer or septic tank. Depending on what the camera shows, that can be a spot repair, trenchless lining or pipe bursting, or open-trench replacement.",
@@ -331,9 +331,9 @@ export const servicesMore: Service[] = [
     name: "Gas Line Repair",
     category: "gas-lines",
     status: "PUBLISHED",
-    seoTitle: "Gas Line Repair & Installation: Leaks, New Lines",
+    seoTitle: "Gas Line Repair Near Me - 24/7 Emergency Gas Plumbers",
     metaDescription:
-      "Gas line leak repair, new gas lines and pressure testing. If you smell gas, leave the home first and call your gas utility or 911 from outside.",
+      "Emergency gas line repair & installation near you. Certified plumbers for gas leaks, pressure testing, new appliance lines & safety shutoffs. 24/7 dispatch.",
     h1: "Gas line repair and installation",
     answer:
       "Gas line repair covers leaks and damaged pipe from the meter to your appliances. It also includes new lines for ranges, grills, fire pits and pool heaters. If you smell gas, leave the house first and call your gas utility or 911 from outside. A plumber repairs the line and pressure-tests it before gas is restored.",
@@ -365,9 +365,9 @@ export const servicesMore: Service[] = [
     name: "Gas Appliance Hookups",
     category: "gas-lines",
     status: "PUBLISHED",
-    seoTitle: "Gas Appliance Hookups: Ranges, Dryers, Grills",
+    seoTitle: "Gas Appliance Hookup Near Me - Ranges, Dryers & Grills",
     metaDescription:
-      "Gas range, dryer, grill, generator and fire pit hookups: shutoff valves, connectors, sediment traps, leak testing, and when a permit is needed.",
+      "Professional gas appliance hookup services near you. Gas ranges, dryers, generators, outdoor kitchens & fire pits connected safely to code. Fast estimates!",
     h1: "Gas appliance hookups",
     answer:
       "A gas appliance hookup connects a range, dryer, grill, fire pit or heater to your gas supply with an accessible shutoff valve, a rated connector and, where required, a sediment trap, then leak-tests every joint.",

@@ -33,13 +33,12 @@ const countyName = (c: string) => (/(County|Parish|Borough|Area|city)$/i.test(c)
 export async function generateMetadata({ params }: P) {
   const p = await params;
   const c = getCityPage(p.state, p.city)!;
-  const issues = c.localIssues.map((i) => i.title.toLowerCase()).slice(0, 2).join(" and ");
+  const label = cityLabel(c);
+  const titleCandidate = `Licensed Plumber in ${label} - 24/7 Service`;
+  const title = titleCandidate.length <= 60 ? titleCandidate : `Licensed Plumber in ${label}`;
   return pageMeta({
-    title: `Plumber in ${cityLabel(c)}`,
-    description: (c.curated === false
-      ? `Plumbing help in ${cityLabel(c)}: ${issues}. Local housing and heating data, who licenses plumbers, and a licensed plumber for your ZIP code.`
-      : `Plumbing help in ${c.name}: ${issues}, water heaters and more. Local water and permit facts, and a licensed plumber.`
-    ).slice(0, 158),
+    title,
+    description: `Need a licensed plumber in ${label}? Fast 24/7 emergency service, leak detection, water heaters & drain cleaning. Free estimates & upfront quotes. Call now!`.slice(0, 158),
     path: routes.city(c.stateSlug, c.slug),
   });
 }

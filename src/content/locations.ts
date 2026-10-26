@@ -246,9 +246,9 @@ export const cityServices: CityService[] = [
     serviceSlug: "slab-leak-repair",
     status: "PUBLISHED",
     h1: "Slab leak repair in Phoenix",
-    seoTitle: "Slab Leak Repair in Phoenix, AZ",
+    seoTitle: "Slab Leak Repair in Phoenix, AZ - 24/7 Fast PEX Reroutes",
     metaDescription:
-      "Slab leak repair for Phoenix homes: why copper hot lines fail under Valley slabs, spot repair vs. attic reroute, and City of Phoenix permits.",
+      "Phoenix slab leak repair & detection. Non-invasive acoustic locating, overhead PEX attic reroutes & licensed contractors. Free estimates & 24/7 dispatch.",
     answer:
       "Phoenix slab leaks are most often on copper hot-water lines under the concrete. Most Phoenix plumbers recommend rerouting the line through the attic rather than breaking the floor, especially in homes that have already had one leak.",
     localAngle: [
@@ -265,9 +265,9 @@ export const cityServices: CityService[] = [
     serviceSlug: "water-softener-installation",
     status: "PUBLISHED",
     h1: "Water softener installation in Scottsdale",
-    seoTitle: "Water Softener Installation in Scottsdale, AZ",
+    seoTitle: "Water Softener Installation in Scottsdale, AZ - Hard Water",
     metaDescription:
-      "Water softener installation for Scottsdale homes: protecting tankless heaters, glass showers and high-end fixtures from Valley hard water.",
+      "Water softener installation in Scottsdale, AZ. Protect tankless heaters, glass showers & luxury fixtures from hard water scale. Call for a free estimate!",
     answer:
       "Scottsdale homes use softeners mainly to protect tankless heaters, glass showers and high-end fixtures from hard-water scale. Many homes built since the 1990s have a softener loop already plumbed in the garage.",
     localAngle: [
@@ -284,9 +284,9 @@ export const cityServices: CityService[] = [
     serviceSlug: "whole-house-repiping",
     status: "PUBLISHED",
     h1: "Repiping in Sun City West",
-    seoTitle: "Repiping & Polybutylene Replacement, Sun City West",
+    seoTitle: "Repiping in Sun City West, AZ - Polybutylene Replacement",
     metaDescription:
-      "Whole-house repiping in Sun City West: polybutylene from the 1978–1998 build-out, PEX replacement, and Maricopa County permits.",
+      "Whole-house repiping in Sun City West, AZ. Replace failing gray polybutylene pipe with durable PEX under Maricopa County permits. Free estimates & quotes.",
     answer:
       "Sun City West was built mostly from 1978 into the late 1990s, which overlaps the years polybutylene was widely used. Many homes there have been or are being repiped with PEX, under Maricopa County permits because the community is unincorporated.",
     localAngle: [

@@ -13,6 +13,7 @@ type Opts = {
 const MAX = 62;
 
 export function fullTitle(title: string) {
+  if (title.includes(site.name) || title.includes(site.shortName)) return title;
   const withBrand = `${title} | ${site.name}`;
   return withBrand.length <= MAX ? withBrand : title;
 }
