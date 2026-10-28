@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "opennextjs-cloudflare build",
-    "build:worker": "opennextjs-cloudflare build",
+    "build": "opennextjs-cloudflare build && node scripts/clean-opennext-cache.mjs",
+    "build:worker": "opennextjs-cloudflare build && node scripts/clean-opennext-cache.mjs",
     "build:next": "next build",
     "deploy": "opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare preview",

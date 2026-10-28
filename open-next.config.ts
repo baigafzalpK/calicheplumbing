@@ -1,5 +1,9 @@
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 
+console.log("==================================================");
+console.log("CALICHE PLUMBING: OPEN-NEXT CONFIG LOADED (SSG MODE)");
+console.log("==================================================");
+
 export default {
   ...defineCloudflareConfig({
     incrementalCache: "dummy",
