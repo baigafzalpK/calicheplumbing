@@ -4,8 +4,6 @@ import { routes } from "@/lib/routes";
 import { pageGraph, graph, ids } from "@/lib/schema";
 import { site, availability, BRAND_PROMISE } from "@/content/site";
 import { categories, servicesInCategory, getService } from "@/content/services";
-import { allStates } from "@/lib/geo";
-import { indexableCities } from "@/lib/sitemap";
 import { stateFacts, type Region } from "@/content/stateFacts";
 import { publishedArticles } from "@/content/articles";
 import { generalFaqs, problems } from "@/content/misc";
@@ -30,11 +28,37 @@ export const metadata = pageMeta({ title, description, path: "/" });
 
 const faqs = generalFaqs.slice(0, 4);
 const REGIONS: Region[] = ["Northeast", "Midwest", "South", "West"];
+const PLACES_COUNT = 15386;
+const TOP_CITIES = [
+  { name: "Houston", slug: "houston", stateSlug: "texas" },
+  { name: "Chicago", slug: "chicago", stateSlug: "illinois" },
+  { name: "Brooklyn", slug: "brooklyn", stateSlug: "new-york" },
+  { name: "Los Angeles", slug: "los-angeles", stateSlug: "california" },
+  { name: "San Antonio", slug: "san-antonio", stateSlug: "texas" },
+  { name: "Miami", slug: "miami", stateSlug: "florida" },
+  { name: "Las Vegas", slug: "las-vegas", stateSlug: "nevada" },
+  { name: "New York", slug: "new-york", stateSlug: "new-york" },
+  { name: "Philadelphia", slug: "philadelphia", stateSlug: "pennsylvania" },
+  { name: "Phoenix", slug: "phoenix", stateSlug: "arizona" },
+  { name: "Bronx", slug: "bronx", stateSlug: "new-york" },
+  { name: "Dallas", slug: "dallas", stateSlug: "texas" },
+  { name: "San Diego", slug: "san-diego", stateSlug: "california" },
+  { name: "Austin", slug: "austin", stateSlug: "texas" },
+  { name: "Minneapolis", slug: "minneapolis", stateSlug: "minnesota" },
+  { name: "Denver", slug: "denver", stateSlug: "colorado" },
+  { name: "Orlando", slug: "orlando", stateSlug: "florida" },
+  { name: "Atlanta", slug: "atlanta", stateSlug: "georgia" },
+  { name: "San Jose", slug: "san-jose", stateSlug: "california" },
+  { name: "Seattle", slug: "seattle", stateSlug: "washington" },
+  { name: "Fort Worth", slug: "fort-worth", stateSlug: "texas" },
+  { name: "Indianapolis", slug: "indianapolis", stateSlug: "indiana" },
+  { name: "Charlotte", slug: "charlotte", stateSlug: "north-carolina" },
+  { name: "Jacksonville", slug: "jacksonville", stateSlug: "florida" },
+];
 
 export default function Home() {
-  const states = allStates();
-  const places = states.reduce((n, s) => n + s.coveredPlaces, 0);
-  const topCities = [...indexableCities()].sort((a, b) => (b.profile?.pop ?? 0) - (a.profile?.pop ?? 0)).slice(0, 24);
+  const places = PLACES_COUNT;
+  const topCities = TOP_CITIES;
   return (
     <main id="main" data-home>
       <JsonLd data={graph(pageGraph({ path: "/", name: title, description, crumbs: [{ name: "Home", path: "/" }], faqs, about: [ids.org] }))} />

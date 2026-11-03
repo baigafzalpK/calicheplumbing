@@ -5,7 +5,8 @@ import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { graph, ids, pageGraph } from "@/lib/schema";
 import { site } from "@/content/site";
-import { allStates, cityLabel } from "@/lib/geo";
+import { cityLabel } from "@/lib/geo";
+import { stateFacts } from "@/content/stateFacts";
 import { indexableCities, indexableCityServices, indexableLocalServices } from "@/lib/sitemap";
 import { JsonLd } from "@/components/ui";
 import { ServiceTemplate } from "@/components/templates/ServiceTemplate";
@@ -86,7 +87,7 @@ export default async function ServicePage({ params }: P) {
     }),
     ...cities.map((c) => ({ name: cityLabel(c), href: routes.city(c.stateSlug, c.slug) })),
   ];
-  const states = allStates().map((x) => ({ name: x.name, href: routes.state(x.slug) }));
+  const states = stateFacts.map((x) => ({ name: x.name, href: routes.state(x.slug) }));
   return (
     <>
       <JsonLd data={graph(pageGraph({ path, name: s.seoTitle, description: s.metaDescription, type: "ItemPage", crumbs, faqs: s.faqs, about: [ids.service(s.slug)], extra: [service] }))} />

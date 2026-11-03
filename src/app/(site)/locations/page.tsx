@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { allStates, cityLabel } from "@/lib/geo";
-import { indexableCities } from "@/lib/sitemap";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { graph, ids, pageGraph } from "@/lib/schema";
@@ -8,7 +6,7 @@ import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/ui";
 import { ZipChecker } from "@/components/ZipChecker";
 import { CtaBand } from "@/components/CtaBand";
-import type { Region } from "@/content/stateFacts";
+import { stateFacts, stateStats, type Region } from "@/content/stateFacts";
 
 const title = "Plumbers in All 50 States: Service Areas";
 const description =
@@ -18,20 +16,64 @@ const path = routes.locations();
 export const metadata = pageMeta({ title, description, path });
 
 const REGIONS: Region[] = ["Northeast", "Midwest", "South", "West"];
+const PLACES_COUNT = 15386;
+const ZIPS_COUNT = 24673;
+const CITIES_COUNT = 1186;
+
+const TOP_40_CITIES = [
+  { label: "Houston, TX", slug: "houston", stateSlug: "texas" },
+  { label: "Chicago, IL", slug: "chicago", stateSlug: "illinois" },
+  { label: "Brooklyn, NY", slug: "brooklyn", stateSlug: "new-york" },
+  { label: "Los Angeles, CA", slug: "los-angeles", stateSlug: "california" },
+  { label: "San Antonio, TX", slug: "san-antonio", stateSlug: "texas" },
+  { label: "Miami, FL", slug: "miami", stateSlug: "florida" },
+  { label: "Las Vegas, NV", slug: "las-vegas", stateSlug: "nevada" },
+  { label: "New York, NY", slug: "new-york", stateSlug: "new-york" },
+  { label: "Philadelphia, PA", slug: "philadelphia", stateSlug: "pennsylvania" },
+  { label: "Phoenix, AZ", slug: "phoenix", stateSlug: "arizona" },
+  { label: "Bronx, NY", slug: "bronx", stateSlug: "new-york" },
+  { label: "Dallas, TX", slug: "dallas", stateSlug: "texas" },
+  { label: "San Diego, CA", slug: "san-diego", stateSlug: "california" },
+  { label: "Austin, TX", slug: "austin", stateSlug: "texas" },
+  { label: "Minneapolis, MN", slug: "minneapolis", stateSlug: "minnesota" },
+  { label: "Denver, CO", slug: "denver", stateSlug: "colorado" },
+  { label: "Orlando, FL", slug: "orlando", stateSlug: "florida" },
+  { label: "Atlanta, GA", slug: "atlanta", stateSlug: "georgia" },
+  { label: "San Jose, CA", slug: "san-jose", stateSlug: "california" },
+  { label: "Seattle, WA", slug: "seattle", stateSlug: "washington" },
+  { label: "Fort Worth, TX", slug: "fort-worth", stateSlug: "texas" },
+  { label: "Indianapolis, IN", slug: "indianapolis", stateSlug: "indiana" },
+  { label: "Charlotte, NC", slug: "charlotte", stateSlug: "north-carolina" },
+  { label: "Jacksonville, FL", slug: "jacksonville", stateSlug: "florida" },
+  { label: "Portland, OR", slug: "portland", stateSlug: "oregon" },
+  { label: "Tucson, AZ", slug: "tucson", stateSlug: "arizona" },
+  { label: "Saint Louis, MO", slug: "saint-louis", stateSlug: "missouri" },
+  { label: "Columbus, OH", slug: "columbus", stateSlug: "ohio" },
+  { label: "Fort Lauderdale, FL", slug: "fort-lauderdale", stateSlug: "florida" },
+  { label: "Sacramento, CA", slug: "sacramento", stateSlug: "california" },
+  { label: "San Francisco, CA", slug: "san-francisco", stateSlug: "california" },
+  { label: "Tampa, FL", slug: "tampa", stateSlug: "florida" },
+  { label: "Saint Paul, MN", slug: "saint-paul", stateSlug: "minnesota" },
+  { label: "Cincinnati, OH", slug: "cincinnati", stateSlug: "ohio" },
+  { label: "Milwaukee, WI", slug: "milwaukee", stateSlug: "wisconsin" },
+  { label: "Louisville, KY", slug: "louisville", stateSlug: "kentucky" },
+  { label: "Cleveland, OH", slug: "cleveland", stateSlug: "ohio" },
+  { label: "Oklahoma City, OK", slug: "oklahoma-city", stateSlug: "oklahoma" },
+  { label: "Pittsburgh, PA", slug: "pittsburgh", stateSlug: "pennsylvania" },
+  { label: "Memphis, TN", slug: "memphis", stateSlug: "tennessee" }
+];
 
 export default function LocationsHub() {
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "Locations", path },
   ];
-  const states = allStates();
-  const cities = indexableCities();
-  const places = states.reduce((n, s) => n + s.coveredPlaces, 0);
-  const zips = states.reduce((n, s) => n + s.coveredZips, 0);
-  const biggest = [...cities].sort((a, b) => (b.profile?.pop ?? 0) - (a.profile?.pop ?? 0)).slice(0, 40);
+  const places = PLACES_COUNT;
+  const zips = ZIPS_COUNT;
+  const biggest = TOP_40_CITIES;
   return (
     <main id="main">
-      <JsonLd data={graph(pageGraph({ path, name: title, description, type: "CollectionPage", crumbs, about: states.map((s) => ids.state(s.slug)) }))} />
+      <JsonLd data={graph(pageGraph({ path, name: title, description, type: "CollectionPage", crumbs, about: stateFacts.map((s) => ids.state(s.slug)) }))} />
       <Hero
         crumbs={crumbs}
         eyebrow="Service areas · United States"
@@ -53,14 +95,14 @@ export default function LocationsHub() {
             <div key={r} id={r.toLowerCase()} className="card scroll-mt-28 p-6">
               <h2 className="text-2xl font-semibold">{r}</h2>
               <ul className="mt-4 space-y-2">
-                {states
+                {stateFacts
                   .filter((s) => s.region === r)
                   .map((s) => (
                     <li key={s.slug} className="flex items-baseline justify-between gap-3">
                       <Link href={routes.state(s.slug)} className="link">
                         {s.name}
                       </Link>
-                      <span className="text-sm text-muted tabular-nums">{s.coveredPlaces.toLocaleString("en-US")} towns</span>
+                      <span className="text-sm text-muted tabular-nums">{(stateStats[s.abbr]?.places ?? 0).toLocaleString("en-US")} towns</span>
                     </li>
                   ))}
               </ul>
@@ -72,13 +114,13 @@ export default function LocationsHub() {
         <div className="container-x">
           <h2 className="text-3xl font-semibold">Largest cities with local pages</h2>
           <p className="mt-2 max-w-3xl text-muted">
-            {cities.length.toLocaleString("en-US")} cities have their own page, built from Census housing data for the ZIP codes we cover there. Every state page lists the rest.
+            {CITIES_COUNT.toLocaleString("en-US")} cities have their own page, built from Census housing data for the ZIP codes we cover there. Every state page lists the rest.
           </p>
           <ul className="mt-6 grid gap-x-6 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {biggest.map((c) => (
               <li key={c.stateSlug + c.slug}>
                 <Link href={routes.city(c.stateSlug, c.slug)} className="link">
-                  {cityLabel(c)}
+                  {c.label}
                 </Link>
               </li>
             ))}

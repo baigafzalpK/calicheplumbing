@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { allStates, getStateView, statePlacesWithoutPages } from "@/lib/geo";
-import { freezeLabel } from "@/content/stateFacts";
+import { getStateView, getStateCityPages, getStateCityServices, statePlacesWithoutPages } from "@/lib/geo";
+import { stateFacts, freezeLabel } from "@/content/stateFacts";
 import { getService } from "@/content/services";
-import { indexableCities, indexableCityServices } from "@/lib/sitemap";
 import { eras } from "@/lib/localContent";
 import { allCounties } from "@/lib/counties";
 import { pageMeta } from "@/lib/seo";
@@ -18,7 +17,7 @@ import type { Faq } from "@/content/types";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return allStates().map((s) => ({ state: s.slug }));
+  return stateFacts.map((s) => ({ state: s.slug }));
 }
 
 type P = { params: Promise<{ state: string }> };
@@ -69,8 +68,8 @@ export default async function StatePage({ params }: P) {
     { name: "Locations", path: routes.locations() },
     { name: st.name, path },
   ];
-  const cities = indexableCities().filter((c) => c.stateSlug === st.slug);
-  const combos = indexableCityServices().filter((cs) => cs.stateSlug === st.slug);
+  const cities = getStateCityPages(st.slug);
+  const combos = getStateCityServices(st.slug);
   const others = statePlacesWithoutPages(st.slug);
   const byCounty = new Map<string, string[]>();
   for (const o of others) {

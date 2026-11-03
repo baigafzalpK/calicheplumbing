@@ -116,6 +116,34 @@ export function allCityPages(): City[] {
   return out;
 }
 
+/** Get city pages for a SINGLE state without loading all 50 states */
+export function getStateCityPages(stateSlug: string): City[] {
+  const f = stateBySlug.get(stateSlug);
+  if (!f) return [];
+  const st = rawState(f.abbr);
+  const ok = eligible(st);
+  const bySlug = new Map(st.cities.map((c) => [c.slug, c]));
+  const curatedHere = curatedCities.filter((c) => c.stateSlug === f.slug);
+  const out: City[] = [];
+  for (const c of curatedHere) {
+    const raw = bySlug.get(c.slug);
+    out.push({ ...c, curated: true, profile: raw?.acs ?? undefined, alsoCovered: raw ? unpaged(raw, ok, curatedHere, bySlug) : [] });
+  }
+  for (const raw of st.cities) {
+    if (!ok.has(raw.slug) || curatedHere.some((c) => c.slug === raw.slug)) continue;
+    const pagedNearby = raw.nearby.filter((n) => ok.has(n.slug) || curatedHere.some((c) => c.slug === n.slug)).slice(0, 6);
+    out.push(
+      composeCity(raw, f, {
+        nearby: pagedNearby.map((n) => n.slug),
+        nearbyNames: pagedNearby.map((n) => ({ name: bySlug.get(n.slug)?.name ?? n.slug, mi: n.mi })),
+        alsoCovered: unpaged(raw, ok, curatedHere, bySlug),
+        rankInState: st.cities.indexOf(raw) + 1,
+      }),
+    );
+  }
+  return out;
+}
+
 function unpaged(raw: RawPlace, ok: Set<string>, curated: City[], bySlug: Map<string, RawPlace>) {
   return raw.nearby
     .filter((n) => !ok.has(n.slug) && !curated.some((c) => c.slug === n.slug) && n.mi <= 25)
@@ -167,6 +195,20 @@ export function allCityServices(): (CityService & { stateSlug: string })[] {
     .filter((g) => !curated.some((cs) => cs.stateSlug === g.stateSlug && cs.citySlug === g.citySlug && cs.serviceSlug === g.serviceSlug));
   csMemo = [...curated, ...generated];
   return csMemo;
+}
+
+/** Get city services for a SINGLE state without loading all 50 states */
+export function getStateCityServices(stateSlug: string): (CityService & { stateSlug: string })[] {
+  const curated = curatedCityServices
+    .filter((cs) => (cs.stateSlug ?? "arizona") === stateSlug)
+    .map((cs) => ({ ...cs, stateSlug: cs.stateSlug ?? "arizona" }));
+  const stateCities = getStateCityPages(stateSlug).filter((c) => !c.curated);
+  const st = stateBySlug.get(stateSlug);
+  if (!st) return curated;
+  const generated = stateCities
+    .flatMap((c) => composeCityServices(c, st))
+    .filter((g) => !curated.some((cs) => cs.stateSlug === g.stateSlug && cs.citySlug === g.citySlug && cs.serviceSlug === g.serviceSlug));
+  return [...curated, ...generated];
 }
 
 export { stateByAbbr };
