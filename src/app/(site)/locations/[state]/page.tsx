@@ -4,7 +4,7 @@ import { getStateView, getStateCityPages, getStateCityServices, statePlacesWitho
 import { stateFacts, freezeLabel } from "@/content/stateFacts";
 import { getService } from "@/content/services";
 import { eras } from "@/lib/localContent";
-import { allCounties } from "@/lib/counties";
+import { getStateCounties } from "@/lib/counties";
 import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { graph, ids, pageGraph } from "@/lib/schema";
@@ -78,7 +78,7 @@ export default async function StatePage({ params }: P) {
   }
   const counties = [...byCounty.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   const faqs = stateFaqs(st);
-  const countyPages = allCounties().filter((c) => c.stateSlug === st.slug).sort((a, b) => a.name.localeCompare(b.name));
+  const countyPages = getStateCounties(st.slug).sort((a, b) => a.name.localeCompare(b.name));
   const countyHref = new Map(countyPages.map((c) => [c.places[0].countyLabel, routes.county(st.slug, c.slug)]));
   const focus = [
     st.freeze === "severe" || st.freeze === "seasonal" ? "frozen-pipe-repair" : null,

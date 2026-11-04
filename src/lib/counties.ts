@@ -58,54 +58,62 @@ function combine(places: RawPlace[]): PlaceProfile | null {
   };
 }
 
-let memo: County[] | null = null;
-export function allCounties(): County[] {
-  if (memo) return memo;
-  const out: County[] = [];
-  for (const f of stateFacts) {
-    const groups = new Map<string, RawPlace[]>();
-    for (const c of rawState(f.abbr).cities) {
-      if (!c.countyLabel) continue;
-      groups.set(c.countyLabel, [...(groups.get(c.countyLabel) ?? []), c]);
-    }
-    for (const [label, places] of groups) {
-      const profile = combine(places);
-      if (!profile || places.length < MIN_PLACES || profile.pop < MIN_POP) continue;
-      const name = fullName(label);
-      const label2 = `${name}, ${f.abbr}`;
-      const largest = [...places].sort((a, b) => (b.acs?.pop ?? 0) - (a.acs?.pop ?? 0)).slice(0, 3).map((p) => p.name);
-      const zips = places.reduce((n, p) => n + p.zips.length, 0);
-      const old = pre1960(profile);
-      out.push({
-        slug: slugify(name),
-        name,
-        stateSlug: f.slug,
-        state: f,
-        places,
-        zips,
-        profile,
-        issues: issuesFor(name, profile, f).slice(0, 4),
-        intro: `We cover ${places.length} cities and towns in ${name}, ${f.name}, across ${zips} ZIP codes, including ${largest.join(", ")}. About ${Math.round(profile.pop / 1000).toLocaleString("en-US")},000 people live in those ZIP codes. ${old >= 25 ? `${pct(old)} of the homes were built before 1960, so galvanized pipe and old cast iron drains are common.` : profile.built.y2000p >= 35 ? `${pct(profile.built.y2000p)} of the homes were built in 2000 or later, so most calls are about water heaters, fixtures and clogs rather than old pipe.` : `Most homes date from ${profile.built.y1960_79 >= profile.built.y1980_99 ? "1960 to 1979" : "1980 to 1999"}, old enough that original water heaters, valves and drains are wearing out.`}`,
-        faqs: [
-          {
-            q: `Which towns in ${name} do you cover?`,
-            a: `${places.length} places: ${[...places].map((p) => p.name).sort().join(", ")}. Enter your ZIP code to confirm coverage for your street.`,
-          },
-          {
-            q: `How old are homes in ${name}?`,
-            a: `Across the covered ZIP codes, Census estimates put ${pct(old)} of homes as built before 1960, ${pct(profile.built.y1960_79)} from 1960 to 1979, ${pct(profile.built.y1980_99)} from 1980 to 1999 and ${pct(profile.built.y2000p)} in 2000 or later.`,
-          },
-          { q: `Who licenses plumbers in ${label2}?`, a: f.licensing },
-        ],
-      });
-    }
+const stateCountyMemos = new Map<string, County[]>();
+export function getStateCounties(stateSlug: string): County[] {
+  const cached = stateCountyMemos.get(stateSlug);
+  if (cached) return cached;
+  const f = stateFacts.find((s) => s.slug === stateSlug);
+  if (!f) return [];
+  const groups = new Map<string, RawPlace[]>();
+  for (const c of rawState(f.abbr).cities) {
+    if (!c.countyLabel) continue;
+    groups.set(c.countyLabel, [...(groups.get(c.countyLabel) ?? []), c]);
   }
-  memo = out;
+  const out: County[] = [];
+  for (const [label, places] of groups) {
+    const profile = combine(places);
+    if (!profile || places.length < MIN_PLACES || profile.pop < MIN_POP) continue;
+    const name = fullName(label);
+    const label2 = `${name}, ${f.abbr}`;
+    const largest = [...places].sort((a, b) => (b.acs?.pop ?? 0) - (a.acs?.pop ?? 0)).slice(0, 3).map((p) => p.name);
+    const zips = places.reduce((n, p) => n + p.zips.length, 0);
+    const old = pre1960(profile);
+    out.push({
+      slug: slugify(name),
+      name,
+      stateSlug: f.slug,
+      state: f,
+      places,
+      zips,
+      profile,
+      issues: issuesFor(name, profile, f).slice(0, 4),
+      intro: `We cover ${places.length} cities and towns in ${name}, ${f.name}, across ${zips} ZIP codes, including ${largest.join(", ")}. About ${Math.round(profile.pop / 1000).toLocaleString("en-US")},000 people live in those ZIP codes. ${old >= 25 ? `${pct(old)} of the homes were built before 1960, so galvanized pipe and old cast iron drains are common.` : profile.built.y2000p >= 35 ? `${pct(profile.built.y2000p)} of the homes were built in 2000 or later, so most calls are about water heaters, fixtures and clogs rather than old pipe.` : `Most homes date from ${profile.built.y1960_79 >= profile.built.y1980_99 ? "1960 to 1979" : "1980 to 1999"}, old enough that original water heaters, valves and drains are wearing out.`}`,
+      faqs: [
+        {
+          q: `Which towns in ${name} do you cover?`,
+          a: `${places.length} places: ${[...places].map((p) => p.name).sort().join(", ")}. Enter your ZIP code to confirm coverage for your street.`,
+        },
+        {
+          q: `How old are homes in ${name}?`,
+          a: `Across the covered ZIP codes, Census estimates put ${pct(old)} of homes as built before 1960, ${pct(profile.built.y1960_79)} from 1960 to 1979, ${pct(profile.built.y1980_99)} from 1980 to 1999 and ${pct(profile.built.y2000p)} in 2000 or later.`,
+        },
+        { q: `Who licenses plumbers in ${label2}?`, a: f.licensing },
+      ],
+    });
+  }
+  stateCountyMemos.set(stateSlug, out);
   return out;
 }
 
+let memo: County[] | null = null;
+export function allCounties(): County[] {
+  if (memo) return memo;
+  memo = stateFacts.flatMap((f) => getStateCounties(f.slug));
+  return memo;
+}
+
 export function getCounty(stateSlug: string, slug: string) {
-  return allCounties().find((c) => c.stateSlug === stateSlug && c.slug === slug);
+  return getStateCounties(stateSlug).find((c) => c.slug === slug);
 }
 export function countyForLabel(stateSlug: string, label: string | null | undefined) {
   if (!label) return undefined;

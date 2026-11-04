@@ -5,11 +5,36 @@ import { pageMeta } from "@/lib/seo";
 import { routes } from "@/lib/routes";
 import { graph, ids, pageGraph } from "@/lib/schema";
 import { site } from "@/content/site";
-import { cityLabel } from "@/lib/geo";
 import { stateFacts } from "@/content/stateFacts";
-import { indexableCities, indexableCityServices, indexableLocalServices } from "@/lib/sitemap";
 import { JsonLd } from "@/components/ui";
 import { ServiceTemplate } from "@/components/templates/ServiceTemplate";
+
+const TOP_CITIES = [
+  { name: "Houston", slug: "houston", stateSlug: "texas", stateAbbr: "TX" },
+  { name: "Chicago", slug: "chicago", stateSlug: "illinois", stateAbbr: "IL" },
+  { name: "Brooklyn", slug: "brooklyn", stateSlug: "new-york", stateAbbr: "NY" },
+  { name: "Los Angeles", slug: "los-angeles", stateSlug: "california", stateAbbr: "CA" },
+  { name: "San Antonio", slug: "san-antonio", stateSlug: "texas", stateAbbr: "TX" },
+  { name: "Miami", slug: "miami", stateSlug: "florida", stateAbbr: "FL" },
+  { name: "Las Vegas", slug: "las-vegas", stateSlug: "nevada", stateAbbr: "NV" },
+  { name: "New York", slug: "new-york", stateSlug: "new-york", stateAbbr: "NY" },
+  { name: "Philadelphia", slug: "philadelphia", stateSlug: "pennsylvania", stateAbbr: "PA" },
+  { name: "Phoenix", slug: "phoenix", stateSlug: "arizona", stateAbbr: "AZ" },
+  { name: "Bronx", slug: "bronx", stateSlug: "new-york", stateAbbr: "NY" },
+  { name: "Dallas", slug: "dallas", stateSlug: "texas", stateAbbr: "TX" },
+  { name: "San Diego", slug: "san-diego", stateSlug: "california", stateAbbr: "CA" },
+  { name: "Austin", slug: "austin", stateSlug: "texas", stateAbbr: "TX" },
+  { name: "Minneapolis", slug: "minneapolis", stateSlug: "minnesota", stateAbbr: "MN" },
+  { name: "Denver", slug: "denver", stateSlug: "colorado", stateAbbr: "CO" },
+  { name: "Orlando", slug: "orlando", stateSlug: "florida", stateAbbr: "FL" },
+  { name: "Atlanta", slug: "atlanta", stateSlug: "georgia", stateAbbr: "GA" },
+  { name: "San Jose", slug: "san-jose", stateSlug: "california", stateAbbr: "CA" },
+  { name: "Seattle", slug: "seattle", stateSlug: "washington", stateAbbr: "WA" },
+  { name: "Fort Worth", slug: "fort-worth", stateSlug: "texas", stateAbbr: "TX" },
+  { name: "Indianapolis", slug: "indianapolis", stateSlug: "indiana", stateAbbr: "IN" },
+  { name: "Charlotte", slug: "charlotte", stateSlug: "north-carolina", stateAbbr: "NC" },
+  { name: "Jacksonville", slug: "jacksonville", stateSlug: "florida", stateAbbr: "FL" },
+];
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -36,10 +61,10 @@ export default async function ServicePage({ params }: P) {
       { name: "Services", path: routes.services() },
       { name: cat.name, path },
     ];
-    const towns = indexableLocalServices()
-      .filter((x) => x.slug === cat.slug)
-      .slice(0, 24)
-      .map((x) => ({ name: x.h1.replace(`${cat.name} in `, ""), href: routes.cityService(x.stateSlug, x.citySlug, x.slug) }));
+    const towns = TOP_CITIES.slice(0, 16).map((c) => ({
+      name: `${c.name}, ${c.stateAbbr}`,
+      href: routes.cityService(c.stateSlug, c.slug, cat.slug),
+    }));
     const services = servicesInCategory(cat.slug);
     return (
       <>
@@ -68,25 +93,10 @@ export default async function ServicePage({ params }: P) {
     broker: { "@id": ids.org },
     areaServed: { "@type": "Country", name: "United States" },
   };
-  // Local pages for this service first, then the largest cities where the service is a common call.
-  const local = [
-    ...indexableCityServices().filter((cs) => cs.serviceSlug === s.slug),
-    ...indexableLocalServices()
-      .filter((x) => x.slug === s.slug)
-      .map((x) => ({ stateSlug: x.stateSlug, citySlug: x.citySlug, serviceSlug: x.slug })),
-  ];
-  const localHrefs = new Set(local.map((cs) => routes.city(cs.stateSlug, cs.citySlug)));
-  const cities = indexableCities()
-    .filter((c) => c.popularServices.includes(s.slug) && !localHrefs.has(routes.city(c.stateSlug, c.slug)))
-    .sort((a, b) => (b.profile?.pop ?? 0) - (a.profile?.pop ?? 0))
-    .slice(0, Math.max(0, 16 - local.length));
-  const towns = [
-    ...local.slice(0, 16).map((cs) => {
-      const c = indexableCities().find((x) => x.stateSlug === cs.stateSlug && x.slug === cs.citySlug)!;
-      return { name: `${cityLabel(c)}`, href: routes.cityService(cs.stateSlug, cs.citySlug, cs.serviceSlug) };
-    }),
-    ...cities.map((c) => ({ name: cityLabel(c), href: routes.city(c.stateSlug, c.slug) })),
-  ];
+  const towns = TOP_CITIES.slice(0, 16).map((c) => ({
+    name: `${c.name}, ${c.stateAbbr}`,
+    href: routes.cityService(c.stateSlug, c.slug, s.slug),
+  }));
   const states = stateFacts.map((x) => ({ name: x.name, href: routes.state(x.slug) }));
   return (
     <>
